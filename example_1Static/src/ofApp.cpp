@@ -1,61 +1,73 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::exit()
+{
+    pixelServer.close();
+}
+//--------------------------------------------------------------
+void ofApp::setup()
+{
+    pixelServer.setup("127.0.0.1", 7980, ofVec2f(65,1));
+}
+//--------------------------------------------------------------
+void ofApp::update()
+{
+    
+    pixelServer.begin();
+    ofSetColor(255, 255, 255);
+    ofRect(mouseX, 0, 1, 1);
+    pixelServer.end();
+    
+    pixelServer.update();
+}
+//--------------------------------------------------------------
+void ofApp::draw()
+{
+    pixelServer.draw();
+}
+//--------------------------------------------------------------
+void ofApp::keyPressed(int key)
+{
 
 }
-
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::keyReleased(int key)
+{
 
 }
-
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::mouseMoved(int x, int y )
+{
 
 }
-
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::mouseDragged(int x, int y, int button)
+{
 
 }
-
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::mousePressed(int x, int y, int button)
+{
 
 }
-
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
+void ofApp::mouseReleased(int x, int y, int button)
+{
 
 }
-
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
+void ofApp::windowResized(int w, int h)
+{
 
 }
-
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofApp::gotMessage(ofMessage msg)
+{
 
 }
-
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo)
+{
 
 }
