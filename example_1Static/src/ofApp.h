@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOPC.h"
+#include "NeoPixelRing24px.h"
 
 class ofApp : public ofBaseApp{
 
@@ -23,6 +24,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
         ofxOPC pixelServer;
-    
-        
+        float counter;
+        NeoPixelRing24px ring;
 };
