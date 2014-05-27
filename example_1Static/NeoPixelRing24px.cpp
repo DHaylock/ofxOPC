@@ -7,8 +7,6 @@
 //
 
 #include "NeoPixelRing24px.h"
-
-
 //--------------------------------------------------------------
 void NeoPixelRing24px::setupLedRing()
 {
@@ -17,7 +15,6 @@ void NeoPixelRing24px::setupLedRing()
     y = 50;
     radius = 49;
     
-    texture.allocate(radius*2+10, radius*2+10,GL_RGB);
     pixels.allocate(radius*2+10, radius*2+10,GL_RGB);
     
     for (int i = 0; i < size; i++)
@@ -30,49 +27,82 @@ void NeoPixelRing24px::setupLedRing()
         
         pos.push_back(ofVec2f(rx,ry));
     }
-    
 }
 //--------------------------------------------------------------
 void NeoPixelRing24px::update()
 {
-
+    colors.clear();
+    pixels.clear();
     
-
-    texture.readToPixels(pixels);
-
+    pixels = img.getPixelsRef();
+    
     for (int i = 0; i < pos.size(); i++)
     {
         colors.push_back(pixels.getColor(pos[i].x, pos[i].y));
     }
-    colors.clear();
-    pixels.clear();
 }
 //--------------------------------------------------------------
-void NeoPixelRing24px::begin()
+void NeoPixelRing24px::grabImageData(ofRectangle r)
 {
-    texture.begin();
-    ofClear(0,0,0);
+    _r = r;
+    img.clear();
+    img.grabScreen(r.x, r.y,r.width,r.height);
+    
+    
+    //Update the position of the ring pixels
+    for (int i = 0; i < pos.size(); i++)
+    {
+        pos[i] + ofVec2f(r.x,r.y);
+    }
+    
 }
 //--------------------------------------------------------------
-void NeoPixelRing24px::end()
+void NeoPixelRing24px::drawGrabRegion()
 {
-    texture.end();
+    
+    ofSetColor(0, 175);
+    ofNoFill();
+    ofCircle(_r.x+50, _r.y+50, radius+6);
+    ofCircle(_r.x+50, _r.y+50, radius-6);
+    //Update the position of the ring pixels
+    for (int i = 0; i < pos.size(); i++)
+    {
+        ofCircle(pos[i]+ofVec2f(_r.x,_r.y),2);
+    }
+    
 }
 //--------------------------------------------------------------
 void NeoPixelRing24px::ledRing()
 {
+    ofSetColor(0, 175);
+    ofBeginShape();
+    for (int i = 0; i < size; i++)
+    {
+        float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size-1);
+        
+        //Make Circle Points
+        float rx = x + (55 * cos(angle));
+        float ry = y + (55 * sin(angle));
+        ofVertex(rx, ry);
+    }
+    for (int i = 0; i < size; i++)
+    {
+        float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size-1);
+        
+        //Make Circle Points
+        float rx = x + (43 * cos(angle));
+        float ry = y + (43 * sin(angle));
+        ofVertex(rx, ry);
+    }
+    
+    ofEndShape(true);
+    
     for (int i = 0; i < size; i++)
     {
         ofFill();
         ofSetColor(colors[i]);
         ofCircle(pos[i],4);
-        
-        ofNoFill();
-        ofSetColor(255,150);
-        ofCircle(x, y, radius-6);
-        ofCircle(x, y, radius+6);
     }
-    ofRect(x-(radius)-5, y-(radius)-5, radius*2+10, radius*2+10);
 }
 //--------------------------------------------------------------
 void NeoPixelRing24px::drawRing(int x, int y)
@@ -81,8 +111,4 @@ void NeoPixelRing24px::drawRing(int x, int y)
     ofTranslate(x, y);
     ledRing();
     ofPopMatrix();
-    texture.draw(0,0);
 }
-
-
-

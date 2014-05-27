@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F399B91E98DC31CDA6DDACB4 /* ofxTCPManager.cpp */; };
 		66CA411C5A9664E27326BF36 /* ofxTCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C085E327DAB912CFA2A443D /* ofxTCPServer.cpp */; };
+		6A3108AE1934817A0047FEEC /* NeoPixelGrid8x8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3108AC1934817A0047FEEC /* NeoPixelGrid8x8.cpp */; };
+		6A3108B21934A14F0047FEEC /* NeoPixelRing16px.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3108B01934A14F0047FEEC /* NeoPixelRing16px.cpp */; };
+		6A3108B51934A1630047FEEC /* NeoPixelRing12px.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3108B31934A1630047FEEC /* NeoPixelRing12px.cpp */; };
+		6A3108B81934A1780047FEEC /* NeoPixelStick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3108B61934A1780047FEEC /* NeoPixelStick.cpp */; };
 		6ACC214B193287EF0030E763 /* NeoPixelRing24px.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC2149193287EF0030E763 /* NeoPixelRing24px.cpp */; };
+		6ACC214E193291BE0030E763 /* NeoPixelStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC214C193291BE0030E763 /* NeoPixelStrip.cpp */; };
 		7CED9FCC5BF62C4915C8D09F /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554E82F6BF0F134EC9BF40AA /* json_reader.cpp */; };
 		960D20B191346612D5C05A6A /* ofxTCPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF88F02779DD820913ACEA06 /* ofxTCPClient.cpp */; };
 		9B06C5CAE570B630A97E51C3 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58F8CBF3C566F6908846E5FB /* json_writer.cpp */; };
@@ -85,8 +90,18 @@
 		554E82F6BF0F134EC9BF40AA /* json_reader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = json_reader.cpp; path = ../../../addons/ofxJSON/libs/jsoncpp/src/json_reader.cpp; sourceTree = SOURCE_ROOT; };
 		58F8CBF3C566F6908846E5FB /* json_writer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = json_writer.cpp; path = ../../../addons/ofxJSON/libs/jsoncpp/src/json_writer.cpp; sourceTree = SOURCE_ROOT; };
 		65FCAE08D326D7EF1910A329 /* writer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = writer.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/writer.h; sourceTree = SOURCE_ROOT; };
+		6A3108AC1934817A0047FEEC /* NeoPixelGrid8x8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelGrid8x8.cpp; sourceTree = "<group>"; };
+		6A3108AD1934817A0047FEEC /* NeoPixelGrid8x8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelGrid8x8.h; sourceTree = "<group>"; };
+		6A3108B01934A14F0047FEEC /* NeoPixelRing16px.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelRing16px.cpp; sourceTree = "<group>"; };
+		6A3108B11934A14F0047FEEC /* NeoPixelRing16px.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelRing16px.h; sourceTree = "<group>"; };
+		6A3108B31934A1630047FEEC /* NeoPixelRing12px.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelRing12px.cpp; sourceTree = "<group>"; };
+		6A3108B41934A1630047FEEC /* NeoPixelRing12px.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelRing12px.h; sourceTree = "<group>"; };
+		6A3108B61934A1780047FEEC /* NeoPixelStick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelStick.cpp; sourceTree = "<group>"; };
+		6A3108B71934A1780047FEEC /* NeoPixelStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelStick.h; sourceTree = "<group>"; };
 		6ACC2149193287EF0030E763 /* NeoPixelRing24px.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelRing24px.cpp; sourceTree = "<group>"; };
 		6ACC214A193287EF0030E763 /* NeoPixelRing24px.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelRing24px.h; sourceTree = "<group>"; };
+		6ACC214C193291BE0030E763 /* NeoPixelStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelStrip.cpp; sourceTree = "<group>"; };
+		6ACC214D193291BE0030E763 /* NeoPixelStrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelStrip.h; sourceTree = "<group>"; };
 		6F94ACA14609A0DE769D3B91 /* features.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = features.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/features.h; sourceTree = SOURCE_ROOT; };
 		98169AEC4E990DBDF3275463 /* config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = config.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/config.h; sourceTree = SOURCE_ROOT; };
 		AA19C7B5EB9660087056E75A /* forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = forwards.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/forwards.h; sourceTree = SOURCE_ROOT; };
@@ -223,6 +238,16 @@
 				33F3EFB014D3C27B5DEAB7C8 /* ofxOPC.h */,
 				6ACC2149193287EF0030E763 /* NeoPixelRing24px.cpp */,
 				6ACC214A193287EF0030E763 /* NeoPixelRing24px.h */,
+				6A3108B01934A14F0047FEEC /* NeoPixelRing16px.cpp */,
+				6A3108B11934A14F0047FEEC /* NeoPixelRing16px.h */,
+				6A3108B31934A1630047FEEC /* NeoPixelRing12px.cpp */,
+				6A3108B41934A1630047FEEC /* NeoPixelRing12px.h */,
+				6A3108B61934A1780047FEEC /* NeoPixelStick.cpp */,
+				6A3108B71934A1780047FEEC /* NeoPixelStick.h */,
+				6ACC214C193291BE0030E763 /* NeoPixelStrip.cpp */,
+				6ACC214D193291BE0030E763 /* NeoPixelStrip.h */,
+				6A3108AC1934817A0047FEEC /* NeoPixelGrid8x8.cpp */,
+				6A3108AD1934817A0047FEEC /* NeoPixelGrid8x8.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -442,6 +467,9 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				960D20B191346612D5C05A6A /* ofxTCPClient.cpp in Sources */,
+				6ACC214E193291BE0030E763 /* NeoPixelStrip.cpp in Sources */,
+				6A3108B51934A1630047FEEC /* NeoPixelRing12px.cpp in Sources */,
+				6A3108AE1934817A0047FEEC /* NeoPixelGrid8x8.cpp in Sources */,
 				125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */,
 				66CA411C5A9664E27326BF36 /* ofxTCPServer.cpp in Sources */,
 				E2564CF7DDB3713772BB682E /* ofxUDPManager.cpp in Sources */,
@@ -451,6 +479,8 @@
 				AE32F1807796B1050E082651 /* json_value.cpp in Sources */,
 				9B06C5CAE570B630A97E51C3 /* json_writer.cpp in Sources */,
 				C0DF2DD6C7A9DAF1E84222ED /* ofxOPC.cpp in Sources */,
+				6A3108B81934A1780047FEEC /* NeoPixelStick.cpp in Sources */,
+				6A3108B21934A14F0047FEEC /* NeoPixelRing16px.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,22 +26,23 @@ public:
     float x;
     float y;
     float radius;
-    void begin();
-    void end();
+    
+    void grabImageData(ofRectangle r);
+    void drawGrabRegion();
     
     void drawRing(int x, int y);
     void ledRing();
 
+private:
     vector <ofColor> colors;
     vector <ofVec2f> pos;
     int _rw,_rh;
     int _radius;
     int _size;
+    ofRectangle _r;
     
-    ofFbo texture;
+    ofImage img;
     ofPixels pixels;
-private:
-    
-    
+
 };
 #endif /* defined(__example_1Static__NeoPixelRing24px__) */

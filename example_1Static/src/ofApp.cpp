@@ -11,45 +11,21 @@ void ofApp::setup()
     //pixelServer.setup("127.0.0.1", 7980, ofVec2f(24,1));
     //pixelServer.setupLedRing(24, 50, 50, 49);
     counter = 0;
-    
+    s =0;
     ring.setupLedRing();
+    strip.setupLedStrip(60);
+    grid.setupLedGrid();
     
     //ofEnableAlphaBlending();
 }
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    
-    if (counter > 100) {
-        counter = 0;
-    }
-    else
-    {
-        counter+= 1;
-    }
     //pixelServer.begin();
-    ofFill();
-    ring.begin();
-    
-    ofPushMatrix();
-    ofTranslate(50, 50);
-    ofRotateZ(ofGetElapsedTimeMillis()/10);
-    ofPushMatrix();
-    ofTranslate(-50, -50);
-    for (int i = 0; i < 24; i++)
-    {
-        float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * 24);
-        
-        //Make Circle Points
-        float rx = 50 + (50 * cos(angle));
-        float ry = 50 + (50 * sin(angle));
-        ofSetColor(0+(i*10), 0, 255-(i*10));
-        ofCircle(rx, ry, 8);
-    }
-    ofPopMatrix();
-    ofPopMatrix();
-    
-    
+
+    ring.grabImageData(ofRectangle(mouseX, mouseY, 100, 100));
+    strip.grabImageData(ofRectangle(mouseX+200, mouseY, 10, 100));
+    grid.grabImageData(ofRectangle(mouseX+400, mouseY, 70,70));
     /*float hue1 = fmodf(ofGetElapsedTimef()*2.5,255);
     float hue2 = fmodf(ofGetElapsedTimef()*5.0,255);
     float hue3 = fmodf(ofGetElapsedTimef()*7.5,255);
@@ -70,7 +46,15 @@ void ofApp::update()
     glVertex2f(0, 100);
     glColor3f(c4.r,c4.g,c4.b);
     glEnd();*/
-    ring.end();
+    
+    
+  //  strip.begin();
+   // ofSetColor(255,0,0);
+   // ofRect(10,0,10,100);
+    
+   // strip.end();
+    
+    //strip.update();
     /*
     ofSetColor(255,0,0);
     ofRect(counter,0,2,100);
@@ -94,24 +78,112 @@ void ofApp::update()
     
     //pixelServer.update();
     ring.update();
+    strip.update();
+    grid.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()
 {
+    drawGraphics(s);
+    
     
     ring.drawRing(ofGetWidth()/2,ofGetHeight()/2);
+    ring.drawGrabRegion();
+    strip.drawStrip(100, 100);
+    strip.drawGrabRegion();
+    grid.drawGrid(200, 200);
+    grid.drawGrabRegion();
     //pixelServer.draw();
     //pixelServer.drawRing(ofGetWidth()/2,ofGetHeight()/2);
 }
 //--------------------------------------------------------------
+void ofApp::drawGraphics(int mode)
+{
+    ofFill();
+    switch (mode) {
+        case 0:
+            ofPushMatrix();
+            ofTranslate(50, 50);
+            ofRotateZ(ofGetElapsedTimeMillis()/10);
+            ofPushMatrix();
+            ofTranslate(-50, -50);
+            for (int i = 0; i < 24; i++)
+            {
+                float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * 24);
+                
+                //Make Circle Points
+                float rx = 50 + (50 * cos(angle));
+                float ry = 50 + (50 * sin(angle));
+                ofSetColor(0+(i*10), 0, 255-(i*10));
+                ofCircle(rx, ry, 8);
+            }
+            ofPopMatrix();
+            ofPopMatrix();
+            break;
+        case 1:
+            ofPushMatrix();
+            ofTranslate(50, 50);
+            ofRotateZ(ofGetElapsedTimeMillis()/10);
+            ofPushMatrix();
+            ofTranslate(-50, -50);
+            for (int i = 0; i < 24; i++)
+            {
+                float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * 24);
+                
+                //Make Circle Points
+                float rx = 50 + (50 * cos(angle));
+                float ry = 50 + (50 * sin(angle));
+                ofSetColor(0,255-(i*10), 255-(i*10));
+                ofCircle(rx, ry, 8);
+            }
+            ofPopMatrix();
+            ofPopMatrix();
+            break;
+            
+        case 2:
+            float hue1 = fmodf(ofGetElapsedTimef()*2.5,255);
+            float hue2 = fmodf(ofGetElapsedTimef()*5.0,255);
+            float hue3 = fmodf(ofGetElapsedTimef()*7.5,255);
+            float hue4 = fmodf(ofGetElapsedTimef()*10,255);
+                  
+          
+             ofFloatColor c1 = ofColor::fromHsb(hue1, 255, 255);
+             ofFloatColor c2 = ofColor::fromHsb(hue2, 255, 255);
+             ofFloatColor c3 = ofColor::fromHsb(hue3, 255, 255);
+             ofFloatColor c4 = ofColor::fromHsb(hue4, 255, 255);
+            
+             glBegin(GL_QUADS);
+             glVertex2f(0, 0);
+             glColor3f(c1.r,c1.g,c1.b);
+             glVertex2f(ofGetWidth(), 0);
+             glColor3f(c2.r,c2.g,c2.b);
+             glVertex2f(ofGetWidth(), ofGetHeight());
+             glColor3f(c3.r,c3.g,c3.b);
+             glVertex2f(0, ofGetHeight());
+             glColor3f(c4.r,c4.g,c4.b);
+             glVertex2f(0, 0);
+             glColor3f(c1.r,c1.g,c1.b);
+             glEnd();
+            break;
+    }
+    
+    
+}
+
+//--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-
+    if (key == OF_KEY_LEFT) {
+        s--;
+    }
+    if (key == OF_KEY_RIGHT) {
+        s++;
+    }
 }
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key)
 {
-
+ 
 }
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y )
