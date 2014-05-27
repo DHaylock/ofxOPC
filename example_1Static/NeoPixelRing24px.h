@@ -32,6 +32,7 @@ public:
     
     void drawRing(int x, int y);
     void ledRing();
+    ofPixels colorData();
 
 private:
     vector <ofColor> colors;
@@ -40,9 +41,11 @@ private:
     int _radius;
     int _size;
     ofRectangle _r;
-    
+   
     ofImage img;
+    ofImage txImage;
     ofPixels pixels;
+    ofPixels txPixels;
 
 };
 #endif /* defined(__example_1Static__NeoPixelRing24px__) */

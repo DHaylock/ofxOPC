@@ -8,8 +8,8 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    //pixelServer.setup("127.0.0.1", 7980, ofVec2f(24,1));
-    //pixelServer.setupLedRing(24, 50, 50, 49);
+    
+    pixelServer.setup("127.0.0.1", 7890);
     counter = 0;
     s =0;
     ring.setupLedRing();
@@ -25,90 +25,58 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    //pixelServer.begin();
-
-    ring.grabImageData(ofRectangle(mouseX, mouseY, 100, 100));
-    ring1.grabImageData(ofRectangle(mouseX, mouseY+100, 100, 100));
-    ring2.grabImageData(ofRectangle(mouseX, mouseY+200, 100, 100));
-    strip.grabImageData(ofRectangle(mouseX+200, mouseY, 10, 100));
-    grid.grabImageData(ofRectangle(mouseX+400, mouseY, 70,70));
-    shield.grabImageData(ofRectangle(mouseX+500, mouseY, 70,70));
-    /*float hue1 = fmodf(ofGetElapsedTimef()*2.5,255);
-    float hue2 = fmodf(ofGetElapsedTimef()*5.0,255);
-    float hue3 = fmodf(ofGetElapsedTimef()*7.5,255);
-    float hue4 = fmodf(ofGetElapsedTimef()*10,255);
-    
-    ofFloatColor c1 = ofColor::fromHsb(hue1, 255, 255);
-    ofFloatColor c2 = ofColor::fromHsb(hue2, 255, 255);
-    ofFloatColor c3 = ofColor::fromHsb(hue3, 255, 255);
-    ofFloatColor c4 = ofColor::fromHsb(hue4, 255, 255);
-    
-    glBegin(GL_QUADS);
-    glVertex2f(0, 0);
-    glColor3f(c1.r,c1.g,c1.b);
-    glVertex2f(100, 0);
-    glColor3f(c2.r,c2.g,c2.b);
-    glVertex2f(100, 100);
-    glColor3f(c3.r,c3.g,c3.b);
-    glVertex2f(0, 100);
-    glColor3f(c4.r,c4.g,c4.b);
-    glEnd();*/
-    
-    
-  //  strip.begin();
-   // ofSetColor(255,0,0);
-   // ofRect(10,0,10,100);
-    
-   // strip.end();
-    
-    //strip.update();
-    /*
-    ofSetColor(255,0,0);
-    ofRect(counter,0,2,100);
-    ofSetColor(0, 255, 0);
-    ofRect(counter-5,0,2,100);
-    ofSetColor(0, 0, 255);
-    ofRect(counter-10,0,2,100);*/
-    
-    //ofRect(ofGetWidth()/2-50, ofGetHeight()/2-50, 100,100);
-    /*ofSetColor(255, 255, 255);
-    ofPushMatrix();
-    ofTranslate(mouseX, 0);
-    for (int i = 0; i < 24; i++) {
-        ofSetColor(255-(i*2), 0, 0+(i*3));
-        ofRect(0+(i*1), 0, 1, 1);
+   
+    if (counter >= ofGetWidth()) {
+        counter = 0;
     }
-    ofPopMatrix();
-    //ofRect(mouseX, 0, 1, 1);
-    */
-    //pixelServer.end();
+    else{
+        counter++;
+    }
     
-    //pixelServer.update();
+    ring.grabImageData(ofRectangle(100, 100, 100, 100));
+    ring1.grabImageData(ofRectangle(100, 200, 100, 100));
+    ring2.grabImageData(ofRectangle(100, 300,100, 100));
+    strip.grabImageData(ofRectangle(200,100, 10, 100));
+    grid.grabImageData(ofRectangle(250, 100, 70,70));
+    shield.grabImageData(ofRectangle(350, 100, 70,70));
+ 
+
     ring.update();
     ring1.update();
     ring2.update();
     strip.update();
     grid.update();
     shield.update();
+    
+    
+    pixelServer.writeChannelOne(ring.colorData());
+    //cout << ring.colorData() << endl; //
 }
 //--------------------------------------------------------------
 void ofApp::draw()
 {
+    
+    ofBackground(100);
     drawGraphics(s);
+    ofFill();
+    ofSetColor(100,175);
+    ofRect(ofGetWidth()-200,0,200,ofGetHeight());
     
-    
-    ring.drawRing(ofGetWidth()/2,ofGetHeight()/2);
+    ring.drawRing(ofGetWidth()-100,50);
     ring.drawGrabRegion();
-    ring1.drawRing(ofGetWidth()/2+50,ofGetHeight()/2);
+    ring1.drawRing(ofGetWidth()-100,120);
     ring1.drawGrabRegion();
-    ring2.drawRing(ofGetWidth()/2+100,ofGetHeight()/2);
+    ring2.drawRing(ofGetWidth()-100,180);
     ring2.drawGrabRegion();
-    strip.drawStrip(100, 100);
+    strip.drawStrip(ofGetWidth()-180,50);
     strip.drawGrabRegion();
-    grid.drawGrid(200, 200);
+    grid.drawGrid(ofGetWidth()-150,300);
     grid.drawGrabRegion();
-    shield.drawShield(300, 300);
+    shield.drawShield(ofGetWidth()-150,400);
     shield.drawGrabRegion();
+    
+    
+    //ring.colorData();
     //pixelServer.draw();
     //pixelServer.drawRing(ofGetWidth()/2,ofGetHeight()/2);
 }
@@ -116,8 +84,10 @@ void ofApp::draw()
 void ofApp::drawGraphics(int mode)
 {
     ofFill();
-    switch (mode) {
+    switch (mode)
+    {
         case 0:
+        {
             ofPushMatrix();
             ofTranslate(50, 50);
             ofRotateZ(ofGetElapsedTimeMillis()/10);
@@ -131,12 +101,14 @@ void ofApp::drawGraphics(int mode)
                 float rx = 50 + (50 * cos(angle));
                 float ry = 50 + (50 * sin(angle));
                 ofSetColor(0+(i*10), 0, 255-(i*10));
-                ofCircle(rx, ry, 8);
+                ofCircle(rx, ry,8);
             }
             ofPopMatrix();
             ofPopMatrix();
+        }
             break;
         case 1:
+        {
             ofPushMatrix();
             ofTranslate(50, 50);
             ofRotateZ(ofGetElapsedTimeMillis()/10);
@@ -154,9 +126,12 @@ void ofApp::drawGraphics(int mode)
             }
             ofPopMatrix();
             ofPopMatrix();
+        }
             break;
             
         case 2:
+        {
+            ofPushMatrix();
             float hue1 = fmodf(ofGetElapsedTimef()*2.5,255);
             float hue2 = fmodf(ofGetElapsedTimef()*5.0,255);
             float hue3 = fmodf(ofGetElapsedTimef()*7.5,255);
@@ -180,6 +155,30 @@ void ofApp::drawGraphics(int mode)
              glVertex2f(0, 0);
              glColor3f(c1.r,c1.g,c1.b);
              glEnd();
+            ofPopMatrix();
+        }
+            break;
+            
+        case 3:
+        {
+            ofPushStyle();
+            ofSetLineWidth(5);
+            ofSetColor(255, 255);
+            ofLine(counter, 0, counter, ofGetHeight());
+            ofPopStyle();
+        }
+        break;
+        case 4:
+        {
+            ofPushStyle();
+            ofSetLineWidth(5);
+            ofSetColor(255, 255);
+            ofLine(0, counter, counter, 0);
+            ofPopStyle();
+        }
+            break;
+            
+            default:
             break;
     }
     

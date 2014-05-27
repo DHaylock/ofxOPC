@@ -7,6 +7,24 @@
 #include "NeoPixelGrid8x8.h"
 #include "NeoPixelShield5x8.h"
 
+
+#define NUM_BYTES 4+(24*3)
+
+enum NeoPixelUnit{
+    OFX_NEOPIXEL_RING24PX,
+    OFX_NEOPIXEL_RING16PX,
+    OFX_NEOPIXEL_RING12PX,
+    OFX_NEOPIXEL_STICK,
+    OFX_NEOPIXEL_STRIP,
+    OFX_NEOPIXEL_GRID,
+    OFX_NEOPIXEL_SHIELD
+};
+
+struct NeoPixelUnitInfo{
+    int NUM_OF_BYTES;
+    
+};
+
 class ofxOPC  {
     
 public:
@@ -15,27 +33,34 @@ public:
     int _port;
     int _w,_h;
     
-    void setup(string address,int port,ofVec2f layout);
-    void setup(string address, int port, int layout);
+    void setup(string address,int port);
+    
+    void setDithering(bool enabled = true);
+    void setInterpolation(bool enabled = true);
+    
+    void setStatusLED(bool value);
+    
+    void sendFirmwareConfigPacket();
+    
     void draw();
     void update();
     
     
-    // Draw into the FBO
-    void begin();
-    void end();
+    void writeChannelOne(ofPixels pix);
+    void writeChannelTwo(vector <uint8_t> data);
+    void writeChannelThree(vector <uint8_t> data);
     
-    void writeData();
-    void writeData(uint8_t data,int size);
     void close();
 
     bool isConnected();
-    bool tryConnecting();
+    void tryConnecting();
     
   
     vector <uint8_t> txData;
     vector <ofColor> colors;
-
+    
+    unsigned char * packetData[4+(24*3)];
+    unsigned char * firmwareConfig;
     
 private:
     void connect();
