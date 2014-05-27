@@ -1,11 +1,11 @@
 #include "ofMain.h"
 #include "ofxNetwork.h"
-
-enum {
-    OFX_LED_TYPE_RING,
-    OFX_LED_TYPE_STRIP,
-    OFX_LED_TYPE_GRID
-};
+#include "NeoPixelRing24px.h"
+#include "NeoPixelRing16px.h"
+#include "NeoPixelRing12px.h"
+#include "NeoPixelStrip.h"
+#include "NeoPixelGrid8x8.h"
+#include "NeoPixelShield5x8.h"
 
 class ofxOPC  {
     
@@ -20,12 +20,6 @@ public:
     void draw();
     void update();
     
-    void setupLedRing(int size,float x, float y,float radius);
-    vector <ofColor> ringColors;
-    vector <ofVec2f> ringPos;
-    int _rw,_rh;
-    int _radius;
-    int _size;
     
     // Draw into the FBO
     void begin();
@@ -38,15 +32,7 @@ public:
     bool isConnected();
     bool tryConnecting();
     
-    // Set Type of NeoPixel
-    
-    void drawRing(int x, int y);
-    void ledStrip(int count, float x, float y, float spacing);
-    void ledRing(int count, float x, float y, float radius);
-    void ledGrid(int index, int stripLength, int numStrips, float x, float y,
-                 float ledSpacing, float stripSpacing, float angle, bool zigzag);
-    void ledGrid8x8(int index, float x, float y, float spacing, float angle, bool zigzag);
-    
+  
     vector <uint8_t> txData;
     vector <ofColor> colors;
 
@@ -55,8 +41,4 @@ private:
     void connect();
     void disconnect();
     ofxTCPClient client;
-    ofFbo windowTexture;
-    ofFbo ringTexture;
-    ofPixels pixels;
-    ofPixels ringPixels;
 };

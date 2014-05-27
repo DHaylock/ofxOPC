@@ -2,9 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOPC.h"
-#include "NeoPixelRing24px.h"
-#include "NeoPixelStrip.h"
-#include "NeoPixelGrid8x8.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -28,8 +26,11 @@ class ofApp : public ofBaseApp{
         ofxOPC pixelServer;
         float counter;
         NeoPixelRing24px ring;
+        NeoPixelRing16px ring1;
+        NeoPixelRing12px ring2;
         NeoPixelStrip strip;
         NeoPixelGrid8x8 grid;
+        NeoPixelShield5x8 shield;
     void drawGraphics(int mode);
         int s;
 };

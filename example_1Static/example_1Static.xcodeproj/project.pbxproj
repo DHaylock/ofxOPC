@@ -13,6 +13,7 @@
 		6A3108B21934A14F0047FEEC /* NeoPixelRing16px.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3108B01934A14F0047FEEC /* NeoPixelRing16px.cpp */; };
 		6A3108B51934A1630047FEEC /* NeoPixelRing12px.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3108B31934A1630047FEEC /* NeoPixelRing12px.cpp */; };
 		6A3108B81934A1780047FEEC /* NeoPixelStick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3108B61934A1780047FEEC /* NeoPixelStick.cpp */; };
+		6A3108BB1934A20E0047FEEC /* NeoPixelShield5x8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3108B91934A20E0047FEEC /* NeoPixelShield5x8.cpp */; };
 		6ACC214B193287EF0030E763 /* NeoPixelRing24px.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC2149193287EF0030E763 /* NeoPixelRing24px.cpp */; };
 		6ACC214E193291BE0030E763 /* NeoPixelStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC214C193291BE0030E763 /* NeoPixelStrip.cpp */; };
 		7CED9FCC5BF62C4915C8D09F /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554E82F6BF0F134EC9BF40AA /* json_reader.cpp */; };
@@ -98,6 +99,8 @@
 		6A3108B41934A1630047FEEC /* NeoPixelRing12px.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelRing12px.h; sourceTree = "<group>"; };
 		6A3108B61934A1780047FEEC /* NeoPixelStick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelStick.cpp; sourceTree = "<group>"; };
 		6A3108B71934A1780047FEEC /* NeoPixelStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelStick.h; sourceTree = "<group>"; };
+		6A3108B91934A20E0047FEEC /* NeoPixelShield5x8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelShield5x8.cpp; sourceTree = "<group>"; };
+		6A3108BA1934A20E0047FEEC /* NeoPixelShield5x8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelShield5x8.h; sourceTree = "<group>"; };
 		6ACC2149193287EF0030E763 /* NeoPixelRing24px.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelRing24px.cpp; sourceTree = "<group>"; };
 		6ACC214A193287EF0030E763 /* NeoPixelRing24px.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeoPixelRing24px.h; sourceTree = "<group>"; };
 		6ACC214C193291BE0030E763 /* NeoPixelStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NeoPixelStrip.cpp; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 				6ACC214D193291BE0030E763 /* NeoPixelStrip.h */,
 				6A3108AC1934817A0047FEEC /* NeoPixelGrid8x8.cpp */,
 				6A3108AD1934817A0047FEEC /* NeoPixelGrid8x8.h */,
+				6A3108B91934A20E0047FEEC /* NeoPixelShield5x8.cpp */,
+				6A3108BA1934A20E0047FEEC /* NeoPixelShield5x8.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				6A3108BB1934A20E0047FEEC /* NeoPixelShield5x8.cpp in Sources */,
 				960D20B191346612D5C05A6A /* ofxTCPClient.cpp in Sources */,
 				6ACC214E193291BE0030E763 /* NeoPixelStrip.cpp in Sources */,
 				6A3108B51934A1630047FEEC /* NeoPixelRing12px.cpp in Sources */,

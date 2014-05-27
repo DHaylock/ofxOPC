@@ -13,8 +13,12 @@ void ofApp::setup()
     counter = 0;
     s =0;
     ring.setupLedRing();
+    ring1.setupLedRing();
+    ring2.setupLedRing();
     strip.setupLedStrip(60);
     grid.setupLedGrid();
+    shield.setupLedShield();
+    
     
     //ofEnableAlphaBlending();
 }
@@ -24,8 +28,11 @@ void ofApp::update()
     //pixelServer.begin();
 
     ring.grabImageData(ofRectangle(mouseX, mouseY, 100, 100));
+    ring1.grabImageData(ofRectangle(mouseX, mouseY+100, 100, 100));
+    ring2.grabImageData(ofRectangle(mouseX, mouseY+200, 100, 100));
     strip.grabImageData(ofRectangle(mouseX+200, mouseY, 10, 100));
     grid.grabImageData(ofRectangle(mouseX+400, mouseY, 70,70));
+    shield.grabImageData(ofRectangle(mouseX+500, mouseY, 70,70));
     /*float hue1 = fmodf(ofGetElapsedTimef()*2.5,255);
     float hue2 = fmodf(ofGetElapsedTimef()*5.0,255);
     float hue3 = fmodf(ofGetElapsedTimef()*7.5,255);
@@ -78,8 +85,11 @@ void ofApp::update()
     
     //pixelServer.update();
     ring.update();
+    ring1.update();
+    ring2.update();
     strip.update();
     grid.update();
+    shield.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()
@@ -89,10 +99,16 @@ void ofApp::draw()
     
     ring.drawRing(ofGetWidth()/2,ofGetHeight()/2);
     ring.drawGrabRegion();
+    ring1.drawRing(ofGetWidth()/2+50,ofGetHeight()/2);
+    ring1.drawGrabRegion();
+    ring2.drawRing(ofGetWidth()/2+100,ofGetHeight()/2);
+    ring2.drawGrabRegion();
     strip.drawStrip(100, 100);
     strip.drawGrabRegion();
     grid.drawGrid(200, 200);
     grid.drawGrabRegion();
+    shield.drawShield(300, 300);
+    shield.drawGrabRegion();
     //pixelServer.draw();
     //pixelServer.drawRing(ofGetWidth()/2,ofGetHeight()/2);
 }

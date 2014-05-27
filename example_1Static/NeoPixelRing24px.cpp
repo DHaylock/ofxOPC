@@ -13,7 +13,7 @@ void NeoPixelRing24px::setupLedRing()
     size = 24;
     x = 50;
     y = 50;
-    radius = 49;
+    radius = 30;
     
     pixels.allocate(radius*2+10, radius*2+10,GL_RGB);
     
@@ -81,8 +81,8 @@ void NeoPixelRing24px::ledRing()
         float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size-1);
         
         //Make Circle Points
-        float rx = x + (55 * cos(angle));
-        float ry = y + (55 * sin(angle));
+        float rx = x + ((radius+6) * cos(angle));
+        float ry = y + ((radius+6) * sin(angle));
         ofVertex(rx, ry);
     }
     for (int i = 0; i < size; i++)
@@ -90,8 +90,8 @@ void NeoPixelRing24px::ledRing()
         float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size-1);
         
         //Make Circle Points
-        float rx = x + (43 * cos(angle));
-        float ry = y + (43 * sin(angle));
+        float rx = x + ((radius-6)  * cos(angle));
+        float ry = y + ((radius-6)  * sin(angle));
         ofVertex(rx, ry);
     }
     
