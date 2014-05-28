@@ -21,65 +21,40 @@ void ofxOPC::update()
   
 }
 //--------------------------------------------------------------
-void ofxOPC::writeChannelOne(ofPixels pix)
+void ofxOPC::writeChannelOne(vector<ofColor>pix)
 {
-    
-    client.sendRawBytes((const char *)(pix.getPixels()), 72);
-  /*  unsigned char * outData[4+data.size()];
-    uint8_t channel = 1;
-    uint8_t commmand = 0;
-    uint8_t highByte = (data.size());
-    uint8_t lowByte = 0;
-    outData[0] = &channel;
-    outData[1] = &commmand;
-    outData[2] = &highByte;
-    outData[3] = &lowByte;
-    if (!data.empty()) {
-        
-    
-    for (int i = 0; i < data.size(); i+=3) {
-        
-        int offset = 4;
-        
-        
-        packetData[offset] = (unsigned char*)(data[i] >> 16);
-        packetData[offset + i + 1] = (unsigned char*)(data[i+1] >> 8);
-        packetData[offset + i + 2] = (unsigned char*)(data[i+2]);
-        
-        //outData[4+i] = &data[i];
-        //outData[4+i+1] = &data[i];
-        //outData[4+i+2] = &data[i];
-        //memcpy(&txData[4+(i*3)], &data, 3);
+    // Bail early if there's no pixel data
+    if(pix.size() <= 0) {
+        return;
     }
-    
-    for (int i = 0; i < 76; i++) {
-        cout << packetData[i] << endl;
-    }
-    
-    
-    }*/
-    if (isConnected() == true) {
-    
-        
-        //client.sendRawMsg((unsigned char*)(outData), data.size()+4);
-    }
-    else {
-        //Nothing
-        
-    }
-    
-    //int totalPixels = _w*_h*3;
 
+    // Determine the length of the data section, as a multiple of the SPCData type
+    uint16_t data_length = pix.size() * sizeof(OPCPacket_SPCData_t);
 
-    //for (int i=0; i< _w; i++)
-    //{
+    // Add the header-section's length to the data-section's to determine the total packet length; allocate the packet
+    size_t packet_length = sizeof(OPCPacket_Header_t) + data_length;
+    OPCPacket_t packet = (OPCPacket_t)malloc(packet_length);
     
-        //uint8_t pixel[3] = { (colors[i].g >>1) | 0x00, (colors[i].r >> 1) | 0x00, (colors[i].b >> 1) | 0x00};
-        //memcpy(&txData[4+(3*i)], pixel, 3);
-        
-    //}
-    //cout << colors[i] << endl;
-    //client.send((char*)(txData.data()));
+    // Fill out the header
+    packet->header.channel = 0x00;
+    packet->header.command = 0x00; // Set Pixel Colour
+    packet->header.data_length = htons(data_length); // Convert the 16bit number into two bytes (High-, then Low-byte)
+    
+    // Create an alias for code-readability
+    OPCPacket_SPCData_t data = (OPCPacket_SPCData_t)(&packet->data);
+    
+    // Copy the data
+    for (int i = 0; i < pix.size(); i++) {
+        data[i].r = pix[i].r;
+        data[i].g = pix[i].g;
+        data[i].b = pix[i].b;
+    }
+    
+    // Send the data
+    client.sendRawBytes((char *)(packet), packet_length);
+
+    // Clean-up
+    free(packet);
 }
 //--------------------------------------------------------------
 void ofxOPC::draw()

@@ -8,7 +8,7 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    
+    ofSetFrameRate(30);
     pixelServer.setup("127.0.0.1", 7890);
     counter = 0;
     s =0;

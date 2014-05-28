@@ -32,7 +32,7 @@ public:
     
     void drawRing(int x, int y);
     void ledRing();
-    ofPixels colorData();
+    vector <ofColor> colorData();
 
 private:
     vector <ofColor> colors;

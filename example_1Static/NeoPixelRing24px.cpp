@@ -48,14 +48,14 @@ void NeoPixelRing24px::update()
     
 }
 //--------------------------------------------------------------
-ofPixels NeoPixelRing24px::colorData()
+vector <ofColor> NeoPixelRing24px::colorData()
 {
     
-    for (int i = 0; i < colors.size(); i++)
+    /*for (int i = 0; i < colors.size(); i++)
     {
         txPixels.setImageType(OF_IMAGE_COLOR);
         txPixels.setColor(i, 0, colors[i]);
-    }
+    }*/
     //cout << txPixels.getPixels() <<endl;
     /*ofPushMatrix();
     ofScale(10, 10);
@@ -96,7 +96,7 @@ ofPixels NeoPixelRing24px::colorData()
     }
     cout << &date << endl;*/
     //txPixels.clear();
-    return txPixels;
+    return colors;
 }
 //--------------------------------------------------------------
 void NeoPixelRing24px::grabImageData(ofRectangle r)
