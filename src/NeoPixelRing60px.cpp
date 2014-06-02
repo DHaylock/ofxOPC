@@ -15,7 +15,7 @@ void NeoPixelRing60px::setupLedRing()
     size = 60;
     x = 75;
     y = 75;
-    radius = 50;
+    radius = 60;
     
     // Set the pixel data
     pixels.allocate(radius*2+10, radius*2+10,GL_RGB);
@@ -71,21 +71,29 @@ void NeoPixelRing60px::grabImageData(ofPoint grabPos)
     }
 }
 //--------------------------------------------------------------
-void NeoPixelRing60px::drawGrabRegion()
+void NeoPixelRing60px::drawGrabRegion(bool hideArea)
 {
-    
-    // Draw Interaction Area
-    ofPushStyle();
-    ofNoFill();
-    ofSetLineWidth(2);
-    ofSetColor(255, 255);
-    ofCircle(_pos.x, _pos.y, radius+12);
-    ofCircle(_pos.x, _pos.y, radius-12);
-    ofPopStyle();
-    
-    // Visualise the Grabber
-    ofSetColor(0, 175);
-    ofNoFill();
+    if (hideArea == true)
+    {
+        // Draw Interaction Area
+        ofPushStyle();
+        ofNoFill();
+        ofSetLineWidth(2);
+        ofSetColor(255, 255);
+        ofCircle(_pos.x, _pos.y, radius+12);
+        ofCircle(_pos.x, _pos.y, radius-12);
+        ofPopStyle();
+        
+        // Visualise the Grabber
+        ofSetColor(255, 175);
+        ofNoFill();
+    }
+    else
+    {
+        // Visualise the Grabber
+        ofSetColor(0, 175);
+        ofNoFill();
+    }
     ofCircle(_pos.x, _pos.y, radius+6);
     ofCircle(_pos.x, _pos.y, radius-6);
     
@@ -97,6 +105,8 @@ void NeoPixelRing60px::drawGrabRegion()
 //--------------------------------------------------------------
 void NeoPixelRing60px::ledRing()
 {
+    ofPushMatrix();
+    ofTranslate(8, 8);
     ofSetColor(0, 175);
     ofBeginShape();
     
@@ -128,6 +138,7 @@ void NeoPixelRing60px::ledRing()
         ofSetColor(colors[i]);
         ofCircle(pos[i].x-x, pos[i].y-y,4);
     }
+    ofPopMatrix();
 }
 //--------------------------------------------------------------
 void NeoPixelRing60px::drawRing(int x, int y)
@@ -135,6 +146,9 @@ void NeoPixelRing60px::drawRing(int x, int y)
     // Where to draw the ring!
     ofPushMatrix();
     ofTranslate(x, y);
+    ofFill();
+    ofSetColor(100);
+    ofRect(-x,-y,135,135);
     ledRing();
     ofPopMatrix();
 }

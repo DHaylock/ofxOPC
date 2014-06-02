@@ -18,7 +18,7 @@ class NeoPixelStrip {
         vector <ofColor> colorData();
         
         void grabImageData(ofPoint grabPoint);
-        void drawGrabRegion();
+        void drawGrabRegion(bool hideArea);
         void drawStrip(int x, int y);
        
         int size;

@@ -47,7 +47,7 @@ void ofApp::draw()
     drawEffects(effect);
     
     // Visual Representation of the Grab Area
-    grid8x8.drawGrabRegion();
+    grid8x8.drawGrabRegion(hide);
     
     grid8x8.drawGrid(30, 30);
     
@@ -74,10 +74,10 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(mouseX,mouseY,60);
+            ofRect(mouseX,mouseY,60,60);
             ofPopStyle();
         }
-            break;
+        break;
             
         case 1:
         {
@@ -104,7 +104,7 @@ void ofApp::drawEffects(int mode)
             ofPopMatrix();
             ofPopMatrix();
         }
-            break;
+        break;
             
         case 2:
         {
@@ -113,20 +113,20 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,60);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2,20);
             ofPopStyle();
         }
-            break;
+        break;
             
         case 3:
         {
             // Fade to full brightness then to zero
             ofPushStyle();
             ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,60);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2,20);
             ofPopStyle();
         }
-            break;
+        break;
             
         case 4:
         {
@@ -138,7 +138,7 @@ void ofApp::drawEffects(int mode)
             ofRotateZ(rotationAmount);
             ofPushMatrix();
             ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2-20, 20);
+            ofCircle(ofGetWidth()/2, ofGetHeight()/2-10, 20);
             ofPopMatrix();
             ofPopMatrix();
             ofSetColor(0, 0, 255);
@@ -147,19 +147,17 @@ void ofApp::drawEffects(int mode)
             ofRotateZ(-rotationAmount);
             ofPushMatrix();
             ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2+20, 20);
+            ofCircle(ofGetWidth()/2, ofGetHeight()/2+10, 20);
             ofPopMatrix();
             ofPopMatrix();
             ofDisableBlendMode();
-            
         }
-            break;
+        break;
+            
         case 5:
         {
             ofSetColor(255, 255,255);
             movie.draw(ofGetWidth()/2-30, ofGetHeight()/2-30, 60, 60);
-            
-            
         }
         break;
         default:
@@ -169,17 +167,23 @@ void ofApp::drawEffects(int mode)
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-    if (key == OF_KEY_LEFT) {
+    if (key == OF_KEY_LEFT)
+    {
         effect--;
     }
-    if (key == OF_KEY_RIGHT) {
+    if (key == OF_KEY_RIGHT)
+    {
         effect++;
     }
     // Retry Connecting to Server
-    if (key == ' ') {
+    if (key == ' ')
+    {
         opcClient.retryConnecting();
     }
-    
+    if (key == ' ')
+    {
+        hide = !hide;
+    }
 }
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key)

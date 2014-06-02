@@ -8,7 +8,7 @@
 //--------------------------------------------------------------
 void NeoPixelShield5x8::setupLedShield()
 {
-    size = 8*8;
+    size = 5*8;
     x = 2;
     y = 2;
     spacing = 7;
@@ -76,40 +76,55 @@ vector <ofColor> NeoPixelShield5x8::colorData()
     return colors;
 }
 //--------------------------------------------------------------
-void NeoPixelShield5x8::drawGrabRegion()
+void NeoPixelShield5x8::drawGrabRegion(bool hideArea)
 {
-    ofSetColor(0, 175);
-    ofNoFill();
-    ofRect(_r.x-3,_r.y+4,39,60);
+    if (hideArea == true)
+    {
+        // Draw Interaction Area
+        ofPushStyle();
+        ofNoFill();
+        ofSetLineWidth(2);
+        ofSetColor(255, 255);
+        ofRect(_pos.x-x-5,_pos.y-y-5,44,70);
+        ofPopStyle();
+        
+        // Visualise the Grabber
+        ofSetColor(255, 175);
+        ofNoFill();
+    }
+    else
+    {
+        // Visualise the Grabber
+        ofSetColor(0, 175);
+        ofNoFill();
+    }
+    
+    ofRect(_pos.x-x-2,_pos.y-y+2,37,65);
     //Update the position of the ring pixels
     for (int i = 0; i < pos.size(); i++)
     {
-        ofCircle(pos[i]+ofVec2f(_r.x,_r.y),2);
+        ofCircle(pos[i]+ofVec2f(_pos.x-x, _pos.y-y),2);
     }
 }
 //--------------------------------------------------------------
-void NeoPixelShield5x8::grabImageData(ofRectangle r)
+void NeoPixelShield5x8::grabImageData(ofPoint grabPos)
 {
-    
-    _r = r;
+    _pos = grabPos;
     img.clear();
-    img.grabScreen(r.x, r.y,r.width,r.height);
-    
+    img.grabScreen(_pos.x,_pos.y,70,70);
     
     //Update the position of the ring pixels
     for (int i = 0; i < pos.size(); i++)
     {
-        pos[i] + ofVec2f(r.x,r.y);
+        pos[i] + ofVec2f(_pos.x,_pos.y);
     }
-    
 }
 //--------------------------------------------------------------
 void NeoPixelShield5x8::ledShield()
 {
-    
     ofFill();
     ofSetColor(0,175);
-    ofRect(-3, 4, 39,60);
+    ofRect(-2, 4, 39,60);
     
     for (int i = 0; i < size; i++)
     {
@@ -117,13 +132,15 @@ void NeoPixelShield5x8::ledShield()
         ofSetColor(colors[i]);
         ofCircle(pos[i],3);
     }
-    
 }
 //--------------------------------------------------------------
 void NeoPixelShield5x8::drawShield(int x, int y)
 {
     ofPushMatrix();
     ofTranslate(x, y);
+    ofFill();
+    ofSetColor(100);
+    ofRect(-x,-y,100,100);
     ledShield();
     ofPopMatrix();
 }

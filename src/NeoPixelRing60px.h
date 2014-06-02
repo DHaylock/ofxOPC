@@ -24,7 +24,7 @@ public:
     float radius;
     
     void grabImageData(ofPoint grabPos);
-    void drawGrabRegion();
+    void drawGrabRegion(bool hideArea);
     
     void drawRing(int x, int y);
     void ledRing();

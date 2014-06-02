@@ -60,20 +60,30 @@ void NeoPixelRing12px::grabImageData(ofPoint grabPos)
     }
 }
 //--------------------------------------------------------------
-void NeoPixelRing12px::drawGrabRegion()
+void NeoPixelRing12px::drawGrabRegion(bool hideArea)
 {
-    // Draw Interaction Area
-    ofPushStyle();
-    ofNoFill();
-    ofSetLineWidth(2);
-    ofSetColor(255, 255);
-    ofCircle(_pos.x, _pos.y, radius+12);
-    ofCircle(_pos.x, _pos.y, radius-12);
-    ofPopStyle();
-    
-    // Visualise the Grabber
-    ofSetColor(0, 175);
-    ofNoFill();
+    if (hideArea == true)
+    {
+        // Draw Interaction Area
+        ofPushStyle();
+        ofNoFill();
+        ofSetLineWidth(2);
+        ofSetColor(255, 255);
+        ofCircle(_pos.x, _pos.y, radius+12);
+        ofCircle(_pos.x, _pos.y, radius-12);
+        ofPopStyle();
+        
+        // Visualise the Grabber
+        ofSetColor(255, 175);
+        ofNoFill();
+    }
+    else
+    {
+        // Visualise the Grabber
+        ofSetColor(0, 175);
+        ofNoFill();
+    }
+
     ofCircle(_pos.x, _pos.y, radius+6);
     ofCircle(_pos.x, _pos.y, radius-6);
     
@@ -85,7 +95,6 @@ void NeoPixelRing12px::drawGrabRegion()
 //--------------------------------------------------------------
 void NeoPixelRing12px::ledRing()
 {
-    
     ofFill();
     ofSetColor(0, 175);
     ofBeginShape();
@@ -107,7 +116,6 @@ void NeoPixelRing12px::ledRing()
         float ry = y-y + ((radius-6)  * sin(angle));
         ofVertex(rx, ry);
     }
-    
     ofEndShape(true);
     
     for (int i = 0; i < size; i++)
@@ -122,6 +130,9 @@ void NeoPixelRing12px::drawRing(int x, int y)
 {
     ofPushMatrix();
     ofTranslate(x, y);
+    ofFill();
+    ofSetColor(100);
+    ofRect(-x,-y,100,100);
     ledRing();
     ofPopMatrix();
 }

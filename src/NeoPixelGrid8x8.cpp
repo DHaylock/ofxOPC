@@ -111,17 +111,29 @@ void NeoPixelGrid8x8::grabImageData(ofPoint grabPos)
     }
 }
 //--------------------------------------------------------------
-void NeoPixelGrid8x8::drawGrabRegion()
+void NeoPixelGrid8x8::drawGrabRegion(bool hideArea)
 {
+    if (hideArea == true)
+    {
+        // Draw Interaction Area
+        ofPushStyle();
+        ofNoFill();
+        ofSetLineWidth(2);
+        ofSetColor(255, 255);
+        ofRect(_pos.x-7,_pos.y-2,65,65);
+        ofPopStyle();
+        
+        // Visualise the Grabber
+        ofSetColor(255, 175);
+        ofNoFill();
+    }
+    else
+    {
+        // Visualise the Grabber
+        ofSetColor(0, 175);
+        ofNoFill();
+    }
     
-    // Show what the leds should be doing!
-    ofFill();
-    ofSetColor(100);
-    ofRect(0,0,120,120);
-    
-    // Visualise the Grabber
-    ofSetColor(0, 175);
-    ofNoFill();
     ofRect(_pos.x-5, _pos.y+2,60,60);
     
     for (int i = 0; i < pos.size(); i++)
@@ -130,11 +142,13 @@ void NeoPixelGrid8x8::drawGrabRegion()
     }
 }
 //--------------------------------------------------------------
-void NeoPixelGrid8x8::ledGrid()
+void NeoPixelGrid8x8::ledGrid(int x, int y)
 {
+    ofPushMatrix();
+    ofTranslate(-x/4, -y/4);
     ofFill();
     ofSetColor(0,175);
-    ofRect(-3, 4, 60,60);
+    ofRect(-4, 2, 62,62);
     
     for (int i = 0; i < size; i++)
     {
@@ -142,6 +156,7 @@ void NeoPixelGrid8x8::ledGrid()
         ofSetColor(colors[i]);
         ofCircle(pos[i],3);
     }
+    ofPopMatrix();
 }
 //--------------------------------------------------------------
 void NeoPixelGrid8x8::drawGrid(int x, int y)
@@ -149,6 +164,9 @@ void NeoPixelGrid8x8::drawGrid(int x, int y)
     // Where to draw the Grid!
     ofPushMatrix();
     ofTranslate(x, y);
-    ledGrid();
+    ofFill();
+    ofSetColor(100);
+    ofRect(-x,-y,124,124);
+    ledGrid(x,y);
     ofPopMatrix();
 }

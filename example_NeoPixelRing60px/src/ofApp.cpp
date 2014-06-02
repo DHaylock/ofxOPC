@@ -44,16 +44,13 @@ void ofApp::draw()
     drawEffects(effect);
     
     // Visual Representation of the Grab Area
-    ring60px.drawGrabRegion();
+    ring60px.drawGrabRegion(hide);
     
     // Show what the leds should be doing!
-    ofFill();
-    ofSetColor(100);
-    ofRect(0,0,120,120);
     ring60px.drawRing(60, 60);
     
     // Report Messages
-    ofDrawBitmapStringHighlight("Output", 1,115);
+    ofDrawBitmapStringHighlight("Output", 1,155);
     ofDrawBitmapStringHighlight("Input Area", ofGetWidth()/2-35,ofGetHeight()/2+120);
     ofDrawBitmapStringHighlight("Press Left and Right to Change Effect Mode", 5,ofGetHeight()-15);
     ofDrawBitmapStringHighlight("Is the Client Connected: " + ofToString(opcClient.isConnected()), 5,ofGetHeight()-30);
@@ -163,17 +160,18 @@ void ofApp::drawEffects(int mode)
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-    if (key == OF_KEY_LEFT) {
+    if (key == OF_KEY_LEFT)
+    {
         effect--;
     }
-    if (key == OF_KEY_RIGHT) {
+    if (key == OF_KEY_RIGHT)
+    {
         effect++;
     }
-    // Retry Connecting to Server
-    if (key == ' ') {
-        opcClient.retryConnecting();
+    if (key == ' ')
+    {
+        hide = !hide;
     }
-    
 }
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key)

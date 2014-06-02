@@ -43,21 +43,10 @@ void ofApp::draw()
     // As it says
     drawEffects(effect);
     
-    // Draw Interaction Area
-    ofPushStyle();
-    ofNoFill();
-    ofSetLineWidth(2);
-    ofSetColor(255, 255);
-    ofCircle(ofGetWidth()/2, ofGetHeight()/2, 40);
-    ofPopStyle();
-    
     // Visual Representation of the Grab Area
-    ring24px.drawGrabRegion();
+    ring24px.drawGrabRegion(hide);
     
     // Show what the leds should be doing!
-    ofFill();
-    ofSetColor(100);
-    ofRect(0,0,100,100);
     ring24px.drawRing(50, 50);
     
     // Report Messages
@@ -83,7 +72,7 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(mouseX,mouseY,40);
+            dot.draw(mouseX-50, mouseY-50, 100, 100);
             ofPopStyle();
         }
         break;
@@ -169,15 +158,17 @@ void ofApp::drawEffects(int mode)
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-    if (key == OF_KEY_LEFT) {
+    if (key == OF_KEY_LEFT)
+    {
         effect--;
     }
-    if (key == OF_KEY_RIGHT) {
+    if (key == OF_KEY_RIGHT)
+    {
         effect++;
     }
-    // Retry Connecting to Server
-    if (key == ' ') {
-        opcClient.retryConnecting();
+    if (key == ' ')
+    {
+        hide = !hide;
     }
 }
 //--------------------------------------------------------------

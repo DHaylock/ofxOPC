@@ -43,12 +43,9 @@ void ofApp::draw()
     drawEffects(effect);
   
     // Visual Representation of the Grab Area
-    ring16px.drawGrabRegion();
+    ring16px.drawGrabRegion(hide);
     
     // Show what the leds should be doing!
-    ofFill();
-    ofSetColor(100);
-    ofRect(0,0,100,100);
     ring16px.drawRing(50, 50);
     
     // Report Messages
@@ -164,6 +161,10 @@ void ofApp::keyPressed(int key)
     }
     if (key == OF_KEY_RIGHT) {
         effect++;
+    }
+    if (key == ' ')
+    {
+        hide = !hide;
     }
 }
 //--------------------------------------------------------------

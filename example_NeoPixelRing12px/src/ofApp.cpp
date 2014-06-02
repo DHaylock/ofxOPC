@@ -44,14 +44,9 @@ void ofApp::draw()
     // As it says
     drawEffects(effect);
     
-    
     // Visual Representation of the Grab Area
-    ring12px.drawGrabRegion();
+    ring12px.drawGrabRegion(hide);
     
-    // Show what the leds should be doing!
-    ofFill();
-    ofSetColor(100);
-    ofRect(0,0,100,100);
     ring12px.drawRing(50, 50);
     
     // Report Messages
@@ -170,9 +165,9 @@ void ofApp::keyPressed(int key)
     if (key == OF_KEY_RIGHT) {
         effect++;
     }
-    // Retry Connecting to Server
-    if (key == ' ') {
-        opcClient.retryConnecting();
+    if(key == ' ')
+    {
+        hide = !hide;
     }
 }
 //--------------------------------------------------------------

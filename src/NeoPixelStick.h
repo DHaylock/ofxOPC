@@ -17,7 +17,7 @@ public:
     void update();
     vector <ofColor> colorData();
     
-    void grabImageData(ofRectangle r);
+    void grabImageData(ofPoint grabPos);
     void drawGrabRegion();
     void drawStick(int x, int y);
     
@@ -31,7 +31,7 @@ private:
     vector <ofColor> colors;
     vector <ofVec2f> pos;
     
-    ofRectangle _r;
+    ofPoint _pos;
     ofImage img;
     ofPixels pixels;
 };

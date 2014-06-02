@@ -6,6 +6,7 @@
 class ofApp : public ofBaseApp{
     
 public:
+    
     void setup();
     void update();
     void draw();
@@ -27,7 +28,9 @@ public:
     NeoPixelStrip strip;
     
     ofImage dot;
-    
+    int dropOne;
+    int dropTwo;
     int effect;
+    bool hide;
     
 };

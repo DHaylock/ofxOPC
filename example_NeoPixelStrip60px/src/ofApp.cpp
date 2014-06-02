@@ -4,8 +4,9 @@
 void ofApp::setup()
 {
     ofSetFrameRate(60);
-    
+    ofSetVerticalSync(true);
     effect = 0;
+    
     // Connect to the fcserver
     opcClient.setup("127.0.0.1", 7890);
     strip.setupLedStrip(60);
@@ -16,9 +17,9 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    ofSetWindowTitle("ofxOPC:NeoPixelStrip: FPS: " +ofToString((int)(ofGetFrameRate())));
+    ofSetWindowTitle("ofxOPC:NeoPixelStrip60px: FPS: " +ofToString((int)(ofGetFrameRate())));
     
-    strip.grabImageData(ofRectangle(ofGetWidth()/2,100,10,100));
+    strip.grabImageData(ofPoint(ofGetWidth()/2,ofGetHeight()/2-(30*5)));
     
     strip.update();
     
@@ -30,7 +31,7 @@ void ofApp::update()
     else
     {
         // Write out the first set of data
-        opcClient.writeChannelOne(strip.colorData(), 0);
+        opcClient.writeChannelOne(strip.colorData());
     }
 }
 //--------------------------------------------------------------
@@ -42,25 +43,14 @@ void ofApp::draw()
     // As it says
     drawEffects(effect);
     
-    // Draw Interaction Area
-    ofPushStyle();
-    ofNoFill();
-    ofSetLineWidth(2);
-    ofSetColor(255, 255);
-    ofRect(ofGetWidth()/2-5, 90, 20,320);
-    ofPopStyle();
-    
     // Visual Representation of the Grab Area
-    strip.drawGrabRegion();
+    strip.drawGrabRegion(hide);
     
     // Show what the leds should be doing!
-    ofFill();
-    ofSetColor(100);
-    ofRect(0,0,100,400);
-    strip.drawStrip(50, 50);
+    strip.drawStrip(50, 30);
     
     // Report Messages
-    ofDrawBitmapStringHighlight("Output", 1,115);
+    ofDrawBitmapStringHighlight("Output", 1,345);
     ofDrawBitmapStringHighlight("Input Area", ofGetWidth()/2-35,ofGetHeight()-50);
     ofDrawBitmapStringHighlight("Press Left and Right to Change Effect Mode", 5,ofGetHeight()-15);
     ofDrawBitmapStringHighlight("Is the Client Connected: " + ofToString(opcClient.isConnected()), 5,ofGetHeight()-30);
@@ -135,7 +125,27 @@ void ofApp::drawEffects(int mode)
             ofPopStyle();
         }
             break;
+        case 4:
+        {
+            ofPushStyle();
             
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*3)),10);
+            float hue1 = fmodf(ofGetElapsedTimef()*5,255);
+            ofColor c1 = ofColor::fromHsb(hue1, 255, 255);
+            ofSetColor(c1);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*2)),10);
+            float hue2 = fmodf(ofGetElapsedTimef(),255);
+            ofColor c2 = ofColor::fromHsb(hue2, 255, 255);
+            ofSetColor(c2);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*1)),10);
+            ofDisableBlendMode();
+            ofPopStyle();
+        }
+            break;
         default:
             break;
     }
@@ -148,6 +158,9 @@ void ofApp::keyPressed(int key)
     }
     if (key == OF_KEY_RIGHT) {
         effect++;
+    }
+    if (key == ' ') {
+        hide = !hide;
     }
 }
 //--------------------------------------------------------------

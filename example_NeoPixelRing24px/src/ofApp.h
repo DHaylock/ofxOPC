@@ -29,5 +29,6 @@ public:
     ofImage dot;
     
     int effect;
+    bool hide;
     
 };

@@ -67,20 +67,29 @@ void NeoPixelRing24px::grabImageData(ofPoint grabPos)
     }
 }
 //--------------------------------------------------------------
-void NeoPixelRing24px::drawGrabRegion()
+void NeoPixelRing24px::drawGrabRegion(bool hideArea)
 {
-    // Draw Interaction Area
-    ofPushStyle();
-    ofNoFill();
-    ofSetLineWidth(2);
-    ofSetColor(255, 255);
-    ofCircle(_pos.x, _pos.y, radius+12);
-    ofCircle(_pos.x, _pos.y, radius-12);
-    ofPopStyle();
-    
-    // Visualise the Grabber
-    ofSetColor(0, 175);
-    ofNoFill();
+    if (hideArea == true)
+    {
+        // Draw Interaction Area
+        ofPushStyle();
+        ofNoFill();
+        ofSetLineWidth(2);
+        ofSetColor(255, 255);
+        ofCircle(_pos.x, _pos.y, radius+12);
+        ofCircle(_pos.x, _pos.y, radius-12);
+        ofPopStyle();
+        
+        // Visualise the Grabber
+        ofSetColor(255, 175);
+        ofNoFill();
+    }
+    else
+    {
+        // Visualise the Grabber
+        ofSetColor(0, 175);
+        ofNoFill();
+    }
     ofCircle(_pos.x, _pos.y, radius+6);
     ofCircle(_pos.x, _pos.y, radius-6);
 
@@ -130,6 +139,9 @@ void NeoPixelRing24px::drawRing(int x, int y)
     // Where to draw the ring!
     ofPushMatrix();
     ofTranslate(x, y);
+    ofFill();
+    ofSetColor(100);
+    ofRect(-50,-50,100,100);
     ledRing();
     ofPopMatrix();
 }

@@ -19,7 +19,7 @@ class NeoPixelGrid8x8 {
         vector <ofColor> colorData();
     
         void grabImageData(ofPoint grabPos);
-        void drawGrabRegion();
+        void drawGrabRegion(bool hideArea);
         void drawGrid(int x, int y);
     
         float x;
@@ -34,6 +34,5 @@ class NeoPixelGrid8x8 {
         ofPoint _pos;
         ofImage img;
         ofPixels pixels;
-        void ledGrid();
+        void ledGrid(int x, int y);
 };
-

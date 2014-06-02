@@ -41,18 +41,36 @@ class ofxOPC  {
     
     public:
         void setup(string address,int port);
-        void close();
-        void sendFirmwareConfigPacket();
-        
-        void draw();
         void update();
-        
-        void writeChannelOne(vector <ofColor> pix);
-        void writeChannelTwo(vector <ofColor> pix);
+        void draw();
     
+        void cleanup();
+        void close();
         bool isConnected();
         void tryConnecting();
         void retryConnecting();
+        void sendFirmwareConfigPacket();
+    
+        void writeChannel(uint8_t channel, vector <ofColor> pix);
+        void writeChannelOne(vector <ofColor> pix);
+        void writeChannelTwo(vector <ofColor> pix);
+        void writeChannelThree(vector <ofColor> pix);
+        void writeChannelFour(vector <ofColor> pix);
+        void writeChannelFive(vector <ofColor> pix);
+        void writeChannelSix(vector <ofColor> pix);
+        void writeChannelSeven(vector <ofColor> pix);
+        void writeChannelEight(vector <ofColor> pix);
+    
+        //Chaining TODO:
+        void writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
+        void writeChannelOne(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
+        void writeChannelTwo(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
+        void writeChannelThree(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
+        void writeChannelFour(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
+        void writeChannelFive(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
+        void writeChannelSix(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
+        void writeChannelSeven(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
+        void writeChannelEight(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
     
         vector <ofColor> colors;
         string _address;
@@ -60,6 +78,7 @@ class ofxOPC  {
         int _w,_h;
         
     private:
+    
         void connect();
         void disconnect();
         
@@ -69,4 +88,18 @@ class ofxOPC  {
         float startTime;
         float endTime;
         int connectionAttempts;
+    
+        OPCPacket_t OPC_SPC_packet;
+        size_t OPC_SPC_packet_length;
+        OPCPacket_SPCData_t OPC_SPC_packet_data;
+    
+        // CHANNEL NUMBERS
+        const int CHANNEL_ONE = 1;
+        const int CHANNEL_TWO = 2;
+        const int CHANNEL_THREE = 3;
+        const int CHANNEL_FOUR = 4;
+        const int CHANNEL_FIVE = 5;
+        const int CHANNEL_SIX = 6;
+        const int CHANNEL_SEVEN = 7;
+        const int CHANNEL_EIGHT = 8;
 };

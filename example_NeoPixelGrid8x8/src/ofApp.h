@@ -30,5 +30,6 @@ public:
     ofVideoPlayer movie;
     
     int effect;
+    bool hide;
     
 };

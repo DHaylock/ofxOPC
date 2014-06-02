@@ -18,8 +18,8 @@ class NeoPixelShield5x8 {
         void update();
         vector <ofColor> colorData();
         
-        void grabImageData(ofRectangle r);
-        void drawGrabRegion();
+        void grabImageData(ofPoint grabPos);
+        void drawGrabRegion(bool hideArea);
         void drawShield(int x, int y);
         
         float x;
@@ -31,7 +31,7 @@ class NeoPixelShield5x8 {
         vector <ofColor> colors;
         vector <ofVec2f> pos;
         
-        ofRectangle _r;
+        ofPoint _pos;
         ofImage img;
         ofPixels pixels;
         void ledShield();
