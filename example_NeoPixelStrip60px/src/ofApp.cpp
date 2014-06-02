@@ -9,7 +9,7 @@ void ofApp::setup()
     
     // Connect to the fcserver
     opcClient.setup("127.0.0.1", 7890);
-    strip.setupLedStrip(60);
+    strip.setupLedStrip(60,false);
     
     // Load the dot image
     dot.loadImage("dot.png");
@@ -75,12 +75,12 @@ void ofApp::drawEffects(int mode)
             ofCircle(mouseX,mouseY,40);
             ofPopStyle();
         }
-            break;
+        break;
             
         case 1:
         {
             // Like the processing example draw dot images and rotate
-            int size = 70;
+            int size = 300;
             ofPushMatrix();
             ofTranslate(0, 0);
             ofPushMatrix();
@@ -102,7 +102,7 @@ void ofApp::drawEffects(int mode)
             ofPopMatrix();
             ofPopMatrix();
         }
-            break;
+        break;
             
         case 2:
         {
@@ -111,43 +111,57 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofRect(ofGetWidth()/2-5, 90, 20,320);
+            ofRect(ofGetWidth()/2-10, 90, 20,320);
             ofPopStyle();
         }
-            break;
+        break;
             
         case 3:
         {
             // Fade to full brightness then to zero
             ofPushStyle();
             ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
-            ofRect(ofGetWidth()/2-5, 90, 20,320);
+            ofRect(ofGetWidth()/2-10, 90, 20,320);
             ofPopStyle();
         }
-            break;
+        break;
+            
         case 4:
         {
             ofPushStyle();
-            
             ofEnableBlendMode(OF_BLENDMODE_ADD);
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*3)),10);
-            float hue1 = fmodf(ofGetElapsedTimef()*5,255);
+            dot.draw(ofGetWidth()/2-75,ofGetHeight()/2-75 + (int)(150 * sin(ofGetElapsedTimef()*3)),150,150);
+            float hue1 = fmodf(ofGetElapsedTimef()*2.5,255);
             ofColor c1 = ofColor::fromHsb(hue1, 255, 255);
             ofSetColor(c1);
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*2)),10);
-            float hue2 = fmodf(ofGetElapsedTimef(),255);
+            dot.draw(ofGetWidth()/2-75,ofGetHeight()/2-75 + (int)(150 * sin(ofGetElapsedTimef()*2)),150,150);
+            float hue2 = fmodf(ofGetElapsedTimef()*5,255);
             ofColor c2 = ofColor::fromHsb(hue2, 255, 255);
             ofSetColor(c2);
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*1)),10);
+            dot.draw(ofGetWidth()/2-75,ofGetHeight()/2-74 + (int)(150 * sin(ofGetElapsedTimef()*1)),150,150);
             ofDisableBlendMode();
             ofPopStyle();
         }
-            break;
+        break;
+            
+        case 5:
+        {
+            ofPushStyle();
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            dot.draw(mouseX-75, mouseY-75, 150,150);
+            ofDisableBlendMode();
+            ofPopStyle();
+        }
+        break;
+        
         default:
-            break;
+        break;
     }
 }
 //--------------------------------------------------------------

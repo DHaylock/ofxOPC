@@ -14,7 +14,6 @@
 		6A37B89C19387E2A00A31731 /* NeoPixelRing60px.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A37B89A19387E2A00A31731 /* NeoPixelRing60px.cpp */; };
 		7A2ECDA32064A6EDC49786DE /* NeoPixelRing24px.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBD84EE948D39CF6257A4 /* NeoPixelRing24px.cpp */; };
 		8ACE302E9E3E65806526EA39 /* NeoPixelGrid8x8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23E13EC527220EA380557AA /* NeoPixelGrid8x8.cpp */; };
-		8E7BDFDB9AE0323B962402C0 /* ofxFadeCandy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C36BDD69AE57F73BC8CC058B /* ofxFadeCandy.cpp */; };
 		960D20B191346612D5C05A6A /* ofxTCPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF88F02779DD820913ACEA06 /* ofxTCPClient.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C0DF2DD6C7A9DAF1E84222ED /* ofxOPC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C24C81D88B85EC85495F7CA /* ofxOPC.cpp */; };
@@ -96,7 +95,6 @@
 		B877C63F0CA63F218B75020C /* NeoPixelStrip.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = NeoPixelStrip.cpp; path = ../../../addons/ofxOPC/src/NeoPixelStrip.cpp; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		BF88F02779DD820913ACEA06 /* ofxTCPClient.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPClient.cpp; path = ../../../addons/ofxNetwork/src/ofxTCPClient.cpp; sourceTree = SOURCE_ROOT; };
-		C36BDD69AE57F73BC8CC058B /* ofxFadeCandy.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxFadeCandy.cpp; path = ../../../addons/ofxOPC/src/ofxFadeCandy.cpp; sourceTree = SOURCE_ROOT; };
 		C6F0A6E2B96ABF6BDF3DC0D8 /* NeoPixelStick.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = NeoPixelStick.cpp; path = ../../../addons/ofxOPC/src/NeoPixelStick.cpp; sourceTree = SOURCE_ROOT; };
 		C8C9B823D7872F9CBF03A813 /* ofxTCPClient.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxTCPClient.h; path = ../../../addons/ofxNetwork/src/ofxTCPClient.h; sourceTree = SOURCE_ROOT; };
 		C8E2BE30E0CBB25AA8972B43 /* ofxNeoPixels.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxNeoPixels.h; path = ../../../addons/ofxOPC/src/ofxNeoPixels.h; sourceTree = SOURCE_ROOT; };
@@ -123,7 +121,6 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		F1D4F661BED644CE3FDE2082 /* ofxFadeCandy.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxFadeCandy.h; path = ../../../addons/ofxOPC/src/ofxFadeCandy.h; sourceTree = SOURCE_ROOT; };
 		F399B91E98DC31CDA6DDACB4 /* ofxTCPManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPManager.cpp; path = ../../../addons/ofxNetwork/src/ofxTCPManager.cpp; sourceTree = SOURCE_ROOT; };
 		F66993296A3AEEC70FD444F5 /* ofxNetwork.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxNetwork.h; path = ../../../addons/ofxNetwork/src/ofxNetwork.h; sourceTree = SOURCE_ROOT; };
 		F7BD144D9D58CA541509F164 /* NeoPixelShield5x8.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = NeoPixelShield5x8.cpp; path = ../../../addons/ofxOPC/src/NeoPixelShield5x8.cpp; sourceTree = SOURCE_ROOT; };
@@ -208,8 +205,6 @@
 				3773C68E31EBA3B9F140049B /* NeoPixelStick.h */,
 				B877C63F0CA63F218B75020C /* NeoPixelStrip.cpp */,
 				816E70342F632EF471F614A4 /* NeoPixelStrip.h */,
-				C36BDD69AE57F73BC8CC058B /* ofxFadeCandy.cpp */,
-				F1D4F661BED644CE3FDE2082 /* ofxFadeCandy.h */,
 				C8E2BE30E0CBB25AA8972B43 /* ofxNeoPixels.h */,
 				2C24C81D88B85EC85495F7CA /* ofxOPC.cpp */,
 				33F3EFB014D3C27B5DEAB7C8 /* ofxOPC.h */,
@@ -405,7 +400,6 @@
 				64BC6FAB1B800B25D22D4271 /* NeoPixelShield5x8.cpp in Sources */,
 				E24898290227C1DB9C59D140 /* NeoPixelStick.cpp in Sources */,
 				C63446BC43BB38684BA28971 /* NeoPixelStrip.cpp in Sources */,
-				8E7BDFDB9AE0323B962402C0 /* ofxFadeCandy.cpp in Sources */,
 				C0DF2DD6C7A9DAF1E84222ED /* ofxOPC.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -115,7 +115,6 @@ void ofxOPC::writeChannel(uint8_t channel, vector<ofColor>pix)
     // Send the data
     client.sendRawBytes((char *)(OPC_SPC_packet), OPC_SPC_packet_length);
 }
-
 //--------------------------------------------------------------
 void ofxOPC::writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3)
 {
@@ -123,7 +122,7 @@ void ofxOPC::writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor
     pix1.insert(pix1.end(), pix3.begin(),pix3.end());
     
     // Bail early if there's no pixel data
-    if(pix1.empty()&&pix2.empty()&&pix3.empty())
+    if(pix1.empty() && pix2.empty() && pix3.empty())
     {
         return;
         

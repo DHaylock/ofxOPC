@@ -4,7 +4,7 @@
 void ofApp::setup()
 {
     ofSetFrameRate(60);
-    
+    ofSetVerticalSync(true);
     effect = 0;
     // Connect to the fcserver
     opcClient.setup("127.0.0.1", 7890);
@@ -12,12 +12,15 @@ void ofApp::setup()
     for (int i = 0; i <= 7; i++)
     {
         NeoPixelStrip strip;
-        strip.setupLedStrip(60);
+        strip.setupLedStrip(60,false);
         strips.push_back(strip);
     }
     
     // Load the dot image
     dot.loadImage("dot.png");
+    video.loadMovie("fingers.mov");
+    video.setLoopState(OF_LOOP_NORMAL);
+    video.play();
 }
 //--------------------------------------------------------------
 void ofApp::update()
@@ -48,6 +51,7 @@ void ofApp::update()
             }
         }
     }
+    video.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()
@@ -101,7 +105,7 @@ void ofApp::drawEffects(int mode)
             ofCircle(mouseX,mouseY,40);
             ofPopStyle();
         }
-            break;
+        break;
             
         case 1:
         {
@@ -128,7 +132,7 @@ void ofApp::drawEffects(int mode)
             ofPopMatrix();
             ofPopMatrix();
         }
-            break;
+        break;
             
         case 2:
         {
@@ -137,20 +141,21 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofRect(ofGetWidth()/2-5, 90, 20,320);
+            ofRect(ofGetWidth()/2-110, ofGetHeight()/2-30*5, 200,300);
             ofPopStyle();
         }
-            break;
+        break;
             
         case 3:
         {
             // Fade to full brightness then to zero
             ofPushStyle();
             ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
-            ofRect(ofGetWidth()/2-5, 90, 20,320);
+            ofRect(ofGetWidth()/2-110, ofGetHeight()/2-30*5, 200,300);
             ofPopStyle();
         }
-            break;
+        break;
+        
         case 4:
         {
             ofPushStyle();
@@ -159,38 +164,50 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofRect(ofGetWidth()/2-200,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*3)),300,20);
+            ofRect(ofGetWidth()/2-110,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*3)),200,20);
             float hue1 = fmodf(ofGetElapsedTimef()*5,255);
             ofColor c1 = ofColor::fromHsb(hue1, 255, 255);
             ofSetColor(c1);
-            ofRect(ofGetWidth()/2-200,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*2)),300,20);
+            ofRect(ofGetWidth()/2-110,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*2)),200,20);
             float hue2 = fmodf(ofGetElapsedTimef(),255);
             ofColor c2 = ofColor::fromHsb(hue2, 255, 255);
             ofSetColor(c2);
-            ofRect(ofGetWidth()/2-200,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*1)),300,20);
+            ofRect(ofGetWidth()/2-110,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*1)),200,20);
             float hue3 = fmodf(ofGetElapsedTimef(),255);
             ofColor c3 = ofColor::fromHsb(hue3, 255, 255);
             ofSetColor(c3);
-            ofRect(ofGetWidth()/2-200,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*4)),300,20);
+            ofRect(ofGetWidth()/2-110,ofGetHeight()/2 + (int)(150 * sin(ofGetElapsedTimef()*4)),200,20);
             ofDisableBlendMode();
             ofPopStyle();
         }
-            break;
+        break;
+        
         case 5:
         {
-            // Fade to full brightness then to zero
             ofPushStyle();
-            float hue = fmodf(ofGetElapsedTimef(),255);
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
             ofEnableAlphaBlending();
-            dot.draw(mouseX-75, mouseY-75, 150, 150);
+            dot.draw(mouseX-100, mouseY-100, 200, 200);
             ofDisableAlphaBlending();
             ofPopStyle();
         }
-            break;
+        break;
+    
+        case 6:
+        {
+            ofPushStyle();
+            
+            ofSetColor(ofColor::white);
+            video.draw(ofGetWidth()/2-160, ofGetHeight()/2-30*5, 320, 300);
+            
+            ofPopStyle();
+            
+        }
+            
         default:
-            break;
+        break;
     }
 }
 //--------------------------------------------------------------

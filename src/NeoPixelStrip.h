@@ -13,7 +13,7 @@ class NeoPixelStrip {
         NeoPixelStrip(){}
         virtual ~NeoPixelStrip(){}
         
-        void setupLedStrip(int length);
+        void setupLedStrip(int length,bool rotation);
         void update();
         vector <ofColor> colorData();
         
@@ -27,7 +27,7 @@ class NeoPixelStrip {
         
     private:
         void ledStrip();
-        
+        bool _rotated;
         vector <ofColor> colors;
         vector <ofVec2f> pos;
         

@@ -29,6 +29,8 @@ public:
     vector <NeoPixelStrip> strips;
 
     ofImage dot;
+    ofVideoPlayer video;
     int effect;
     bool hide;
+    
 };
