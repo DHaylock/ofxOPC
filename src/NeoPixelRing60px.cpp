@@ -143,7 +143,7 @@ void NeoPixelRing60px::drawRing(int x, int y)
     ofTranslate(x, y);
     ofFill();
     ofSetColor(100);
-    ofRect(-75,-75,135,135);
+    ofRect(-70,-70,150,150);
     ledRing();
     ofPopMatrix();
 }
