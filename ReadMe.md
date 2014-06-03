@@ -17,7 +17,7 @@ Also drop me a line and let me know how you end up using the addon.
 - openFrameworks v0.8.0+
 - ofxNetwork - comes as part of the openFrameworks download
 - Fadecandy unit @scanlime
-- Fadecandy server
+- Fadecandy server <a href='https://github.com/scanlime/fadecandy'>https://github.com/scanlime/fadecandy</a> 
 
 ## What the addon includes
 
