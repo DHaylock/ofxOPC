@@ -98,6 +98,7 @@ Also drop me a line and let me know how you end up using the addon.
 - Neopixel Shield 5x8
 - Neopixel Multiple Strips
 - Neopixel Chained Rings
+- Multiple Neopixel units and Syphon
 
 ## Important 
 
