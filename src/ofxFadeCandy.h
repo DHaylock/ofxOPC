@@ -4,9 +4,8 @@
 //  Created by David Haylock on 28/05/2014.
 //
 
-#ifndef __example_1Static__ofxFadeCandy__
-#define __example_1Static__ofxFadeCandy__
 
+// NOT USED YET FOR FUTURE DEVELOPMENT
 #include <iostream>
 #include "ofMain.h"
 #include "ofxNetwork.h"
@@ -41,5 +40,3 @@ class ofxFadeCandy {
     
     
 };
-
-#endif /* defined(__example_1Static__ofxFadeCandy__) */

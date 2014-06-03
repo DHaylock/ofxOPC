@@ -3,6 +3,8 @@
 //
 //  Created by David Haylock on 28/05/2014.
 //
+
+// Headers for the Neopixel units
 #include "ofMain.h"
 #include "NeoPixelStick.h"
 #include "NeoPixelStrip.h"

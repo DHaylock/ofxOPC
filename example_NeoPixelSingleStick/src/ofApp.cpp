@@ -9,7 +9,7 @@ void ofApp::setup()
     
     // Connect to the fcserver
     opcClient.setup("127.0.0.1", 7890);
-    stick.setupLedStick();
+    stick.setupLedStick(false);
     
     // Load the dot image
     dot.loadImage("dot.png");
@@ -19,7 +19,7 @@ void ofApp::update()
 {
     ofSetWindowTitle("ofxOPC:NeoPixelStick: FPS: " +ofToString((int)(ofGetFrameRate())));
     
-    stick.grabImageData(ofPoint(ofGetWidth()/2,ofGetHeight()/2-(30*5)));
+    stick.grabImageData(ofPoint(ofGetWidth()/2,ofGetHeight()/2-(4*5)));
     
     stick.update();
     
@@ -44,13 +44,13 @@ void ofApp::draw()
     drawEffects(effect);
     
     // Visual Representation of the Grab Area
-    stick.drawGrabRegion();
+    stick.drawGrabRegion(hide);
     
     // Show what the leds should be doing!
     stick.drawStick(50, 50);
     
     // Report Messages
-    ofDrawBitmapStringHighlight("Output", 1,345);
+    ofDrawBitmapStringHighlight("Output", 1,115);
     ofDrawBitmapStringHighlight("Input Area", ofGetWidth()/2-35,ofGetHeight()-50);
     ofDrawBitmapStringHighlight("Press Left and Right to Change Effect Mode", 5,ofGetHeight()-15);
     ofDrawBitmapStringHighlight("Is the Client Connected: " + ofToString(opcClient.isConnected()), 5,ofGetHeight()-30);
@@ -111,7 +111,7 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofRect(ofGetWidth()/2-5, 90, 20,320);
+            ofRect(190, 175, 20,50);
             ofPopStyle();
         }
             break;
@@ -121,7 +121,7 @@ void ofApp::drawEffects(int mode)
             // Fade to full brightness then to zero
             ofPushStyle();
             ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
-            ofRect(ofGetWidth()/2-5, 90, 20,320);
+            ofRect(190, 175, 20,50);
             ofPopStyle();
         }
             break;
@@ -145,7 +145,21 @@ void ofApp::drawEffects(int mode)
             ofDisableBlendMode();
             ofPopStyle();
         }
-            break;
+        break;
+            
+        case 5:
+        {
+            ofPushStyle();
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            dot.draw(mouseX-50, mouseY-50, 100,100);
+            ofDisableBlendMode();
+            ofPopStyle();
+        }
+        break;
+            
         default:
             break;
     }
@@ -158,6 +172,9 @@ void ofApp::keyPressed(int key)
     }
     if (key == OF_KEY_RIGHT) {
         effect++;
+    }
+    if (key == ' ') {
+        hide = !hide;
     }
 }
 //--------------------------------------------------------------

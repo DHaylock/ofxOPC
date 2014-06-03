@@ -49,9 +49,12 @@ class ofxOPC  {
         bool isConnected();
         void tryConnecting();
         void retryConnecting();
-        void sendFirmwareConfigPacket();
+        void sendFirmwareConfigPacket(); // Not used
     
+        // For writing custom channels
         void writeChannel(uint8_t channel, vector <ofColor> pix);
+    
+        // Write Channels or Pin data
         void writeChannelOne(vector <ofColor> pix);
         void writeChannelTwo(vector <ofColor> pix);
         void writeChannelThree(vector <ofColor> pix);
@@ -71,8 +74,7 @@ class ofxOPC  {
         void writeChannelSix(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
         void writeChannelSeven(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
         void writeChannelEight(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
-    
-        vector <ofColor> colors;
+
         string _address;
         int _port;
         int _w,_h;
@@ -81,14 +83,18 @@ class ofxOPC  {
     
         void connect();
         void disconnect();
-        
+    
+        // For sending our data packets out to the Server
         ofxTCPClient client;
+    
+        // Reconnection Stuff
         float timer;
         bool tryReconnecting;
         float startTime;
         float endTime;
         int connectionAttempts;
     
+        // Data Packets
         OPCPacket_t OPC_SPC_packet;
         size_t OPC_SPC_packet_length;
         OPCPacket_SPCData_t OPC_SPC_packet_data;

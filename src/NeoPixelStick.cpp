@@ -7,23 +7,47 @@
 
 #include "NeoPixelStick.h"
 //--------------------------------------------------------------
-void NeoPixelStick::setupLedStick()
+void NeoPixelStick::setupLedStick(bool rotateH)
 {
     // Setup Positioning
     size = 8;
-    x = 10;
+    x = 5;
     y = 1;
+    _rotated = rotateH;
     
-    // Set the pixel data
-    pixels.allocate(x,size,GL_RGB);
-    
-    for (int i = 0; i < size; i++)
+    if (_rotated == true)
     {
-        // Generate the position of the grabber points
-        float rx = x-5;
-        float ry = y + (i*5);
+        // Set the pixel data
+        pixels.allocate(size,x,GL_RGB);
+        img.allocate(size*5,10,OF_IMAGE_COLOR);
         
-        pos.push_back(ofVec2f(rx,ry));
+        for (int i = 0; i < size; i++)
+        {
+            // Generate the position of the grabber points
+            float rx = x + (i*5);
+            float ry = y;
+            
+            pos.push_back(ofVec2f(rx,ry));
+        }
+    }
+    else if(_rotated == false)
+    {
+        // Set the pixel data
+        pixels.allocate(x,size,GL_RGB);
+        img.allocate(10,size*5,OF_IMAGE_COLOR);
+        
+        for (int i = 0; i < size; i++)
+        {
+            // Generate the position of the grabber points
+            float rx = x;
+            float ry = y + (i*5);
+            
+            pos.push_back(ofVec2f(rx,ry));
+        }
+    }
+    else
+    {
+        
     }
 }
 //--------------------------------------------------------------
@@ -52,31 +76,69 @@ void NeoPixelStick::grabImageData(ofPoint grabPos)
 {
     _pos = grabPos;
     img.clear();
-    img.grabScreen(_pos.x-x, _pos.y-y,10,size*5);
-    
-    
-    //Update the position of the ring pixels
-    for (int i = 0; i < pos.size(); i++)
+    if (_rotated == true)
     {
-        pos[i] + ofVec2f(_pos.x,_pos.y);
+        img.grabScreen(_pos.x-x,_pos.y-y,size*5,10);
+        
+        //Update the position of the ring pixels
+        for (int i = 0; i < pos.size(); i++)
+        {
+            pos[i] + ofVec2f(_pos.x,_pos.y);
+        }
     }
-    
+    else if(_rotated == false)
+    {
+        img.grabScreen(_pos.x-x,_pos.y-y,10,size*5);
+        
+        //Update the position of the ring pixels
+        for (int i = 0; i < pos.size(); i++)
+        {
+            pos[i] + ofVec2f(_pos.x,_pos.y);
+        }
+    }
+    else
+    {
+        
+    }
 }
 //--------------------------------------------------------------
-void NeoPixelStick::drawGrabRegion()
+void NeoPixelStick::drawGrabRegion(bool hideArea)
 {
-    // Draw Interaction Area
-    ofPushStyle();
-    ofNoFill();
-    ofSetLineWidth(2);
-    ofSetColor(255, 255);
-    ofRect(_pos.x-10,_pos.y-2,20,size*5+10);
-    ofPopStyle();
     
-    // Visualise the Grabber
-    ofSetColor(0, 175);
-    ofNoFill();
-    ofRect(_pos.x-5,_pos.y-y,10,size*5);
+    if (hideArea == true)
+    {
+        // Draw Interaction Area
+        ofPushStyle();
+        ofNoFill();
+        ofSetLineWidth(2);
+        ofSetColor(255, 255);
+        if (_rotated == true)
+        {
+            ofRect(_pos.x-9,_pos.y-9,size*5+12,20);
+        }
+        else
+        {
+            ofRect(_pos.x-9,_pos.y-6,20,size*5+12);
+        }
+        ofPopStyle();
+        // Visualise the Grabber
+        ofSetColor(255, 175);
+        ofNoFill();
+    }
+    else
+    {
+        // Visualise the Grabber
+        ofSetColor(0, 175);
+        ofNoFill();
+    }
+  
+    if (_rotated == true) {
+        ofRect(_pos.x-5,_pos.y-y-4,size*5+7,10);
+    }
+    else
+    {
+        ofRect(_pos.x-5,_pos.y-y-1,10,size*5+7);
+    }
     
     for (int i = 0; i < pos.size(); i++)
     {
@@ -87,15 +149,31 @@ void NeoPixelStick::drawGrabRegion()
 void NeoPixelStick::ledStick()
 {
     
-    ofFill();
-    ofSetColor(0,175);
-    ofRect(0, 0, 10, size*5);
-    
-    for (int i = 0; i < size; i++)
+    if (_rotated == true)
     {
         ofFill();
-        ofSetColor(colors[i]);
-        ofCircle(pos[i],3);
+        ofSetColor(100,175);
+        ofRect(-x/2-2, y-6, size*5+5,10);
+        
+        for (int i = 0; i < size; i++)
+        {
+            ofFill();
+            ofSetColor(colors[i]);
+            ofCircle(pos[i].x-x,pos[i].y-y,3);
+        }
+    }
+    else if(_rotated == false)
+    {
+        ofFill();
+        ofSetColor(100,175);
+        ofRect(-x/2-2, y-6, 10, size*5+5);
+        
+        for (int i = 0; i < size; i++)
+        {
+            ofFill();
+            ofSetColor(colors[i]);
+            ofCircle(pos[i].x-x,pos[i].y-y,3);
+        }
     }
 }
 //--------------------------------------------------------------
@@ -104,9 +182,6 @@ void NeoPixelStick::drawStick(int x, int y)
     // Where to draw the Strip!
     ofPushMatrix();
     ofTranslate(x, y);
-    ofFill();
-    ofSetColor(100);
-    ofRect(-x,-y,100,100);
     ledStick();
     ofPopMatrix();
 }

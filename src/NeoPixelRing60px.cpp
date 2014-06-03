@@ -52,11 +52,6 @@ vector <ofColor> NeoPixelRing60px::colorData()
     return colors;
 }
 //--------------------------------------------------------------
-int NeoPixelRing60px::indexPos()
-{
-    return _index;
-}
-//--------------------------------------------------------------
 void NeoPixelRing60px::grabImageData(ofPoint grabPos)
 {
     // Change Capture Location
@@ -148,7 +143,7 @@ void NeoPixelRing60px::drawRing(int x, int y)
     ofTranslate(x, y);
     ofFill();
     ofSetColor(100);
-    ofRect(-x,-y,135,135);
+    ofRect(-75,-75,135,135);
     ledRing();
     ofPopMatrix();
 }

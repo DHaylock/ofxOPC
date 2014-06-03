@@ -140,7 +140,7 @@ void NeoPixelShield5x8::drawShield(int x, int y)
     ofTranslate(x, y);
     ofFill();
     ofSetColor(100);
-    ofRect(-x,-y,100,100);
+    ofRect(-2,-2,100,100);
     ledShield();
     ofPopMatrix();
 }

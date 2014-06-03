@@ -15,30 +15,36 @@ public:
     
     void setupLedRing();
     void update();
-    vector <ofColor> colorData();
-    int indexPos();
+    void grabImageData(ofPoint grabPos);
+    void drawGrabRegion(bool hideArea);
+    void drawRing(int x, int y);
     
+    // Return Data Method
+    vector <ofColor> colorData();
+   
+private:
+    
+    // Hold the Captured Colors
+    vector <ofColor> colors;
+    
+    // Hold the Position of our Capture points
+    vector <ofVec2f> pos;
+    
+    // Variables
     int size;
     float x;
     float y;
     float radius;
-    
-    void grabImageData(ofPoint grabPos);
-    void drawGrabRegion(bool hideArea);
-    
-    void drawRing(int x, int y);
-    void ledRing();
-    
-private:
-    vector <ofColor> colors;
-    vector <ofVec2f> pos;
-    int _rw,_rh;
-    int _radius;
-    int _size;
-    int _index;
     ofPoint _pos;
     
+    // Capture Objects
     ofImage img;
     ofPixels pixels;
+    
+    // Draw Unit
+    void ledRing();
 };
+
+
+
 

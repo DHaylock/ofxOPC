@@ -48,11 +48,6 @@ vector <ofColor> NeoPixelRing24px::colorData()
     return colors;
 }
 //--------------------------------------------------------------
-int NeoPixelRing24px::indexPos()
-{
-    return _index;
-}
-//--------------------------------------------------------------
 void NeoPixelRing24px::grabImageData(ofPoint grabPos)
 {
     // Change Capture Location

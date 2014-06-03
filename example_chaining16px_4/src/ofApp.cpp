@@ -51,7 +51,7 @@ void ofApp::draw()
     }
     // Show what the leds should be doing!
     for (int i = 0;  i < 4; i++) {
-        rings[i].drawRing(50+(i*60), 50);
+        rings[i].drawRing(50+(i*100), 50);
     }
     // Report Messages
     ofDrawBitmapStringHighlight("Output", 1,115);
@@ -84,7 +84,7 @@ void ofApp::drawEffects(int mode)
         case 1:
         {
             // Like the processing example draw dot images and rotate
-            int size = 70;
+            int size = 300;
             ofPushMatrix();
             ofTranslate(0, 0);
             ofPushMatrix();
@@ -115,7 +115,9 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,30);
+            for (int i = 0; i < 4; i++) {
+                ofCircle(ofGetWidth()/2-100+(i*80),ofGetHeight()/2,30);
+            }
             ofPopStyle();
         }
             break;
@@ -125,34 +127,33 @@ void ofApp::drawEffects(int mode)
             // Fade to full brightness then to zero
             ofPushStyle();
             ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,30);
+            for (int i = 0; i < 4; i++) {
+                ofCircle(ofGetWidth()/2-100+(i*80),ofGetHeight()/2,30);
+            }
+            
             ofPopStyle();
         }
             break;
         case 4:
         {
+            ofPushStyle();
             ofEnableBlendMode(OF_BLENDMODE_ADD);
-            float rotationAmount = ofGetElapsedTimeMillis()/10;
-            ofSetColor(255, 0, 0);
-            ofPushMatrix();
-            ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-            ofRotateZ(rotationAmount);
-            ofPushMatrix();
-            ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2-20, 20);
-            ofPopMatrix();
-            ofPopMatrix();
-            ofSetColor(0, 0, 255);
-            ofPushMatrix();
-            ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-            ofRotateZ(-rotationAmount);
-            ofPushMatrix();
-            ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2+20, 20);
-            ofPopMatrix();
-            ofPopMatrix();
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            dot.draw(ofGetWidth()/2-75+ (int)(150 * sin(ofGetElapsedTimef()*3)),ofGetHeight()/2-75,150,150);
+            float hue1 = fmodf(ofGetElapsedTimef()*2.5,255);
+            ofColor c1 = ofColor::fromHsb(hue1, 255, 255);
+            ofSetColor(c1);
+            dot.draw(ofGetWidth()/2-75+ (int)(150 * sin(ofGetElapsedTimef()*2)),ofGetHeight()/2-75,150,150);
+            float hue2 = fmodf(ofGetElapsedTimef()*5,255);
+            ofColor c2 = ofColor::fromHsb(hue2, 255, 255);
+            ofSetColor(c2);
+            dot.draw(ofGetWidth()/2-75+ (int)(150 * sin(ofGetElapsedTimef()*1)),ofGetHeight()/2-75,150,150);
             ofDisableBlendMode();
+            ofPopStyle();
         }
+        
             break;
         case 5:
         {
@@ -162,19 +163,19 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofRect(ofGetWidth()/2+(int)(150 * sin(ofGetElapsedTimef()*3)),ofGetHeight()/2-50,20,100);
+            ofRect(ofGetWidth()/2+5+(int)(150 * sin(ofGetElapsedTimef()*3)),ofGetHeight()/2-50,20,100);
             float hue1 = fmodf(ofGetElapsedTimef()*5,255);
             ofColor c1 = ofColor::fromHsb(hue1, 255, 255);
             ofSetColor(c1);
-            ofRect(ofGetWidth()/2+(int)(150 * sin(ofGetElapsedTimef()*2)),ofGetHeight()/2-50,20,100);
+            ofRect(ofGetWidth()/2+5+(int)(150 * sin(ofGetElapsedTimef()*2)),ofGetHeight()/2-50,20,100);
             float hue2 = fmodf(ofGetElapsedTimef(),255);
             ofColor c2 = ofColor::fromHsb(hue2, 255, 255);
             ofSetColor(c2);
-            ofRect(ofGetWidth()/2+(int)(150 * sin(ofGetElapsedTimef()*1)),ofGetHeight()/2-50,20,100);
+            ofRect(ofGetWidth()/2+5+(int)(150 * sin(ofGetElapsedTimef()*1)),ofGetHeight()/2-50,20,100);
             float hue3 = fmodf(ofGetElapsedTimef(),255);
             ofColor c3 = ofColor::fromHsb(hue3, 255, 255);
             ofSetColor(c3);
-            ofRect(ofGetWidth()/2+(int)(150 * sin(ofGetElapsedTimef()*4)),ofGetHeight()/2-50,20,100);
+            ofRect(ofGetWidth()/2+5+(int)(150 * sin(ofGetElapsedTimef()*4)),ofGetHeight()/2-50,20,100);
             ofDisableBlendMode();
             ofPopStyle();
         }

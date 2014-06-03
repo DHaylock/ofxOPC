@@ -28,5 +28,5 @@ class ofApp : public ofBaseApp{
         
         ofImage dot;
         int effect;
-    
+        bool hide;
 };

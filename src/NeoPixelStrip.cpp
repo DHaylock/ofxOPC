@@ -6,13 +6,13 @@
 
 #include "NeoPixelStrip.h"
 //--------------------------------------------------------------
-void NeoPixelStrip::setupLedStrip(int length,bool rotation)
+void NeoPixelStrip::setupLedStrip(int length,bool rotateH)
 {
     // Setup Positioning
     size = length;
     x = 5;
     y = 1;
-    _rotated = rotation;
+    _rotated = rotateH;
     
     if (_rotated == true)
     {

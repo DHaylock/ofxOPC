@@ -159,6 +159,16 @@ void ofApp::drawEffects(int mode)
             movie.draw(ofGetWidth()/2-30, ofGetHeight()/2-30, 60, 60);
         }
         break;
+        case 6:
+        {
+            ofPushStyle();
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            dot.draw(mouseX-75, mouseY-75, 150,150);
+            ofPopStyle();
+        }
+            break;
         default:
         break;
     }
