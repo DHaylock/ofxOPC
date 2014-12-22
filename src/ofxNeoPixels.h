@@ -6,6 +6,7 @@
 
 // Headers for the Neopixel units
 #include "ofMain.h"
+#include "NeoPixel.h"
 #include "NeoPixelStick.h"
 #include "NeoPixelStrip.h"
 #include "NeoPixelGrid8x8.h"

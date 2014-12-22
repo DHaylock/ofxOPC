@@ -10,31 +10,43 @@
 	<string>example_MultipleUnitsSyphon</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5CEC2232-1C85-4444-A2A9-59BC2DA08864</key>
-		<string>ssh://wcode.org//data/git/wproj/ofxOPC/</string>
+		<key>31E280106F6B078BEC34817BA46938F466369C05</key>
+		<string>wcode.org:/data/git/wproj/ofxOPC/</string>
+		<key>F4CCB893AFADB97238A965FD2F28717F1CAAE613</key>
+		<string>https://github.com/astellato/ofxSyphon</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>example_MultipleUnitsSyphon/example_MultipleUnitsSyphon.xcodeproj/project.xcworkspace</string>
+	<string>example_MultipleUnitsSyphon/example_MultipleUnitsSyphon.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5CEC2232-1C85-4444-A2A9-59BC2DA08864</key>
+		<key>31E280106F6B078BEC34817BA46938F466369C05</key>
 		<string>../../..</string>
+		<key>F4CCB893AFADB97238A965FD2F28717F1CAAE613</key>
+		<string>../../../../ofxSyphon</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://wcode.org//data/git/wproj/ofxOPC/</string>
+	<string>wcode.org:/data/git/wproj/ofxOPC/</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5CEC2232-1C85-4444-A2A9-59BC2DA08864</string>
+	<string>31E280106F6B078BEC34817BA46938F466369C05</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5CEC2232-1C85-4444-A2A9-59BC2DA08864</string>
+			<string>31E280106F6B078BEC34817BA46938F466369C05</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxOPC</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F4CCB893AFADB97238A965FD2F28717F1CAAE613</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSyphon</string>
 		</dict>
 	</array>
 </dict>

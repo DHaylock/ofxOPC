@@ -55,6 +55,12 @@ void ofApp::draw()
     ofDrawBitmapStringHighlight("Press Left and Right to Change Effect Mode", 5,ofGetHeight()-15);
     ofDrawBitmapStringHighlight("Is the Client Connected: " + ofToString(opcClient.isConnected()), 5,ofGetHeight()-30);
     
+    if (!ring12px.colorData().empty()) {
+        
+            ofDrawBitmapStringHighlight(ofToString(ring12px.colorData()), 10,10);
+        
+    }
+    
 }
 //--------------------------------------------------------------
 void ofApp::exit()
@@ -81,27 +87,27 @@ void ofApp::drawEffects(int mode)
         case 1:
         {
             // Like the processing example draw dot images and rotate
-            int size = 70;
-            ofPushMatrix();
-            ofTranslate(0, 0);
-            ofPushMatrix();
-            ofTranslate(ofGetWidth()/2,ofGetHeight()/2);
-            ofRotateZ(ofGetElapsedTimeMillis()/10);
-            ofPushMatrix();
-            ofTranslate(-size,-size);
-            ofEnableBlendMode(OF_BLENDMODE_ADD);
-            ofSetColor(0, 255,20);
-            dot.draw(size/4, size/4, size,size);
-            ofSetColor(255, 0,20);
-            dot.draw((size/4*3), size/4, size,size);
-            ofSetColor(0, 0,255);
-            dot.draw(size/4, (size/4*3), size,size);
-            ofSetColor(255, 0,255);
-            dot.draw((size/4*3),(size/4*3), size,size);
-            ofDisableBlendMode();
-            ofPopMatrix();
-            ofPopMatrix();
-            ofPopMatrix();
+int size = 70;
+ofPushMatrix();
+ofTranslate(0, 0);
+ofPushMatrix();
+ofTranslate(ofGetWidth()/2,ofGetHeight()/2);
+ofRotateZ(ofGetElapsedTimeMillis()/10);
+ofPushMatrix();
+ofTranslate(-size,-size);
+ofEnableBlendMode(OF_BLENDMODE_ADD);
+ofSetColor(0, 255,20);
+dot.draw(size/4, size/4, size,size);
+ofSetColor(255, 0,20);
+dot.draw((size/4*3), size/4, size,size);
+ofSetColor(0, 0,255);
+dot.draw(size/4, (size/4*3), size,size);
+ofSetColor(255, 0,255);
+dot.draw((size/4*3),(size/4*3), size,size);
+ofDisableBlendMode();
+ofPopMatrix();
+ofPopMatrix();
+ofPopMatrix();
         }
         break;
             

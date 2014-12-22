@@ -10,29 +10,29 @@
 	<string>example_chaining16px_4</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5CEC2232-1C85-4444-A2A9-59BC2DA08864</key>
-		<string>ssh://wcode.org//data/git/wproj/ofxOPC/</string>
+		<key>31E280106F6B078BEC34817BA46938F466369C05</key>
+		<string>wcode.org:/data/git/wproj/ofxOPC/</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>example_chaining16px_4/example_chaining16px_4.xcodeproj/project.xcworkspace</string>
+	<string>example_chaining16px_4/example_chaining16px_4.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5CEC2232-1C85-4444-A2A9-59BC2DA08864</key>
+		<key>31E280106F6B078BEC34817BA46938F466369C05</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://wcode.org//data/git/wproj/ofxOPC/</string>
+	<string>wcode.org:/data/git/wproj/ofxOPC/</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5CEC2232-1C85-4444-A2A9-59BC2DA08864</string>
+	<string>31E280106F6B078BEC34817BA46938F466369C05</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5CEC2232-1C85-4444-A2A9-59BC2DA08864</string>
+			<string>31E280106F6B078BEC34817BA46938F466369C05</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxOPC</string>
 		</dict>

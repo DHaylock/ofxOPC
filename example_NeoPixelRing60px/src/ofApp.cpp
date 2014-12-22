@@ -72,7 +72,7 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(mouseX,mouseY,60);
+            ofCircle(mouseX,mouseY,70);
             ofPopStyle();
         }
         break;
@@ -80,7 +80,7 @@ void ofApp::drawEffects(int mode)
         case 1:
         {
             // Like the processing example draw dot images and rotate
-            int size = 120;
+            int size = 160;
             ofPushMatrix();
             ofTranslate(0, 0);
             ofPushMatrix();
@@ -111,7 +111,7 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,60);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2,70);
             ofPopStyle();
         }
         break;
@@ -121,7 +121,7 @@ void ofApp::drawEffects(int mode)
             // Fade to full brightness then to zero
             ofPushStyle();
             ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,60);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2,70);
             ofPopStyle();
         }
         break;
@@ -136,7 +136,7 @@ void ofApp::drawEffects(int mode)
             ofRotateZ(rotationAmount);
             ofPushMatrix();
             ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2-40, 20);
+            ofCircle(ofGetWidth()/2, ofGetHeight()/2-40, 40);
             ofPopMatrix();
             ofPopMatrix();
             ofSetColor(0, 0, 255);
@@ -145,13 +145,13 @@ void ofApp::drawEffects(int mode)
             ofRotateZ(-rotationAmount);
             ofPushMatrix();
             ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2+40, 20);
+            ofCircle(ofGetWidth()/2, ofGetHeight()/2+40, 40);
             ofPopMatrix();
             ofPopMatrix();
             ofDisableBlendMode();
-        
         }
         break;
+        
         case 5:
         {
             ofPushStyle();
@@ -161,7 +161,7 @@ void ofApp::drawEffects(int mode)
             dot.draw(mouseX-75, mouseY-75, 150,150);
             ofPopStyle();
         }
-            break;
+        break;
         default:
         break;
     }
