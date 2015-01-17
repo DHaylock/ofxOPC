@@ -78,7 +78,7 @@ class ofxOPC  {
         string _address;
         int _port;
         int _w,_h;
-        
+
     private:
     
         void connect();

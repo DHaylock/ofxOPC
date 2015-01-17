@@ -30,6 +30,7 @@ Also drop me a line and let me know how you end up using the addon.
 - Neopixel Strip
 - Neopixel Stick
 - Neopixel Grid 8x8
+- Neopixel Grid 32x32
 - Neopixel Shield 5x8
 
 ## Getting Started
@@ -109,8 +110,22 @@ Also drop me a line and let me know how you end up using the addon.
 	opcClient.writeChannelTwo(ring60px.colorData());
 </code>
 
+If you would like to use the 32x32grid please alter line 24 of ofOPC.cpp from
+
+<code>uint16_t data_length = 8 * 64 * sizeof(OPCPacket_SPCData_t);</code>
+
+to 
+
+<code> uint16_t data_length = 16 * 64 * sizeof(OPCPacket_SPCData_t);</code>
+
+To use the 32x32 grid check this guide.
+
+<a href='http://docs.pixelmatix.com/SmartMatrix/'>http://docs.pixelmatix.com/SmartMatrix/</a>
+
+Thanks to @rorypickering.
+
 ## To Do
 
-- Allow users to specify the size of the elements in setup proceedure
+- Allow users to specify the size of the elements in setup procedure
 - Create return methods with data about the elements.
 - Need to Create a Single Neopixel unit

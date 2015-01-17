@@ -31,6 +31,7 @@ void ofApp::update()
         // Write out the first set of data
 //        opcClient.writeChannel(1, grid32x32.colorData());
     }
+    
     opcClient.update();
 }
 //--------------------------------------------------------------
