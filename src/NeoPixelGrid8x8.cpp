@@ -23,53 +23,13 @@ void NeoPixelGrid8x8::setupLedGrid()
     
     for (int i = 0; i < size; i++)
     {
-        // First Row
-        if (i <= 7)
+        for (int row = 0; row < 8; row++)
         {
-            rx = x+(i*spacing);
-            ry = y+spacing;
-        }
-        // Second Row
-        if ((i >= 8)&&(i <= 15))
-        {
-            rx = x+((i-8)*spacing);
-            ry = y+(spacing*2);
-        }
-        // Third Row
-        if ((i >= 16)&&(i <= 23))
-        {
-            rx = x+((i-16)*spacing);
-            ry = y+(spacing*3);
-        }
-        // Fourth Row
-        if ((i >= 24)&&(i <= 31))
-        {
-            rx = x+((i-24)*spacing);
-            ry = y+(spacing*4);
-        }
-        // Fifth Row
-        if ((i >= 32)&&(i <= 39))
-        {
-            rx = x+((i-32)*spacing);
-            ry = y+(spacing*5);
-        }
-        // Sixth Row
-        if ((i >= 40)&&(i <= 47))
-        {
-            rx = x+((i-40)*spacing);
-            ry = y+(spacing*6);
-        }
-        // Seventh Row
-        if ((i >= 48)&&(i <= 55))
-        {
-            rx = x+((i-48)*spacing);
-            ry = y+(spacing*7);
-        }
-        // Eighth Row
-        if ((i >= 56)&&(i <= 63))
-        {
-            rx = x+((i-56)*spacing);
-            ry = y+(spacing*8);
+            if((i >= (row*8))&&(i <= ((row*8)+7)))
+            {
+                rx = x+((i-(row*8))*spacing);
+                ry = y+(spacing*row);
+            }
         }
         // Push Points of Grabber
         pos.push_back(ofVec2f(rx,ry));
@@ -120,7 +80,7 @@ void NeoPixelGrid8x8::drawGrabRegion(bool hideArea)
         ofNoFill();
         ofSetLineWidth(2);
         ofSetColor(255, 255);
-        ofRect(_pos.x-7,_pos.y-2,65,65);
+        ofRect(_pos.x-7,_pos.y-6,65,65);
         ofPopStyle();
         
         // Visualise the Grabber
@@ -134,7 +94,7 @@ void NeoPixelGrid8x8::drawGrabRegion(bool hideArea)
         ofNoFill();
     }
     
-    ofRect(_pos.x-5, _pos.y+2,60,60);
+    ofRect(_pos.x-5, _pos.y-4,60,60);
     
     for (int i = 0; i < pos.size(); i++)
     {
@@ -148,7 +108,7 @@ void NeoPixelGrid8x8::ledGrid(int x, int y)
     ofTranslate(-x/4, -y/4);
     ofFill();
     ofSetColor(0,175);
-    ofRect(-4, 2, 62,62);
+    ofRect(-4, -4, 62,62);
     
     for (int i = 0; i < size; i++)
     {

@@ -82,7 +82,7 @@ void ofApp::drawEffects(int mode)
         case 1:
         {
             // Like the processing example draw dot images and rotate
-            int size = 120;
+            int size = 70;
             ofPushMatrix();
             ofTranslate(0, 0);
             ofPushMatrix();
