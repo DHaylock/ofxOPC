@@ -11,15 +11,11 @@ void ofApp::setup()
     
     // Load the dot image
     dot.loadImage("dot.png");
-    movie.loadMovie("fingers.mov");
-    movie.play();
-    movie.setLoopState(OF_LOOP_NORMAL);
 }
 //--------------------------------------------------------------
 void ofApp::update()
 {
     ofSetWindowTitle("ofxOPC:NeoPixelGrid32x32: FPS: " +ofToString((int)(ofGetFrameRate())));
-    movie.update();
     grid32x32.grabImageData(ofPoint(ofGetWidth()/2-115,ofGetHeight()/2-115));
     
     grid32x32.update();
@@ -113,7 +109,7 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,20);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2,50);
             ofPopStyle();
         }
             break;
@@ -123,7 +119,7 @@ void ofApp::drawEffects(int mode)
             // Fade to full brightness then to zero
             ofPushStyle();
             ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,20);
+            ofCircle(ofGetWidth()/2,ofGetHeight()/2,50);
             ofPopStyle();
         }
             break;
@@ -138,7 +134,7 @@ void ofApp::drawEffects(int mode)
             ofRotateZ(rotationAmount);
             ofPushMatrix();
             ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2-10, 20);
+            ofCircle(ofGetWidth()/2, ofGetHeight()/2-50, 50);
             ofPopMatrix();
             ofPopMatrix();
             ofSetColor(0, 0, 255);
@@ -147,7 +143,7 @@ void ofApp::drawEffects(int mode)
             ofRotateZ(-rotationAmount);
             ofPushMatrix();
             ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2+10, 20);
+            ofCircle(ofGetWidth()/2, ofGetHeight()/2+50, 50);
             ofPopMatrix();
             ofPopMatrix();
             ofDisableBlendMode();
@@ -156,8 +152,19 @@ void ofApp::drawEffects(int mode)
             
         case 5:
         {
-            ofSetColor(255, 255,255);
-            movie.draw(ofGetWidth()/2-30, ofGetHeight()/2-30, 60, 60);
+            ofPushStyle();
+            
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofCircle(ofGetWidth()/2+5+(int)(250 * sin(ofGetElapsedTimef()*3)),ofGetHeight()/2,90);
+            float hue1 = fmodf(ofGetElapsedTimef()*5,255);
+            ofColor c1 = ofColor::fromHsb(hue1, 255, 255);
+            ofSetColor(c1);
+            ofCircle(ofGetWidth()/2+5+(int)(250 * sin(ofGetElapsedTimef()*2)),ofGetHeight()/2,90);
+            ofDisableBlendMode();
+            ofPopStyle();
         }
             break;
         default:

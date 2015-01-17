@@ -28,7 +28,6 @@ class ofApp : public ofBaseApp{
         NeoPixelGrid32x32 grid32x32;
         
         ofImage dot;
-        ofVideoPlayer movie;
         
         int effect;
         bool hide;
