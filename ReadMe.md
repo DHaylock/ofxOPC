@@ -5,12 +5,12 @@ A openFrameworks addon for Open Pixel Control and FadeCandy Server
 
 ofxOPC is an addon for openFrameworks (v0.8.0+) that allows users to communicate to Neopixel LED units through Fadecandy and open pixel control. Draw graphics to the oF window, place the Neopixel grabber on the screen and the addon collects, encodes and sends the pixel data to the Fadecandy.
 
-It is a work in progress and there are still some issues that need to be addressed. However, it works as it stands.
+![alt text](ofxOPC.gif "gif")
 
 If you would like to contribute to the addon feel free to fork, hack and mod the code.
 Also drop me a line and let me know how you end up using the addon.
 
-@david_haylock
+[@david_haylock](https://twitter.com/david_haylock)
 
 ## Requirements
 
