@@ -18,7 +18,7 @@ void NeoPixelRing24px::setupLedRing()
     
     for (int i = 0; i < size; i++)
     {
-        float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size);
+        float angle = (1.0 * i) * (2.0 * PI)/(1.0 * size);
         
         // Generate the position of the grabber points
         float rx = x + (radius * cos(angle));
@@ -101,7 +101,7 @@ void NeoPixelRing24px::ledRing()
     
         for (int i = 0; i < size; i++)
         {
-            float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size-1);
+            float angle = (1.0 * i) * (2.0 * PI)/(1.0 * size-1);
             
             // Make Circle Points
             float rx = x-x + ((radius+6) * cos(angle));
@@ -111,7 +111,7 @@ void NeoPixelRing24px::ledRing()
     
         for (int i = 0; i < size; i++)
         {
-            float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size-1);
+            float angle = (1.0 * i) * (2.0 * PI)/(1.0 * size-1);
             
             // Make Circle Points
             float rx = x-x + ((radius-6)  * cos(angle));

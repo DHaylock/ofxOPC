@@ -100,12 +100,12 @@ class ofxOPC  {
         OPCPacket_SPCData_t OPC_SPC_packet_data;
     
         // CHANNEL NUMBERS
-        const int CHANNEL_ONE = 1;
-        const int CHANNEL_TWO = 2;
-        const int CHANNEL_THREE = 3;
-        const int CHANNEL_FOUR = 4;
-        const int CHANNEL_FIVE = 5;
-        const int CHANNEL_SIX = 6;
-        const int CHANNEL_SEVEN = 7;
-        const int CHANNEL_EIGHT = 8;
+        static const int CHANNEL_ONE = 1;
+        static const int CHANNEL_TWO = 2;
+        static const int CHANNEL_THREE = 3;
+        static const int CHANNEL_FOUR = 4;
+        static const int CHANNEL_FIVE = 5;
+        static const int CHANNEL_SIX = 6;
+        static const int CHANNEL_SEVEN = 7;
+        static const int CHANNEL_EIGHT = 8;
 };
