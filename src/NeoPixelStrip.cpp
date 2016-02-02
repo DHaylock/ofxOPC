@@ -11,7 +11,7 @@ void NeoPixelStrip::setupLedStrip(int length,bool rotateH)
     // Setup Positioning
     size = length;
     x = 5;
-    y = 1;
+    y = 5;
     _rotated = rotateH;
     
     if (_rotated == true)
@@ -57,11 +57,11 @@ void NeoPixelStrip::update()
     pixels.clear();
     
     // Transfer grab data to the pixel array
-    pixels = img.getPixels();
+    pixels = img.getPixelsRef();
     
     for (int i = 0; i < pos.size(); i++)
     {
-        colors.push_back(ofColor::white);//pixels.getColor(pos[i].x, pos[i].y));
+        colors.push_back(pixels.getColor(pos[i].x, pos[i].y));
     }
 }
 //--------------------------------------------------------------
@@ -185,4 +185,5 @@ void NeoPixelStrip::drawStrip(int x, int y)
     ofTranslate(x, y);
     ledStrip();
     ofPopMatrix();
+    img.draw(ofGetWidth()-img.getWidth(), 0);
 }
