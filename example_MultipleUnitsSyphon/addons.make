@@ -1,3 +1,0 @@
-ofxNetwork
-ofxOPC
-ofxSyphon

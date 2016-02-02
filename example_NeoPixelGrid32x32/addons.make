@@ -1,2 +1,0 @@
-ofxNetwork
-ofxOPC
