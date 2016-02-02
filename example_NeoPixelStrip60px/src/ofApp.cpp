@@ -7,17 +7,30 @@ void ofApp::setup()
     ofSetVerticalSync(true);
     effect = 0;
     
+
+    
     // Connect to the fcserver
     opcClient.setup("127.0.0.1", 7890);
     strip.setupLedStrip(60,false);
     
     // Load the dot image
     dot.loadImage("dot.png");
+    
+    unsigned delay = 0;
+    unsigned duration = 2000;
+    
+    for(int i = 0; i < 10; i++) {
+        tweenbounce[i].setParameters(2,easingbounce,ofxTween::easeOut,75,0,duration,delay);
+    }
+
 }
 //--------------------------------------------------------------
 void ofApp::update()
 {
     ofSetWindowTitle("ofxOPC:NeoPixelStrip60px: FPS: " +ofToString((int)(ofGetFrameRate())));
+    
+    
+ 
     
     strip.grabImageData(ofPoint(ofGetWidth()/2,ofGetHeight()/2-(30*5)));
     
@@ -154,7 +167,13 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            dot.draw(mouseX-75, mouseY-75, 150,150);
+            for(int i = 0; i < 10; i++){
+                ofCircle(ofGetWidth()/2,100+(i*30), tweenbounce[i].update());
+            }
+            
+                
+            //            dot.draw(ofGetWidth()/2-(75/2),ofGetHeight()/2,tweenbounce[0].update(),tweenbounce[0].update());
+//            dot.draw(mouseX-75, mouseY-75, 150,150);
             ofDisableBlendMode();
             ofPopStyle();
         }
@@ -167,6 +186,9 @@ void ofApp::drawEffects(int mode)
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
+    unsigned delay = 0;
+    unsigned duration = 500;
+    
     if (key == OF_KEY_LEFT) {
         effect--;
     }
@@ -176,6 +198,44 @@ void ofApp::keyPressed(int key)
     if (key == ' ') {
         hide = !hide;
     }
+//    if(key == '1') {
+//        tweenbounce[0].setParameters(2,easingbounce,ofxTween::easeOut,20,0,duration,delay);
+//    }
+//    if(key == '2') {
+//        tweenbounce[1].setParameters(2,easingbounce,ofxTween::easeOut,20,0,duration,delay);
+//    }
+//    if(key == '3') {
+//        tweenbounce[2].setParameters(2,easingbounce,ofxTween::easeOut,20,0,duration,delay);
+//    }
+//    if(key == '4') {
+//        tweenbounce[3].setParameters(2,easingbounce,ofxTween::easeOut,20,0,duration,delay);
+//    }
+//    if(key == '5') {
+//        tweenbounce[4].setParameters(2,easingbounce,ofxTween::easeOut,20,0,duration,delay);
+//    }
+    
+    int size = 10;
+
+    for (int e = 0; e < 10; e++) {
+        if(key == ofToChar(ofToString(e))) {
+            tweenbounce[e].setParameters(2,easingLinear,ofxTween::easeOut,size,0,duration,delay);
+        }
+    }
+    
+//    if(key == '2') {
+//        tweenbounce[1].setParameters(2,easingLinear,ofxTween::easeOut,size,0,duration,delay);
+//    }
+//    if(key == '3') {
+//        tweenbounce[2].setParameters(2,easingLinear,ofxTween::easeOut,size,0,duration,delay);
+//    }
+//    if(key == '4') {
+//        tweenbounce[3].setParameters(2,easingLinear,ofxTween::easeOut,size,0,duration,delay);
+//    }
+//    if(key == '5') {
+//        tweenbounce[4].setParameters(2,easingLinear,ofxTween::easeOut,size,0,duration,delay);
+//    }
+
+
 }
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key)

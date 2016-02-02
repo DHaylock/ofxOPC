@@ -18,7 +18,6 @@ void ofApp::update()
     ofSetWindowTitle("ofxOPC:NeoPixelRing60px: FPS: " +ofToString((int)(ofGetFrameRate())));
     
     ring60px.grabImageData(ofPoint(ofGetWidth()/2,ofGetHeight()/2));
-    
     ring60px.update();
     
     // If the client is not connected do not try and send information

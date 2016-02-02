@@ -18,12 +18,12 @@ void NeoPixelStrip::setupLedStrip(int length,bool rotateH)
     {
         // Set the pixel data
         pixels.allocate(length,x,GL_RGB);
-        img.allocate(size*5,10,OF_IMAGE_COLOR);
+        img.allocate(size*7,10,OF_IMAGE_COLOR);
         
         for (int i = 0; i < size; i++)
         {
             // Generate the position of the grabber points
-            float rx = x + (i*5);
+            float rx = x + (i*7);
             float ry = y;
             
             pos.push_back(ofVec2f(rx,ry));
@@ -33,13 +33,13 @@ void NeoPixelStrip::setupLedStrip(int length,bool rotateH)
     {
         // Set the pixel data
         pixels.allocate(x,length,GL_RGB);
-        img.allocate(10,size*5,OF_IMAGE_COLOR);
+        img.allocate(10,size*7,OF_IMAGE_COLOR);
         
         for (int i = 0; i < size; i++)
         {
             // Generate the position of the grabber points
             float rx = x;
-            float ry = y + (i*5);
+            float ry = y + (i*7);
             
             pos.push_back(ofVec2f(rx,ry));
         }
@@ -57,11 +57,11 @@ void NeoPixelStrip::update()
     pixels.clear();
     
     // Transfer grab data to the pixel array
-    pixels = img.getPixelsRef();
+    pixels = img.getPixels();
     
     for (int i = 0; i < pos.size(); i++)
     {
-        colors.push_back(pixels.getColor(pos[i].x, pos[i].y));
+        colors.push_back(ofColor::white);//pixels.getColor(pos[i].x, pos[i].y));
     }
 }
 //--------------------------------------------------------------
@@ -78,7 +78,7 @@ void NeoPixelStrip::grabImageData(ofPoint grabPoint)
     img.clear();
     if (_rotated == true)
     {
-        img.grabScreen(_pos.x-x,_pos.y-y,size*5,10);
+        img.grabScreen(_pos.x-x,_pos.y-y,size*7,10);
     
         //Update the position of the ring pixels
         for (int i = 0; i < pos.size(); i++)
@@ -88,7 +88,7 @@ void NeoPixelStrip::grabImageData(ofPoint grabPoint)
     }
     else if(_rotated == false)
     {
-        img.grabScreen(_pos.x-x,_pos.y-y,10,size*5);
+        img.grabScreen(_pos.x-x,_pos.y-y,10,size*7);
         
         //Update the position of the ring pixels
         for (int i = 0; i < pos.size(); i++)
@@ -111,14 +111,14 @@ void NeoPixelStrip::drawGrabRegion(bool hideArea)
         ofNoFill();
         ofSetLineWidth(2);
         ofSetColor(255, 255);
-        if (_rotated == true)
-        {
-            ofRect(_pos.x-9,_pos.y-9,size*5+10,20);
-        }
-        else
-        {
-            ofRect(_pos.x-9,_pos.y-6,20,size*5+10);
-        }
+//        if (_rotated == true)
+//        {
+//            ofRect(_pos.x-9,_pos.y-9,size*5+10,20);
+//        }
+//        else
+//        {
+//            ofRect(_pos.x-9,_pos.y-6,20,size*5+10);
+//        }
 
         ofPopStyle();
    
@@ -133,11 +133,11 @@ void NeoPixelStrip::drawGrabRegion(bool hideArea)
         ofNoFill();
     }
     if (_rotated == true) {
-        ofRect(_pos.x-5,_pos.y-y-4,size*5,10);
+        ofDrawRectangle(_pos.x-5,_pos.y-y-4,size*5,10);
     }
     else
     {
-        ofRect(_pos.x-5,_pos.y-y-1,10,size*5);
+        ofDrawRectangle(_pos.x-5,_pos.y-y-1,10,size*5);
     }
 
     
@@ -154,30 +154,28 @@ void NeoPixelStrip::ledStrip()
     {
         ofFill();
         ofSetColor(100,175);
-        ofRect(-x/2-2, y-6, size*5+5,10);
+        ofDrawRectangle(-x/2-2, y-6, size*5+5,10);
     
         for (int i = 0; i < size; i++)
         {
             ofFill();
             ofSetColor(colors[i]);
-            ofCircle(pos[i].x-x,pos[i].y-y,3);
+            ofDrawCircle(pos[i].x-x,pos[i].y-y,3);
         }
     }
     else if(_rotated == false)
     {
         ofFill();
         ofSetColor(100,175);
-        ofRect(-x/2-2, y-6, 10, size*5+5);
+        ofDrawRectangle(-x/2-2, y-6, 10, size*5+5);
         
         for (int i = 0; i < size; i++)
         {
             ofFill();
             ofSetColor(colors[i]);
-            ofCircle(pos[i].x-x,pos[i].y-y,3);
+            ofDrawCircle(pos[i].x-x,pos[i].y-y,3);
         }
     }
-    
-    
 }
 //--------------------------------------------------------------
 void NeoPixelStrip::drawStrip(int x, int y)

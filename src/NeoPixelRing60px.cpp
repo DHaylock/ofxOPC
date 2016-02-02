@@ -19,6 +19,7 @@ void NeoPixelRing60px::setupLedRing()
     
     // Set the pixel data
     pixels.allocate(radius*2+10, radius*2+10,GL_RGB);
+    img.allocate(radius*2+10, radius*2+10, OF_IMAGE_COLOR);
     
     for (int i = 0; i < size; i++)
     {
@@ -38,11 +39,13 @@ void NeoPixelRing60px::update()
     pixels.clear();
     
     // Transfer grab data to the pixel array
-    pixels = img.getPixelsRef();
+//
+//    cout <<  << endl;
     
     for (int i = 0; i < pos.size(); i++)
     {
-        colors.push_back(pixels.getColor(pos[i].x, pos[i].y));
+        colors.push_back(img.getPixels().getColor(pos[i].x, pos[i].y));
+        cout << img.getPixels().getColor(pos[i].x, pos[i].y) << endl;
     }
 }
 //--------------------------------------------------------------
@@ -56,7 +59,7 @@ void NeoPixelRing60px::grabImageData(ofPoint grabPos)
 {
     // Change Capture Location
     _pos = grabPos;
-    img.clear();
+//    img.clear();
     img.grabScreen(_pos.x-x, _pos.y-y,150,150);
     
     // Update the position of the ring pixels
@@ -96,6 +99,8 @@ void NeoPixelRing60px::drawGrabRegion(bool hideArea)
     {
         ofCircle(pos[i]+ofVec2f(_pos.x-x, _pos.y-y),2);
     }
+    ofSetColor(ofColor::white);
+    img.draw(ofGetWidth()-img.getWidth(), 0);
 }
 //--------------------------------------------------------------
 void NeoPixelRing60px::ledRing()

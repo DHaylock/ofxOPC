@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOPC.h"
+#include "ofxTween.h"
 
 class ofApp : public ofBaseApp{
     
@@ -32,5 +33,12 @@ public:
     int dropTwo;
     int effect;
     bool hide;
+    
+    ofSerial serial;
+    
+    ofxTween tweenbounce[10];
+    
+    ofxEasingLinear easingLinear;
+    ofxEasingBounce easingbounce;
     
 };
