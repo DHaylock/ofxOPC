@@ -99,6 +99,16 @@ ofPixels ofxOPC::getStagePixels()
     return tempPixs;
 }
 //--------------------------------------------------------------
+void ofxOPC::getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData)
+{
+    ofPixels tempPixs;
+    tempPixs.setFromPixels(screenPixels, _stageWidth, _stageHeight, OF_IMAGE_COLOR_ALPHA);
+    
+    for (int i = 0; i < pixels.size(); i++) {
+        colorData.push_back(tempPixs.getColor(pixels[i].x, pixels[i].y));
+    }
+}
+//--------------------------------------------------------------
 void ofxOPC::drawStage()
 {
     ofPushMatrix();

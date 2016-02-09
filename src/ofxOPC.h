@@ -66,6 +66,8 @@ class ofxOPC  {
         ofPoint getStageCenter();
     
         ofPixels getStagePixels();
+        void getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData);
+
     
         void cleanup();
         void close();
