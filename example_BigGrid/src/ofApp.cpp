@@ -17,7 +17,7 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    ofSetWindowTitle("example_ofxNeoPixelGrids");
+    ofSetWindowTitle("example_BigGrid");
     
     // Now Draw the effects to the stage
     opcClient.beginStage();
