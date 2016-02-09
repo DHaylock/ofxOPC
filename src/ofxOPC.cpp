@@ -12,6 +12,7 @@ void ofxOPC::setup(string address, int port)
     _port = port;
     _address = address;
     
+    moveCounter = 0;
     labels.load( "../../../resources/Verdana.ttf", 13);
     dot.load("../../../resources/dot.png");
     connectionAttempts = 0;
@@ -241,6 +242,25 @@ void ofxOPC::drawDefaultEffects(int mode)
             int w = (int)(28 + 128 * sin(ofGetElapsedTimef()));
             ofDrawRectangle(getStageCenterX()-(w/2), getStageCenterY()-_stageHeight, w, _stageHeight*2);
             ofPopMatrix();
+            ofPopMatrix();
+        }
+            break;
+        case 7:
+        {
+            if (moveCounter < -labels.getStringBoundingBox("Hello World", 0, 0).width) {
+                moveCounter = _stageWidth;
+            }
+            else {
+                moveCounter--;
+            }
+            
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofPushMatrix();
+            ofScale(4, 4);
+            ofTranslate(moveCounter, _stageHeight/8);
+            labels.drawString("Hello World", 0, 0);
             ofPopMatrix();
         }
             break;

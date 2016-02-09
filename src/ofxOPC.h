@@ -109,7 +109,7 @@ class ofxOPC  {
     
         void connect();
         void disconnect();
-    
+        int moveCounter;
         ofFbo screenCapture;
         int _stageWidth;
         int _stageHeight;
