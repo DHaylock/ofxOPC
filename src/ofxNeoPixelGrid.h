@@ -45,5 +45,5 @@ class ofxNeoPixelGrid {
         int _spacing;
         
         // Draw Unit
-        void ledGrid(int x, int y);
+        void ledGrid();
 };

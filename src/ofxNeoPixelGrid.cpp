@@ -72,7 +72,7 @@ void ofxNeoPixelGrid::drawGrabRegion(bool hideArea)
     }
 }
 //--------------------------------------------------------------
-void ofxNeoPixelGrid::ledGrid(int x, int y)
+void ofxNeoPixelGrid::ledGrid()
 {
     ofFill();
     ofSetColor(50,175);
@@ -95,7 +95,7 @@ void ofxNeoPixelGrid::drawGrid(int x, int y)
 {
     // Where to draw the Grid!
     ofPushMatrix();
-    ofTranslate(x, y-pos[0].y);
-    ledGrid(0,0);
+    ofTranslate(x-pos[0].x, y-pos[0].y);
+    ledGrid();
     ofPopMatrix();
 }
