@@ -12,7 +12,8 @@ void ofxOPC::setup(string address, int port)
     _port = port;
     _address = address;
     
-    labels.load( "../../../resources/Verdana.ttf", 15);
+    labels.load( "../../../resources/Verdana.ttf", 13);
+    dot.load("../../../resources/dot.png");
     connectionAttempts = 0;
     tryReconnecting = false;
     startTime = ofGetElapsedTimeMillis();  // get the start time
@@ -120,8 +121,115 @@ void ofxOPC::drawStage()
     screenCapture.draw(0,0);
     ofSetColor(ofColor::white);
     labels.drawString("Input Stage", 10, _stageHeight+labels.getLineHeight());
+    string st = (isConnected()) ? "True" : "False";
+    labels.drawString("Is Fade Candy Connected " + st, 10, _stageHeight+(labels.getLineHeight()*2));
     ofPopStyle();
     ofPopMatrix();
+}
+//--------------------------------------------------------------
+void ofxOPC::drawDefaultEffects(int mode)
+{
+    switch (mode) {
+        case 0:
+        {
+            // Mouse Circle
+            ofPushStyle();
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofDrawCircle(ofGetMouseX(),ofGetMouseY(),70);
+            ofPopStyle();
+        }
+            break;
+            
+        case 1:
+        {
+            // Like the processing example draw dot images and rotate
+            int size = 160;
+            ofPushMatrix();
+            ofTranslate(0, 0);
+            ofPushMatrix();
+            ofTranslate(getStageCenterX(),getStageCenterY());
+            ofRotateZ(ofGetElapsedTimeMillis()/10);
+            ofPushMatrix();
+            ofTranslate(-size,-size);
+            ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+            ofSetColor(0, 255,20);
+            dot.draw(size/4, size/4, size,size);
+            ofSetColor(255, 0,20);
+            dot.draw((size/4*3), size/4, size,size);
+            ofSetColor(0, 0,255);
+            dot.draw(size/4, (size/4*3), size,size);
+            ofSetColor(255, 0,255);
+            dot.draw((size/4*3),(size/4*3), size,size);
+            ofDisableBlendMode();
+            ofPopMatrix();
+            ofPopMatrix();
+            ofPopMatrix();
+        }
+            break;
+            
+        case 2:
+        {
+            // Changes the color of a Circle
+            ofPushStyle();
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofDrawRectangle(0,0,_stageWidth,_stageHeight);
+            ofPopStyle();
+        }
+            break;
+            
+        case 3:
+        {
+            // Fade to full brightness then to zero
+            ofPushStyle();
+            ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
+            ofDrawRectangle(0,0,_stageWidth,_stageHeight);
+            ofPopStyle();
+        }
+            break;
+            
+        case 4:
+        {
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            float rotationAmount = ofGetElapsedTimeMillis()/10;
+            ofSetColor(255, 0, 0);
+            ofPushMatrix();
+            ofTranslate(getStageCenterX(), getStageCenterY());
+            ofRotateZ(rotationAmount);
+            ofPushMatrix();
+            ofTranslate(-getStageCenterX(), -getStageCenterY());
+            ofDrawCircle(getStageCenterX(), getStageCenterY()-40, 40);
+            ofPopMatrix();
+            ofPopMatrix();
+            ofSetColor(0, 0, 255);
+            ofPushMatrix();
+            ofTranslate(getStageCenterX(), getStageCenterY());
+            ofRotateZ(-rotationAmount);
+            ofPushMatrix();
+            ofTranslate(-getStageCenterX(), -getStageCenterY());
+            ofDrawCircle(getStageCenterX(), getStageCenterY()+40, 40);
+            ofPopMatrix();
+            ofPopMatrix();
+            ofDisableBlendMode();
+        }
+            break;
+            
+        case 5:
+        {
+            ofPushStyle();
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            dot.draw(ofGetMouseX()-75, ofGetMouseY()-75, 150,150);
+            ofPopStyle();
+        }
+            break;
+        default:
+            break;
+    }
 }
 //--------------------------------------------------------------
 void ofxOPC::cleanup()

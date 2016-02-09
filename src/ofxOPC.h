@@ -45,8 +45,8 @@ class ofxOPC  {
         void setup(string address,int port);
         void update();
         void draw();
-
-    
+        void drawDefaultEffects(int mode);
+        ofImage dot;
 
         //! Set the FBOS Size
         void setupStage(int width, int height);
