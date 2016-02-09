@@ -8,35 +8,38 @@
 #include "ofMain.h"
 
 class ofxNeoPixelRing {
+    public:
+        ofxNeoPixelRing(){}
+        virtual ~ofxNeoPixelRing(){}
     
-public:
-    ofxNeoPixelRing(){}
-    virtual ~ofxNeoPixelRing(){}
+        
+        void setupLedRing(int posx,int posy,int numberOfLeds,int radiusOfRing);
     
-    void setupLedRing(int posx,int posy,int numberOfLeds,int radiusOfRing);
-    void drawGrabRegion(bool hideArea);
-    void drawRing(int x, int y);
-    
-    // Return Data Method
-    vector <ofColor> colorData();
-    vector <ofVec2f> pixelCoordinates();
+        void drawGrabRegion(bool hideArea);
+        void drawRing(int x, int y);
+        
+        //! Return Data Method
+        vector <ofColor> colorData();
 
-    // Hold the Captured Colors
-    vector <ofColor> colors;
-private:
+        //! Return the locations of the Pixels
+        vector <ofVec2f> getPixelCoordinates();
 
-    // Hold the Position of our Capture points
-    vector <ofVec2f> pos;
-    
-    // Variables
-    int size;
-    float centerX;
-    float centerY;
-    float radius;
-    ofPoint _pos;
-    
-    // Draw Unit
-    void ledRing();
+        // Hold the Captured Colors
+        vector <ofColor> colors;
+    private:
+
+        // Hold the Position of our Capture points
+        vector <ofVec2f> pos;
+        
+        // Variables
+        int size;
+        float centerX;
+        float centerY;
+        float radius;
+        ofPoint _pos;
+        
+        // Draw Unit
+        void ledRing();
 };
 
 

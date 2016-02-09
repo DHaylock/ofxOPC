@@ -8,22 +8,25 @@
 #include "ofMain.h"
 
 class ofxNeoPixelStrip {
-    
     public:
         ofxNeoPixelStrip(){}
         virtual ~ofxNeoPixelStrip(){}
-        void setupLedStrip(int posx, int posy,int length,int spacing);
+    
+        //! Setup Strip
+        void setupLedStrip(int posx, int posy,int numberOfLeds,int spacing);
+    
         void drawGrabRegion(bool hideArea);
         void drawStrip(int x, int y);
 
-        // Return Data Method
+        //! Return Data Method
         vector <ofColor> colorData();
-        vector <ofVec2f> pixelCoordinates();
+        
+        //! Return the locations of the Pixels
+        vector <ofVec2f> getPixelCoordinates();
 
         // Hold the Captured Colors
         vector <ofColor> colors;
     private:
-
     
         // Hold the Position of our Capture points
         vector <ofVec2f> pos;

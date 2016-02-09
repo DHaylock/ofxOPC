@@ -31,7 +31,7 @@ vector <ofColor> ofxNeoPixelRing::colorData()
     return colors;
 }
 //--------------------------------------------------------------
-vector<ofVec2f> ofxNeoPixelRing::pixelCoordinates()
+vector<ofVec2f> ofxNeoPixelRing::getPixelCoordinates()
 {
     colors.clear();
     return pos;

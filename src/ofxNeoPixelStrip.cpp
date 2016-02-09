@@ -6,10 +6,10 @@
 
 #include "ofxNeoPixelStrip.h"
 //--------------------------------------------------------------
-void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int length,int spacing)
+void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int numberOfLeds,int spacing)
 {
     // Setup Positioning
-    size = length;
+    size = numberOfLeds;
     offsetX = 5;
     offsetY = 5;
     _spacing = spacing;
@@ -25,7 +25,7 @@ void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int length,int spacing)
     }
 }
 //--------------------------------------------------------------
-vector<ofVec2f> ofxNeoPixelStrip::pixelCoordinates()
+vector<ofVec2f> ofxNeoPixelStrip::getPixelCoordinates()
 {
     colors.clear();
     return pos;
