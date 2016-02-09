@@ -6,7 +6,9 @@
 //
 #include "ofMain.h"
 #include "ofxNetwork.h"
-#include "ofxNeoPixels.h"
+#include "ofxNeoPixelStrip.h"
+#include "ofxNeoPixelRing.h"
+#include "ofxNeoPixelGrid.h"
 
 //------------------------------------------------------------------------------
 typedef struct OPCPacket_Header {
@@ -43,6 +45,29 @@ class ofxOPC  {
         void setup(string address,int port);
         void update();
         void draw();
+        void drawDefaultEffects(int mode);
+        ofImage dot;
+
+        //! Set the FBOS Size
+        void setupStage(int width, int height);
+    
+        // New Method of Accessing screen pixels
+        //! Open Fbo
+        void beginStage();
+        //! Close Fbo
+        void endStage();
+        //! Draw Fbo
+        void drawStage();
+    
+        int getStageWidth();
+        int getStageHeight();
+        int getStageCenterX();
+        int getStageCenterY();
+        ofPoint getStageCenter();
+    
+        ofPixels getStagePixels();
+        void getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData);
+
     
         void cleanup();
         void close();
@@ -51,10 +76,10 @@ class ofxOPC  {
         void retryConnecting();
         void sendFirmwareConfigPacket(); // Not used
     
-        // For writing custom channels
+        //! For writing custom channels
         void writeChannel(uint8_t channel, vector <ofColor> pix);
     
-        // Write Channels or Pin data
+        //! Write Channels or Pin data
         void writeChannelOne(vector <ofColor> pix);
         void writeChannelTwo(vector <ofColor> pix);
         void writeChannelThree(vector <ofColor> pix);
@@ -80,9 +105,15 @@ class ofxOPC  {
         int _w,_h;
 
     private:
+        ofTrueTypeFont labels;
     
         void connect();
         void disconnect();
+        int moveCounter;
+        ofFbo screenCapture;
+        int _stageWidth;
+        int _stageHeight;
+        unsigned char * screenPixels;
     
         // For sending our data packets out to the Server
         ofxTCPClient client;

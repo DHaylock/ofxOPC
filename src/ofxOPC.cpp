@@ -12,6 +12,9 @@ void ofxOPC::setup(string address, int port)
     _port = port;
     _address = address;
     
+    moveCounter = 0;
+    labels.load( "../../../resources/Verdana.ttf", 13);
+    dot.load("../../../resources/dot.png");
     connectionAttempts = 0;
     tryReconnecting = false;
     startTime = ofGetElapsedTimeMillis();  // get the start time
@@ -37,6 +40,233 @@ void ofxOPC::setup(string address, int port)
     
     // Create an alias for code-readability
     OPC_SPC_packet_data = (OPCPacket_SPCData_t)(&OPC_SPC_packet->data);
+}
+//--------------------------------------------------------------
+void ofxOPC::setupStage(int width,int height)
+{
+    _stageWidth = width;
+    _stageHeight = height;
+    screenPixels = new unsigned char [_stageWidth*_stageHeight*4];
+    screenCapture.allocate(_stageWidth, _stageHeight,GL_RGBA);
+    screenCapture.begin();
+        ofClear(0);
+    screenCapture.end();
+}
+//--------------------------------------------------------------
+void ofxOPC::beginStage()
+{
+    screenCapture.begin();
+    ofPushStyle();
+    ofFill();
+    ofSetColor(0, 0, 0);
+    ofDrawRectangle(0, 0, _stageWidth, _stageHeight);
+    ofPopStyle();
+}
+//--------------------------------------------------------------
+void ofxOPC::endStage()
+{
+    glReadPixels(0, 0,screenCapture.getWidth(),screenCapture.getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, screenPixels);
+    screenCapture.end();
+}
+//--------------------------------------------------------------
+int ofxOPC::getStageWidth()
+{
+    return _stageWidth;
+}
+//--------------------------------------------------------------
+int ofxOPC::getStageHeight()
+{
+    return _stageHeight;
+}
+//--------------------------------------------------------------
+int ofxOPC::getStageCenterX()
+{
+    return _stageWidth/2;
+}
+//--------------------------------------------------------------
+int ofxOPC::getStageCenterY()
+{
+    return _stageHeight/2;
+}
+//--------------------------------------------------------------
+ofPoint ofxOPC::getStageCenter()
+{
+    return ofPoint(_stageWidth/2,_stageHeight/2);
+}
+//--------------------------------------------------------------
+ofPixels ofxOPC::getStagePixels()
+{
+    ofPixels tempPixs;
+    tempPixs.setFromPixels(screenPixels, _stageWidth, _stageHeight, OF_IMAGE_COLOR_ALPHA);
+    return tempPixs;
+}
+//--------------------------------------------------------------
+void ofxOPC::getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData)
+{
+    ofPixels tempPixs;
+    tempPixs.setFromPixels(screenPixels, _stageWidth, _stageHeight, OF_IMAGE_COLOR_ALPHA);
+    
+    for (int i = 0; i < pixels.size(); i++) {
+        colorData.push_back(tempPixs.getColor(pixels[i].x, pixels[i].y));
+    }
+}
+//--------------------------------------------------------------
+void ofxOPC::drawStage()
+{
+    ofPushMatrix();
+    ofPushStyle();
+    ofNoFill();
+    ofSetColor(ofColor::white);
+    ofDrawRectangle(0, 0, _stageWidth, _stageHeight);
+    ofFill();
+    screenCapture.draw(0,0);
+    ofSetColor(ofColor::white);
+    labels.drawString("Input Stage", 10, _stageHeight+labels.getLineHeight());
+    string st = (isConnected()) ? "True" : "False";
+    labels.drawString("Is Fade Candy Connected " + st, 10, _stageHeight+(labels.getLineHeight()*2));
+    ofPopStyle();
+    ofPopMatrix();
+}
+//--------------------------------------------------------------
+void ofxOPC::drawDefaultEffects(int mode)
+{
+    switch (mode) {
+        case 0:
+        {
+            // Mouse Circle
+            ofPushStyle();
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofDrawCircle(ofGetMouseX(),ofGetMouseY(),70);
+            ofPopStyle();
+        }
+            break;
+            
+        case 1:
+        {
+            // Like the processing example draw dot images and rotate
+            int size = (_stageWidth+_stageHeight)/2;
+            ofPushMatrix();
+            ofTranslate(0, 0);
+            ofPushMatrix();
+            ofTranslate(getStageCenterX(),getStageCenterY());
+            ofRotateZ(ofGetElapsedTimeMillis()/10);
+            ofPushMatrix();
+            ofTranslate(-size,-size);
+            ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+            ofSetColor(0, 255,20);
+            dot.draw(size/4, size/4, size,size);
+            ofSetColor(255, 0,20);
+            dot.draw((size/4*3), size/4, size,size);
+            ofSetColor(0, 0,255);
+            dot.draw(size/4, (size/4*3), size,size);
+            ofSetColor(255, 0,255);
+            dot.draw((size/4*3),(size/4*3), size,size);
+            ofDisableBlendMode();
+            ofPopMatrix();
+            ofPopMatrix();
+            ofPopMatrix();
+        }
+            break;
+            
+        case 2:
+        {
+            // Changes the color of a Circle
+            ofPushStyle();
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofDrawRectangle(0,0,_stageWidth,_stageHeight);
+            ofPopStyle();
+        }
+            break;
+            
+        case 3:
+        {
+            // Fade to full brightness then to zero
+            ofPushStyle();
+            ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
+            ofDrawRectangle(0,0,_stageWidth,_stageHeight);
+            ofPopStyle();
+        }
+            break;
+            
+        case 4:
+        {
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            float rotationAmount = ofGetElapsedTimeMillis()/10;
+            ofSetColor(255, 0, 0);
+            ofPushMatrix();
+            ofTranslate(getStageCenterX(), getStageCenterY());
+            ofRotateZ(rotationAmount);
+            ofPushMatrix();
+            ofTranslate(-getStageCenterX(), -getStageCenterY());
+            ofDrawCircle(getStageCenterX(), getStageCenterY()-40, 40);
+            ofPopMatrix();
+            ofPopMatrix();
+            ofSetColor(0, 0, 255);
+            ofPushMatrix();
+            ofTranslate(getStageCenterX(), getStageCenterY());
+            ofRotateZ(-rotationAmount);
+            ofPushMatrix();
+            ofTranslate(-getStageCenterX(), -getStageCenterY());
+            ofDrawCircle(getStageCenterX(), getStageCenterY()+40, 40);
+            ofPopMatrix();
+            ofPopMatrix();
+            ofDisableBlendMode();
+        }
+            break;
+            
+        case 5:
+        {
+            ofPushStyle();
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            dot.draw(ofGetMouseX()-75, ofGetMouseY()-75, 150,150);
+            ofPopStyle();
+        }
+            break;
+        case 6:
+        {
+            float rotationAmount = ofGetElapsedTimeMillis()/5;
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofPushMatrix();
+            ofTranslate(getStageCenterX(), getStageCenterY());
+            ofRotateZ(rotationAmount);
+            ofPushMatrix();
+            ofTranslate(-getStageCenterX(), -getStageCenterY());
+            int w = (int)(28 + 128 * sin(ofGetElapsedTimef()));
+            ofDrawRectangle(getStageCenterX()-(w/2), getStageCenterY()-_stageHeight, w, _stageHeight*2);
+            ofPopMatrix();
+            ofPopMatrix();
+        }
+            break;
+        case 7:
+        {
+            if (moveCounter < -labels.getStringBoundingBox("Hello World", 0, 0).width) {
+                moveCounter = _stageWidth;
+            }
+            else {
+                moveCounter--;
+            }
+            
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofPushMatrix();
+            ofScale(4, 4);
+            ofTranslate(moveCounter, _stageHeight/8);
+            labels.drawString("Hello World", 0, 0);
+            ofPopMatrix();
+        }
+            break;
+        default:
+            break;
+    }
 }
 //--------------------------------------------------------------
 void ofxOPC::cleanup()
@@ -105,7 +335,7 @@ void ofxOPC::writeChannel(uint8_t channel, vector<ofColor>pix)
     uint16_t channel_offset = (channel - 1) * 64;
     
     // Copy the data
-    for (int i = 0; i < pix.size(); i++)
+    for (unsigned int i = 0; i < pix.size(); i++)
     {
         OPC_SPC_packet_data[channel_offset + i].r = pix[i].r;
         OPC_SPC_packet_data[channel_offset + i].g = pix[i].g;
@@ -134,7 +364,7 @@ void ofxOPC::writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor
     uint16_t channel_offset = (channel - 1) * 64;
     
     // Copy the data
-    for (int i = 0; i < pix1.size(); i++)
+    for (unsigned int i = 0; i < pix1.size(); i++)
     {
         OPC_SPC_packet_data[channel_offset + i].r = pix1[i].r;
         OPC_SPC_packet_data[channel_offset + i].g = pix1[i].g;
