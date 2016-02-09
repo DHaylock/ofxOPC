@@ -43,6 +43,21 @@ class ofxOPC  {
         void setup(string address,int port);
         void update();
         void draw();
+
+    
+
+        //! Set the FBOS Size
+        void setupStage(int width, int height);
+    
+        // New Method of Accessing screen pixels
+        //! Open Fbo
+        void beginStage();
+    
+        //! Close Fbo
+        void endStage();
+        //! Draw Fbo
+        void drawStage();
+    
     
         void cleanup();
         void close();
@@ -51,10 +66,10 @@ class ofxOPC  {
         void retryConnecting();
         void sendFirmwareConfigPacket(); // Not used
     
-        // For writing custom channels
+        //! For writing custom channels
         void writeChannel(uint8_t channel, vector <ofColor> pix);
     
-        // Write Channels or Pin data
+        //! Write Channels or Pin data
         void writeChannelOne(vector <ofColor> pix);
         void writeChannelTwo(vector <ofColor> pix);
         void writeChannelThree(vector <ofColor> pix);
@@ -83,6 +98,11 @@ class ofxOPC  {
     
         void connect();
         void disconnect();
+    
+    
+        ofFbo screenCapture;
+        int _stageWidth;
+        int _stageHeight;
     
         // For sending our data packets out to the Server
         ofxTCPClient client;

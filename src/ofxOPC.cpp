@@ -39,6 +39,41 @@ void ofxOPC::setup(string address, int port)
     OPC_SPC_packet_data = (OPCPacket_SPCData_t)(&OPC_SPC_packet->data);
 }
 //--------------------------------------------------------------
+void ofxOPC::setupStage(int width,int height)
+{
+    _stageWidth = width;
+    _stageHeight = height;
+    
+    screenCapture.allocate(_stageWidth, _stageHeight,GL_RGBA);
+    screenCapture.begin();
+        ofClear(0);
+    screenCapture.end();
+}
+//--------------------------------------------------------------
+void ofxOPC::beginStage()
+{
+    screenCapture.begin();
+    ofClear(0);
+}
+//--------------------------------------------------------------
+void ofxOPC::endStage()
+{
+    screenCapture.end();
+}
+//--------------------------------------------------------------
+void ofxOPC::drawStage()
+{
+    ofPushMatrix();
+    ofPushStyle();
+    ofNoFill();
+    ofSetColor(ofColor::white);
+    ofDrawRectangle(0, 0, _stageWidth, _stageHeight);
+    ofFill();
+    screenCapture.draw(0,0);
+    ofPopStyle();
+    ofPopMatrix();
+}
+//--------------------------------------------------------------
 void ofxOPC::cleanup()
 {
     // Clean-up
