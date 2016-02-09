@@ -25,14 +25,14 @@ void NeoPixelGrid32x32::setupLedGrid()
     
     for (int i = 0; i < size; i++)
     {
-            for (int row = 0; row < 32; row++)
+        for (int row = 0; row < 32; row++)
+        {
+            if((i >= (row*32))&&(i <= ((row*32)+31)))
             {
-                if((i >= (row*32))&&(i <= ((row*32)+31)))
-                {
-                    rx = x+((i-(row*32))*spacing);
-                    ry = y+(spacing*row);
-                }
+                rx = x+((i-(row*32))*spacing);
+                ry = y+(spacing*row);
             }
+        }
         pos.push_back(ofVec2f(rx,ry));
     }
 }
@@ -63,7 +63,7 @@ void NeoPixelGrid32x32::grabImageData(ofPoint grabPos)
     // Change Capture Location
     _pos = grabPos;
     img.clear();
-    img.grabScreen(_pos.x-x,_pos.y-y,230,230);
+    img.grabScreen(_pos.x+(x*2),_pos.y+(y*2),230,230);
     
     //Update the position of the Grid
     for (int i = 0; i < pos.size(); i++)
@@ -81,7 +81,7 @@ void NeoPixelGrid32x32::drawGrabRegion(bool hideArea)
         ofNoFill();
         ofSetLineWidth(2);
         ofSetColor(255, 255);
-        ofRect(_pos.x-7,_pos.y-6,230,234);
+        ofRect(_pos.x,_pos.y,230,230);
         ofPopStyle();
         
         // Visualise the Grabber
@@ -95,11 +95,9 @@ void NeoPixelGrid32x32::drawGrabRegion(bool hideArea)
         ofNoFill();
     }
     
-    ofRect(_pos.x-5, _pos.y-4,230,224);
-    
     for (int i = 0; i < pos.size(); i++)
     {
-        ofCircle(pos[i]+ofVec2f(_pos.x-x, _pos.y-y),2);
+        ofCircle(pos[i]+ofVec2f(_pos.x+(x*2), _pos.y+(y*2)),2);
     }
 }
 //--------------------------------------------------------------

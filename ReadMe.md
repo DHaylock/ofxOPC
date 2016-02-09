@@ -79,7 +79,7 @@ Also drop me a line and let me know how you end up using the addon.
 <code>
     ofBackground(0);
    
-    ring24px.drawGrabRegion(hide);
+    ring24px.drawGrabRegion(true);
 
     ring24px.drawRing(50, 50);
 </code>
