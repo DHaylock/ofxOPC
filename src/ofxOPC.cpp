@@ -105,7 +105,7 @@ void ofxOPC::writeChannel(uint8_t channel, vector<ofColor>pix)
     uint16_t channel_offset = (channel - 1) * 64;
     
     // Copy the data
-    for (int i = 0; i < pix.size(); i++)
+    for (unsigned int i = 0; i < pix.size(); i++)
     {
         OPC_SPC_packet_data[channel_offset + i].r = pix[i].r;
         OPC_SPC_packet_data[channel_offset + i].g = pix[i].g;
@@ -134,7 +134,7 @@ void ofxOPC::writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor
     uint16_t channel_offset = (channel - 1) * 64;
     
     // Copy the data
-    for (int i = 0; i < pix1.size(); i++)
+    for (unsigned int i = 0; i < pix1.size(); i++)
     {
         OPC_SPC_packet_data[channel_offset + i].r = pix1[i].r;
         OPC_SPC_packet_data[channel_offset + i].g = pix1[i].g;
