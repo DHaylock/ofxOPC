@@ -145,7 +145,7 @@ void ofxOPC::drawDefaultEffects(int mode)
         case 1:
         {
             // Like the processing example draw dot images and rotate
-            int size = 160;
+            int size = (_stageWidth+_stageHeight)/2;
             ofPushMatrix();
             ofTranslate(0, 0);
             ofPushMatrix();
@@ -225,6 +225,23 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofSetColor(c);
             dot.draw(ofGetMouseX()-75, ofGetMouseY()-75, 150,150);
             ofPopStyle();
+        }
+            break;
+        case 6:
+        {
+            float rotationAmount = ofGetElapsedTimeMillis()/5;
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofPushMatrix();
+            ofTranslate(getStageCenterX(), getStageCenterY());
+            ofRotateZ(rotationAmount);
+            ofPushMatrix();
+            ofTranslate(-getStageCenterX(), -getStageCenterY());
+            int w = (int)(28 + 128 * sin(ofGetElapsedTimef()));
+            ofDrawRectangle(getStageCenterX()-(w/2), getStageCenterY()-_stageHeight, w, _stageHeight*2);
+            ofPopMatrix();
+            ofPopMatrix();
         }
             break;
         default:
