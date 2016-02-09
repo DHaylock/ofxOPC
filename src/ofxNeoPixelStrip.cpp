@@ -27,20 +27,8 @@ void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int length,int spacing)
 //--------------------------------------------------------------
 vector<ofVec2f> ofxNeoPixelStrip::pixelCoordinates()
 {
-    return pos;
-}
-//--------------------------------------------------------------
-void ofxNeoPixelStrip::setColors(vector<ofColor> data)
-{
     colors.clear();
-    colors = data;
-}
-//--------------------------------------------------------------
-void ofxNeoPixelStrip::update(int x,int y)
-{
-    for (int i = 0; i < pos.size(); i++) {
-        pos[i] + ofVec2f(x, y);
-    }
+    return pos;
 }
 //--------------------------------------------------------------
 vector <ofColor> ofxNeoPixelStrip::colorData()
@@ -49,21 +37,13 @@ vector <ofColor> ofxNeoPixelStrip::colorData()
     return colors;
 }
 //--------------------------------------------------------------
-void ofxNeoPixelStrip::grabImageData(ofPoint grabPoint)
-{
-    _pos = grabPoint;
-    for (int i = 0; i < pos.size(); i++) {
-        pos[i] + ofVec2f(_pos.x,_pos.y);
-    }
-}
-//--------------------------------------------------------------
 void ofxNeoPixelStrip::drawGrabRegion(bool hideArea)
 {
     if (hideArea == true) {
         // Draw Interaction Area
         ofPushStyle();
         ofNoFill();
-        ofSetLineWidth(2);
+        ofSetLineWidth(1);
         ofSetColor(255, 255);
         ofPopStyle();
    

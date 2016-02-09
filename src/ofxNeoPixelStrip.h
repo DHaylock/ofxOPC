@@ -12,19 +12,18 @@ class ofxNeoPixelStrip {
     public:
         ofxNeoPixelStrip(){}
         virtual ~ofxNeoPixelStrip(){}
-        
         void setupLedStrip(int posx, int posy,int length,int spacing);
-        void update(int x,int y);
-        void grabImageData(ofPoint grabPoint);
         void drawGrabRegion(bool hideArea);
         void drawStrip(int x, int y);
-        void setColors(vector<ofColor> data);
+
         // Return Data Method
         vector <ofColor> colorData();
         vector <ofVec2f> pixelCoordinates();
-    private:
+
         // Hold the Captured Colors
         vector <ofColor> colors;
+    private:
+
     
         // Hold the Position of our Capture points
         vector <ofVec2f> pos;
@@ -37,6 +36,7 @@ class ofxNeoPixelStrip {
         float actualY;
         ofPoint _pos;
         int _spacing;
+    
         // Draw Unit
         void ledStrip();
 };
