@@ -69,6 +69,8 @@ void ofxNeoPixelRing::drawGrabRegion(bool hideArea)
 void ofxNeoPixelRing::ledRing()
 {
     ofPushMatrix();
+
+    ofFill();
     ofSetColor(50,175);
     ofDrawCircle(centerX,centerY,radius+6);
     ofSetColor(0);
