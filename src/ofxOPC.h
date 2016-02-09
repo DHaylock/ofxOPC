@@ -6,7 +6,9 @@
 //
 #include "ofMain.h"
 #include "ofxNetwork.h"
-#include "ofxNeoPixels.h"
+#include "ofxNeoPixelStrip.h"
+#include "ofxNeoPixelRing.h"
+#include "ofxNeoPixelGrid.h"
 
 //------------------------------------------------------------------------------
 typedef struct OPCPacket_Header {
@@ -52,12 +54,18 @@ class ofxOPC  {
         // New Method of Accessing screen pixels
         //! Open Fbo
         void beginStage();
-    
         //! Close Fbo
         void endStage();
         //! Draw Fbo
         void drawStage();
     
+        int getStageWidth();
+        int getStageHeight();
+        int getStageCenterX();
+        int getStageCenterY();
+        ofPoint getStageCenter();
+    
+        ofPixels getStagePixels();
     
         void cleanup();
         void close();
@@ -95,14 +103,15 @@ class ofxOPC  {
         int _w,_h;
 
     private:
+        ofTrueTypeFont labels;
     
         void connect();
         void disconnect();
     
-    
         ofFbo screenCapture;
         int _stageWidth;
         int _stageHeight;
+        unsigned char * screenPixels;
     
         // For sending our data packets out to the Server
         ofxTCPClient client;

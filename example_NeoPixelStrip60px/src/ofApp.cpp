@@ -8,18 +8,18 @@ void ofApp::setup()
     
     // Connect to the fcserver
     opcClient.setup("127.0.0.1", 7890);
-    strip.setupLedStrip(60, false);
+
     
+    opcClient.setupStage(480, 480);
     // Load the dot image
     dot.load("dot.png");
+    
+    strip.setupLedStrip(opcClient.getStageCenterX(),opcClient.getStageCenterY()-(30*5),60, 5);
 }
 //--------------------------------------------------------------
 void ofApp::update()
 {
     ofSetWindowTitle("ofxOPC:NeoPixelRing60px: FPS: " +ofToString((int)(ofGetFrameRate())));
-    
-    strip.grabImageData(ofPoint(ofGetWidth()/2,ofGetHeight()/2));
-    strip.update();
     
     // If the client is not connected do not try and send information
     if (!opcClient.isConnected())
@@ -32,28 +32,38 @@ void ofApp::update()
         // Write out the first set of data
         opcClient.writeChannelOne(strip.colorData());
     }
+    
+    // Now Draw the effects to the stage
+    opcClient.beginStage();
+    drawEffects(effect);
+    opcClient.endStage();
+    
+    vector<ofColor> a;
+    for (int i = 0; i < strip.pixelCoordinates().size(); i++) {
+        a.push_back(opcClient.getStagePixels().getColor(strip.pixelCoordinates()[i].x, strip.pixelCoordinates()[i].y));
+    }
+    strip.setColors(a);
+    
     opcClient.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-    //Should be black otherwise the addon grabs the background pixels
     ofBackground(0);
     
-    // As it says
-    drawEffects(effect);
-    
+    opcClient.drawStage();
     // Visual Representation of the Grab Area
     strip.drawGrabRegion(hide);
     
     // Show what the leds should be doing!
-    strip.drawStrip(60, 60);
+    strip.drawStrip(opcClient.getStageWidth(), 10);
     
     // Report Messages
     ofDrawBitmapStringHighlight("Output", 1,155);
     ofDrawBitmapStringHighlight("Input Area", ofGetWidth()/2-35,ofGetHeight()/2+120);
     ofDrawBitmapStringHighlight("Press Left and Right to Change Effect Mode", 5,ofGetHeight()-15);
     ofDrawBitmapStringHighlight("Is the Client Connected: " + ofToString(opcClient.isConnected()), 5,ofGetHeight()-30);
+
 }
 //--------------------------------------------------------------
 void ofApp::exit()
@@ -72,7 +82,7 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(mouseX,mouseY,70);
+            ofDrawCircle(mouseX,mouseY,70);
             ofPopStyle();
         }
             break;
@@ -84,11 +94,11 @@ void ofApp::drawEffects(int mode)
             ofPushMatrix();
             ofTranslate(0, 0);
             ofPushMatrix();
-            ofTranslate(ofGetWidth()/2,ofGetHeight()/2);
+            ofTranslate(opcClient.getStageCenterX(),opcClient.getStageCenterY());
             ofRotateZ(ofGetElapsedTimeMillis()/10);
             ofPushMatrix();
             ofTranslate(-size,-size);
-            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            ofEnableBlendMode(OF_BLENDMODE_SCREEN);
             ofSetColor(0, 255,20);
             dot.draw(size/4, size/4, size,size);
             ofSetColor(255, 0,20);
@@ -111,7 +121,7 @@ void ofApp::drawEffects(int mode)
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,70);
+            ofDrawCircle(ofGetWidth()/2,ofGetHeight()/2,70);
             ofPopStyle();
         }
             break;
@@ -121,7 +131,7 @@ void ofApp::drawEffects(int mode)
             // Fade to full brightness then to zero
             ofPushStyle();
             ofSetColor((int)(128 + 128 * sin(ofGetElapsedTimef())));
-            ofCircle(ofGetWidth()/2,ofGetHeight()/2,70);
+            ofDrawCircle(ofGetWidth()/2,ofGetHeight()/2,70);
             ofPopStyle();
         }
             break;
@@ -136,7 +146,7 @@ void ofApp::drawEffects(int mode)
             ofRotateZ(rotationAmount);
             ofPushMatrix();
             ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2-40, 40);
+            ofDrawCircle(ofGetWidth()/2, ofGetHeight()/2-40, 40);
             ofPopMatrix();
             ofPopMatrix();
             ofSetColor(0, 0, 255);
@@ -145,7 +155,7 @@ void ofApp::drawEffects(int mode)
             ofRotateZ(-rotationAmount);
             ofPushMatrix();
             ofTranslate(-ofGetWidth()/2, -ofGetHeight()/2);
-            ofCircle(ofGetWidth()/2, ofGetHeight()/2+40, 40);
+            ofDrawCircle(ofGetWidth()/2, ofGetHeight()/2+40, 40);
             ofPopMatrix();
             ofPopMatrix();
             ofDisableBlendMode();

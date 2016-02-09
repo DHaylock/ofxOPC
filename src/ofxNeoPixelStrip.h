@@ -1,5 +1,5 @@
 //
-//  NeoPixelStrip.h
+//  ofxNeoPixelStrip.h
 //
 //  Created by David Haylock on 25/05/2014.
 //
@@ -7,21 +7,21 @@
 #include <iostream>
 #include "ofMain.h"
 
-class NeoPixelStrip {
+class ofxNeoPixelStrip {
     
     public:
-        NeoPixelStrip(){}
-        virtual ~NeoPixelStrip(){}
+        ofxNeoPixelStrip(){}
+        virtual ~ofxNeoPixelStrip(){}
         
-        void setupLedStrip(int length,bool rotateH);
-        void update();
+        void setupLedStrip(int posx, int posy,int length,int spacing);
+        void update(int x,int y);
         void grabImageData(ofPoint grabPoint);
         void drawGrabRegion(bool hideArea);
         void drawStrip(int x, int y);
-       
+        void setColors(vector<ofColor> data);
         // Return Data Method
         vector <ofColor> colorData();
-    
+        vector <ofVec2f> pixelCoordinates();
     private:
         // Hold the Captured Colors
         vector <ofColor> colors;
@@ -31,15 +31,12 @@ class NeoPixelStrip {
     
         // Variables
         int size;
-        float x;
-        float y;
+        float offsetX;
+        float offsetY;
+        float actualX;
+        float actualY;
         ofPoint _pos;
-        bool _rotated;
-    
-        // Capture Objects
-        ofImage img;
-        ofPixels pixels;
-    
+        int _spacing;
         // Draw Unit
         void ledStrip();
 };

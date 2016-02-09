@@ -1,6 +1,5 @@
 //
-//  NeoPixelGrid32x32.h
-//  example_NeoPixelGrid32x32
+//  ofxNeoPixelGrid.h
 //
 //  Created by David Haylock on 15/01/2015.
 //
@@ -9,7 +8,7 @@
 #include <iostream>
 #include "ofMain.h"
 
-class NeoPixelGrid32x32 {
+class ofxNeoPixelGrid {
     
 public:
     

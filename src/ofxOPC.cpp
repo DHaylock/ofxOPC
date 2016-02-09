@@ -12,6 +12,7 @@ void ofxOPC::setup(string address, int port)
     _port = port;
     _address = address;
     
+    labels.load( "../../../resources/Verdana.ttf", 15);
     connectionAttempts = 0;
     tryReconnecting = false;
     startTime = ofGetElapsedTimeMillis();  // get the start time
@@ -43,7 +44,7 @@ void ofxOPC::setupStage(int width,int height)
 {
     _stageWidth = width;
     _stageHeight = height;
-    
+    screenPixels = new unsigned char [_stageWidth*_stageHeight*4];
     screenCapture.allocate(_stageWidth, _stageHeight,GL_RGBA);
     screenCapture.begin();
         ofClear(0);
@@ -53,12 +54,49 @@ void ofxOPC::setupStage(int width,int height)
 void ofxOPC::beginStage()
 {
     screenCapture.begin();
-    ofClear(0);
+    ofPushStyle();
+    ofFill();
+    ofSetColor(0, 0, 0);
+    ofDrawRectangle(0, 0, _stageWidth, _stageHeight);
+    ofPopStyle();
 }
 //--------------------------------------------------------------
 void ofxOPC::endStage()
 {
+    glReadPixels(0, 0,screenCapture.getWidth(),screenCapture.getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, screenPixels);
     screenCapture.end();
+}
+//--------------------------------------------------------------
+int ofxOPC::getStageWidth()
+{
+    return _stageWidth;
+}
+//--------------------------------------------------------------
+int ofxOPC::getStageHeight()
+{
+    return _stageHeight;
+}
+//--------------------------------------------------------------
+int ofxOPC::getStageCenterX()
+{
+    return _stageWidth/2;
+}
+//--------------------------------------------------------------
+int ofxOPC::getStageCenterY()
+{
+    return _stageHeight/2;
+}
+//--------------------------------------------------------------
+ofPoint ofxOPC::getStageCenter()
+{
+    return ofPoint(_stageWidth/2,_stageHeight/2);
+}
+//--------------------------------------------------------------
+ofPixels ofxOPC::getStagePixels()
+{
+    ofPixels tempPixs;
+    tempPixs.setFromPixels(screenPixels, _stageWidth, _stageHeight, OF_IMAGE_COLOR_ALPHA);
+    return tempPixs;
 }
 //--------------------------------------------------------------
 void ofxOPC::drawStage()
@@ -70,6 +108,8 @@ void ofxOPC::drawStage()
     ofDrawRectangle(0, 0, _stageWidth, _stageHeight);
     ofFill();
     screenCapture.draw(0,0);
+    ofSetColor(ofColor::white);
+    labels.drawString("Input Stage", 10, _stageHeight+labels.getLineHeight());
     ofPopStyle();
     ofPopMatrix();
 }

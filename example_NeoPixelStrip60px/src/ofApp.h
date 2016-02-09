@@ -24,7 +24,7 @@ class ofApp : public ofBaseApp{
         void drawEffects(int mode);
         
         ofxOPC opcClient;
-        NeoPixelStrip strip;
+        ofxNeoPixelStrip strip;
     
         ofImage dot;
         

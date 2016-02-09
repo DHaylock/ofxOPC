@@ -1,42 +1,42 @@
 //
-//  NeoPixelGrid8x8.cpp
+//  ofxNeoPixelGrid.cpp
 //
-//  Created by David Haylock on 27/05/2014.
+//  Created by David Haylock on 15/01/2015.
+//
 //
 
+#include "ofxNeoPixelGrid.h"
 
-#include "NeoPixelGrid8x8.h"
 //--------------------------------------------------------------
-void NeoPixelGrid8x8::setupLedGrid()
+void ofxNeoPixelGrid::setupLedGrid()
 {
     // Setup Positioning
-    size = 8*8;
+    size = 32*32;
     x = 2;
     y = 2;
     spacing = 7;
     
     // Set the pixel data
-    pixels.allocate(70,70,GL_RGB);
-
+    pixels.allocate(230,230,GL_RGB);
+    
     float ry;
     float rx;
     
     for (int i = 0; i < size; i++)
     {
-        for (int row = 0; row < 8; row++)
-        {
-            if((i >= (row*8))&&(i <= ((row*8)+7)))
+            for (int row = 0; row < 32; row++)
             {
-                rx = x+((i-(row*8))*spacing);
-                ry = y+(spacing*row);
+                if((i >= (row*32))&&(i <= ((row*32)+31)))
+                {
+                    rx = x+((i-(row*32))*spacing);
+                    ry = y+(spacing*row);
+                }
             }
-        }
-        // Push Points of Grabber
         pos.push_back(ofVec2f(rx,ry));
     }
 }
 //--------------------------------------------------------------
-void NeoPixelGrid8x8::update()
+void ofxNeoPixelGrid::update()
 {
     // Clear the colors and pixels each frame
     colors.clear();
@@ -51,18 +51,18 @@ void NeoPixelGrid8x8::update()
     }
 }
 //--------------------------------------------------------------
-vector <ofColor> NeoPixelGrid8x8::colorData()
+vector <ofColor> ofxNeoPixelGrid::colorData()
 {
     // Transmit Data
     return colors;
 }
 //--------------------------------------------------------------
-void NeoPixelGrid8x8::grabImageData(ofPoint grabPos)
+void ofxNeoPixelGrid::grabImageData(ofPoint grabPos)
 {
     // Change Capture Location
     _pos = grabPos;
     img.clear();
-    img.grabScreen(_pos.x-x,_pos.y-y,70,70);
+    img.grabScreen(_pos.x-x,_pos.y-y,230,230);
     
     //Update the position of the Grid
     for (int i = 0; i < pos.size(); i++)
@@ -71,7 +71,7 @@ void NeoPixelGrid8x8::grabImageData(ofPoint grabPos)
     }
 }
 //--------------------------------------------------------------
-void NeoPixelGrid8x8::drawGrabRegion(bool hideArea)
+void ofxNeoPixelGrid::drawGrabRegion(bool hideArea)
 {
     if (hideArea == true)
     {
@@ -80,7 +80,7 @@ void NeoPixelGrid8x8::drawGrabRegion(bool hideArea)
         ofNoFill();
         ofSetLineWidth(2);
         ofSetColor(255, 255);
-        ofRect(_pos.x-7,_pos.y-6,65,65);
+        ofRect(_pos.x-7,_pos.y-6,230,234);
         ofPopStyle();
         
         // Visualise the Grabber
@@ -94,7 +94,7 @@ void NeoPixelGrid8x8::drawGrabRegion(bool hideArea)
         ofNoFill();
     }
     
-    ofRect(_pos.x-5, _pos.y-4,60,60);
+    ofRect(_pos.x-5, _pos.y-4,230,224);
     
     for (int i = 0; i < pos.size(); i++)
     {
@@ -102,13 +102,13 @@ void NeoPixelGrid8x8::drawGrabRegion(bool hideArea)
     }
 }
 //--------------------------------------------------------------
-void NeoPixelGrid8x8::ledGrid(int x, int y)
+void ofxNeoPixelGrid::ledGrid(int x, int y)
 {
     ofPushMatrix();
-    ofTranslate(-x/4, -y/4);
+    ofTranslate(-x+8, -y+8);
     ofFill();
     ofSetColor(0,175);
-    ofRect(-4, -4, 62,62);
+    ofRect(-4, -2, 230,226);
     
     for (int i = 0; i < size; i++)
     {
@@ -119,14 +119,14 @@ void NeoPixelGrid8x8::ledGrid(int x, int y)
     ofPopMatrix();
 }
 //--------------------------------------------------------------
-void NeoPixelGrid8x8::drawGrid(int x, int y)
+void ofxNeoPixelGrid::drawGrid(int x, int y)
 {
     // Where to draw the Grid!
     ofPushMatrix();
     ofTranslate(x, y);
     ofFill();
     ofSetColor(100);
-    ofRect(-x,-y,124,124);
+    ofRect(-x,-y,240,235);
     ledGrid(x,y);
     ofPopMatrix();
 }

@@ -1,20 +1,24 @@
 //
-//  NeoPixelRing12px.cpp
+//  ofxNeoPixelRing.cpp
 //
-//  Created by David Haylock on 27/05/2014.
+//  Created by David Haylock on 29/05/2014.
+//
 //
 
-#include "NeoPixelRing12px.h"
+#include "ofxNeoPixelRing.h"
 
 //--------------------------------------------------------------
-void NeoPixelRing12px::setupLedRing()
+void ofxNeoPixelRing::setupLedRing()
 {
-    size = 12;
-    x = 50; // Offset Value for grabber
-    y = 50; // Offset Value for grabber
-    radius = 23;
+    // Setup Positioning
+    size = 60;
+    x = 75;
+    y = 75;
+    radius = 60;
     
+    // Set the pixel data
     pixels.allocate(radius*2+10, radius*2+10,GL_RGB);
+    img.allocate(radius*2+10, radius*2+10, OF_IMAGE_COLOR);
     
     for (int i = 0; i < size; i++)
     {
@@ -23,44 +27,48 @@ void NeoPixelRing12px::setupLedRing()
         // Generate the position of the grabber points
         float rx = x + (radius * cos(angle));
         float ry = y + (radius * sin(angle));
-        
         pos.push_back(ofVec2f(rx,ry));
     }
 }
 //--------------------------------------------------------------
-void NeoPixelRing12px::update()
+void ofxNeoPixelRing::update()
 {
+    // Clear the colors and pixels each frame
     colors.clear();
     pixels.clear();
     
-    pixels = img.getPixelsRef();
+    // Transfer grab data to the pixel array
+//
+//    cout <<  << endl;
     
     for (int i = 0; i < pos.size(); i++)
     {
-        colors.push_back(pixels.getColor(pos[i].x, pos[i].y));
+        colors.push_back(img.getPixels().getColor(pos[i].x, pos[i].y));
+        cout << img.getPixels().getColor(pos[i].x, pos[i].y) << endl;
     }
 }
 //--------------------------------------------------------------
-vector <ofColor> NeoPixelRing12px::colorData()
+vector <ofColor> ofxNeoPixelRing::colorData()
 {
     // Transmit Data
     return colors;
 }
 //--------------------------------------------------------------
-void NeoPixelRing12px::grabImageData(ofPoint grabPos)
+void ofxNeoPixelRing::grabImageData(ofPoint grabPos)
 {
+    // Change Capture Location
     _pos = grabPos;
-    img.clear();
-    img.grabScreen(_pos.x-x, _pos.y-y,100,100);
+//    img.clear();
+    img.grabScreen(_pos.x-x, _pos.y-y,150,150);
     
-    //Update the position of the ring pixels
+    // Update the position of the ring pixels
     for (int i = 0; i < pos.size(); i++)
     {
         pos[i] + ofVec2f(_pos.x,_pos.y);
     }
 }
 //--------------------------------------------------------------
-void NeoPixelRing12px::drawGrabRegion(bool hideArea)
+void ofxNeoPixelRing::drawGrabRegion(bool hideArea)
 {
     if (hideArea == true)
     {
@@ -83,7 +91,6 @@ void NeoPixelRing12px::drawGrabRegion(bool hideArea)
         ofSetColor(0, 175);
         ofNoFill();
     }
-
     ofCircle(_pos.x, _pos.y, radius+6);
     ofCircle(_pos.x, _pos.y, radius-6);
     
@@ -91,48 +98,56 @@ void NeoPixelRing12px::drawGrabRegion(bool hideArea)
     {
         ofCircle(pos[i]+ofVec2f(_pos.x-x, _pos.y-y),2);
     }
+    ofSetColor(ofColor::white);
+    img.draw(ofGetWidth()-img.getWidth(), 0);
 }
 //--------------------------------------------------------------
-void NeoPixelRing12px::ledRing()
+void ofxNeoPixelRing::ledRing()
 {
-    ofFill();
+    ofPushMatrix();
+    ofTranslate(8, 8);
     ofSetColor(0, 175);
     ofBeginShape();
+    
     for (int i = 0; i < size; i++)
     {
         float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size-1);
         
-        //Make Circle Points
-        float rx = x-x + ((radius+6)  * cos(angle));
-        float ry = y-y + ((radius+6)  * sin(angle));
+        // Make Circle Points
+        float rx = x-x + ((radius+6) * cos(angle));
+        float ry = y-y + ((radius+6) * sin(angle));
         ofVertex(rx, ry);
     }
+    
     for (int i = 0; i < size; i++)
     {
         float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size-1);
         
-        //Make Circle Points
+        // Make Circle Points
         float rx = x-x + ((radius-6)  * cos(angle));
         float ry = y-y + ((radius-6)  * sin(angle));
         ofVertex(rx, ry);
     }
+    
     ofEndShape(true);
     
     for (int i = 0; i < size; i++)
     {
         ofFill();
         ofSetColor(colors[i]);
-        ofCircle(pos[i].x-x,pos[i].y-y,4);
+        ofCircle(pos[i].x-x, pos[i].y-y,4);
     }
+    ofPopMatrix();
 }
 //--------------------------------------------------------------
-void NeoPixelRing12px::drawRing(int x, int y)
+void ofxNeoPixelRing::drawRing(int x, int y)
 {
+    // Where to draw the ring!
     ofPushMatrix();
     ofTranslate(x, y);
     ofFill();
     ofSetColor(100);
-    ofRect(-50,-50,100,100);
+    ofRect(-70,-70,150,150);
     ledRing();
     ofPopMatrix();
 }

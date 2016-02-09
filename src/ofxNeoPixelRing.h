@@ -1,26 +1,27 @@
 //
-//  NeoPixelStick.h
+//  ofxNeoPixelRing.h
 //
-//  Created by David Haylock on 27/05/2014.
+//  Created by David Haylock on 25/05/2014.
 //
 
 #include <iostream>
 #include "ofMain.h"
 
-class NeoPixelStick {
+class ofxNeoPixelRing {
     
 public:
-    NeoPixelStick(){}
-    virtual ~NeoPixelStick(){}
+    ofxNeoPixelRing(){}
+    virtual ~ofxNeoPixelRing(){}
     
-    void setupLedStick(bool rotateH);
+    void setupLedRing();
     void update();
     void grabImageData(ofPoint grabPos);
     void drawGrabRegion(bool hideArea);
-    void drawStick(int x, int y);
+    void drawRing(int x, int y);
     
     // Return Data Method
     vector <ofColor> colorData();
+   
 private:
     
     // Hold the Captured Colors
@@ -28,18 +29,22 @@ private:
     
     // Hold the Position of our Capture points
     vector <ofVec2f> pos;
-   
+    
     // Variables
     int size;
     float x;
     float y;
-    bool _rotated;
+    float radius;
     ofPoint _pos;
     
     // Capture Objects
     ofImage img;
     ofPixels pixels;
-   
+    
     // Draw Unit
-    void ledStick();
+    void ledRing();
 };
+
+
+
+
