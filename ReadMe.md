@@ -51,13 +51,16 @@ Also drop me a line and let me know how you end up using the addon.
 	ring.setupLedRing(posX,posY,numLeds,spacing);
 ```
 
-- Then grab the image data you want by positioning the grabber over the area. The isConnected method protects the application from crashing if connection is lost to the server.
+- A new feature is the Stage. The stage is where you draw your graphics for the leds. Essentially its an FBO! But it gives you access to the pixel data of the screen. In the update function call:
 
 ````
     opcClient.beginStage();
+    
     opcClient.drawDefaultEffects(effect);
+    //or your own graphics
     opcClient.endStage();
     
+````
     if (!opcClient.isConnected())
     {
         opcClient.tryConnecting();
