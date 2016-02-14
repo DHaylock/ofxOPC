@@ -26,7 +26,6 @@ void ofApp::update()
     opcClient.beginStage();
     
     // Draw what you want rendered here
-    
     // For now here are some default effects
     opcClient.drawDefaultEffects(effect);
     
