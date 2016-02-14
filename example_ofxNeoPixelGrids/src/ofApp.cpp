@@ -53,7 +53,7 @@ void ofApp::update()
 void ofApp::draw()
 {
     ofBackground(0);
-    opcClient.drawStage();
+    opcClient.drawStage(hide);
     
     // Show the grabber area
     grid5x7.drawGrabRegion(hide);

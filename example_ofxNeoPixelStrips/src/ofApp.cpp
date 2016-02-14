@@ -56,7 +56,7 @@ void ofApp::update()
 void ofApp::draw()
 {
     ofBackground(0);
-    opcClient.drawStage();
+    opcClient.drawStage(hide);
     
     // Show the grabber area
     stick.drawGrabRegion(hide);

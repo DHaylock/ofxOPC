@@ -10,7 +10,7 @@ void ofApp::setup()
     opcClient.setup("127.0.0.1", 7890);
     
     // You define the stage size and draw into the stage
-    opcClient.setupStage(480, 480);
+    opcClient.setupStage(500, 500);
     
     for (int x = 0; x < 8; x++) {
         strips.push_back(ofxNeoPixelStrip(((opcClient.getStageWidth()/8)/2)+(x*(opcClient.getStageWidth()/8)), opcClient.getStageCenterY()-(30*5), 60, 5));
@@ -55,7 +55,7 @@ void ofApp::update()
 void ofApp::draw()
 {
     ofBackground(0);
-    opcClient.drawStage();
+    opcClient.drawStage(hide);
     
     // Show the grabber area and Draw the output
     for (int i = 0; i < strips.size(); i++) {
@@ -63,7 +63,6 @@ void ofApp::draw()
         strips[i].drawStrip(opcClient.getStageWidth()+(i*25), 10);
     }
 
-    
     // Report Messages
     stringstream ss;
     ss << "Press Left and Right to Change Effect Mode" << endl;
