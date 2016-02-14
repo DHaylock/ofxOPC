@@ -53,22 +53,25 @@ Also drop me a line and let me know how you end up using the addon.
 
 - A new feature is the Stage. The stage is where you draw your graphics for the leds. Essentially its an FBO! But it gives you access to the pixel data of the screen. In the update function call:
 
-````
+```
     opcClient.beginStage();
     
     opcClient.drawDefaultEffects(effect);
     //or your own graphics
     opcClient.endStage();
     
+```
+- Then write your data to the leds
+
 ````
-    if (!opcClient.isConnected())
-    {
-        opcClient.tryConnecting();
-    }
-    else
-    {
-		opcClient.writeChannelOne(ring24px.colorData());
-    }
+if (!opcClient.isConnected()) 
+{
+	opcClient.tryConnecting();
+}
+else
+{
+	opcClient.writeChannelOne(ring24px.colorData());
+}
 ````
 
 - Draw the resulting data to our visualiser
