@@ -83,18 +83,23 @@ Also drop me a line and let me know how you end up using the addon.
 
 ## Examples
 - ofxNeoPixelRings
+
 ![alt text](images/example_ofxNeoPixelRings.gif "rings.gif")
 
 - ofxNeoPixelStrips
+
 ![alt text](images/example_ofxNeoPixelStrips.gif "strips.gif")
 
 - ofxNeoPixelGrids
+
 ![alt text](images/example_ofxNeoPixelGrids.gif "grids.gif")
 
 - Big Grid
+
 ![alt text](images/example_BigGrid.gif "biggrid.gif")
 
 - Multiple Strips
+
 ![alt text](images/example_multiple_ofxNeoPixelStrips.gif "multiplestrips.gif")
 
 Coming Soon
