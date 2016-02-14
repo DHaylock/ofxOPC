@@ -12,10 +12,10 @@ void ofApp::setup()
     // You define the stage size and draw into the stage
     opcClient.setupStage(500, 500);
     
-    stick.setupLedStrip(10, 10, 8, 7);
-    strip40px.setupLedStrip(50,10, 40, 7);
-    strip60px.setupLedStrip(100,10, 60, 7);
-    strip144px.setupLedStrip(150,10, 144, 3);
+    stick.setupLedStrip(50, 50, 8, 7);
+    strip40px.setupLedStrip(100,50, 40, 7);
+    strip60px.setupLedStrip(150,50, 60, 7);
+    strip144px.setupLedStrip(200,50, 144, 3);
 }
 //--------------------------------------------------------------
 void ofApp::update()
@@ -65,10 +65,10 @@ void ofApp::draw()
     strip144px.drawGrabRegion(hide);
     
     // Draw the output
-    stick.drawStrip(opcClient.getStageWidth()+50, 10);
-    strip40px.drawStrip(opcClient.getStageWidth()+70, 10);
-    strip60px.drawStrip(opcClient.getStageWidth()+100, 10);
-    strip144px.drawStrip(opcClient.getStageWidth()+130, 10);
+    stick.drawStrip(opcClient.getStageWidth()+25, 10);
+    strip40px.drawStrip(opcClient.getStageWidth()+50, 10);
+    strip60px.drawStrip(opcClient.getStageWidth()+75, 10);
+    strip144px.drawStrip(opcClient.getStageWidth()+100, 10);
     
     // Report Messages
     stringstream ss;
