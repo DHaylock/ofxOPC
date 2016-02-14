@@ -59,7 +59,7 @@ void ofApp::draw()
     // Show the grabber area and Draw the output
     for (int i = 0; i < strips.size(); i++) {
         strips[i].drawGrabRegion(hide);
-        strips[i].drawStrip(opcClient.getStageWidth()+(i*25), 10);
+        strips[i].drawStrip((opcClient.getStageWidth()+25)+(i*25), 10);
     }
 
     // Report Messages
