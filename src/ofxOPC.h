@@ -115,6 +115,8 @@ class ofxOPC  {
         int _stageHeight;
         unsigned char * screenPixels;
     
+        ofImage noiseImage;
+    
         // For sending our data packets out to the Server
         ofxTCPClient client;
     

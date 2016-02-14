@@ -46,6 +46,17 @@ void ofxOPC::setupStage(int width,int height)
 {
     _stageWidth = width;
     _stageHeight = height;
+    noiseImage.allocate(_stageWidth/4, _stageHeight/4, OF_IMAGE_GRAYSCALE);
+    
+    unsigned char* ap = noiseImage.getPixels();
+    for(int x = 0; x < noiseImage.getWidth(); x++) {
+        for(int y = 0; y < noiseImage.getHeight(); y++) {
+            int value = 255*ofNoise(x/100.0,y/100.0,ofGetElapsedTimef()*0.1);
+            ap[(int)(x+y*noiseImage.getWidth())] = value;
+        }
+    }
+    noiseImage.update();
+    
     screenPixels = new unsigned char [_stageWidth*_stageHeight*4];
     screenCapture.allocate(_stageWidth, _stageHeight,GL_RGBA);
     screenCapture.begin();
@@ -271,6 +282,23 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofScale(4, 4);
             ofTranslate(moveCounter, _stageHeight/8);
             labels.drawString("Hello World", 0, 0);
+            ofPopMatrix();
+        }
+            break;
+        case 8:
+        {
+            unsigned char* ap = noiseImage.getPixels();
+            for(int x = 0; x < noiseImage.getWidth(); x++) {
+                for(int y = 0; y < noiseImage.getHeight(); y++) {
+                    int value = 255*ofNoise(x/100.0,y/100.0,ofGetElapsedTimef());
+                    ap[(int)(x+y*noiseImage.getWidth())] = value;
+                }
+            }
+            noiseImage.update();
+            ofPushMatrix();
+            ofScale(4, 4);
+            ofSetColor(255, 255, 255);
+            noiseImage.draw(0, 0);
             ofPopMatrix();
         }
             break;
