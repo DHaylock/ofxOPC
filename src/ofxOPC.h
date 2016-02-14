@@ -57,7 +57,7 @@ class ofxOPC  {
         //! Close Fbo
         void endStage();
         //! Draw Fbo
-        void drawStage();
+        void drawStage(bool drawGrid,int gridSpace = 50);
     
         int getStageWidth();
         int getStageHeight();

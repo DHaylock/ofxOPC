@@ -111,7 +111,7 @@ void ofxOPC::getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData)
     }
 }
 //--------------------------------------------------------------
-void ofxOPC::drawStage()
+void ofxOPC::drawStage(bool drawGrid,int gridSpace)
 {
     ofPushMatrix();
     ofPushStyle();
@@ -122,10 +122,20 @@ void ofxOPC::drawStage()
     screenCapture.draw(0,0);
     ofSetColor(ofColor::white);
     labels.drawString("Input Stage", 10, _stageHeight+labels.getLineHeight());
-    string st = (isConnected()) ? "True" : "False";
-    labels.drawString("Is Fade Candy Connected " + st, 10, _stageHeight+(labels.getLineHeight()*2));
+    string st = (isConnected()) ? "Fade Candy Connected " : "Fade Candy Not Connected";
+    labels.drawString(st, 10, _stageHeight+(labels.getLineHeight()*2));
     ofPopStyle();
     ofPopMatrix();
+    
+    if (drawGrid) {
+        for (int y = 0; y < _stageHeight; y+=gridSpace) {
+            for (int x = 0; x < _stageWidth; x+=gridSpace) {
+                ofSetColor(255,100);
+                ofDrawLine(x,0,x,_stageHeight);
+                ofDrawLine(0,y,_stageWidth,y);
+            }
+        }
+    }
 }
 //--------------------------------------------------------------
 void ofxOPC::drawDefaultEffects(int mode)
