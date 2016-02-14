@@ -10,7 +10,7 @@ void ofApp::setup()
     opcClient.setup("127.0.0.1", 7890);
     
     // You define the stage size and draw into the stage
-    opcClient.setupStage(480, 480);
+    opcClient.setupStage(500, 500);
     
     // Setup the rings
     ring12px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 12, 12);
@@ -27,7 +27,6 @@ void ofApp::update()
     opcClient.beginStage();
     
     // Draw what you want rendered here
-    
     // For now here are some default effects
     opcClient.drawDefaultEffects(effect);
     

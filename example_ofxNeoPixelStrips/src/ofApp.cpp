@@ -10,7 +10,7 @@ void ofApp::setup()
     opcClient.setup("127.0.0.1", 7890);
     
     // You define the stage size and draw into the stage
-    opcClient.setupStage(480, 480);
+    opcClient.setupStage(500, 500);
     
     stick.setupLedStrip(10, 10, 8, 7);
     strip40px.setupLedStrip(50,10, 40, 7);
