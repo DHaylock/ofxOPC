@@ -5,6 +5,36 @@
 //
 
 #include "ofxNeoPixelStrip.h"
+
+//--------------------------------------------------------------
+ofxNeoPixelStrip::ofxNeoPixelStrip()
+{
+    
+}
+//--------------------------------------------------------------
+ofxNeoPixelStrip::~ofxNeoPixelStrip()
+{
+    
+}
+//--------------------------------------------------------------
+ofxNeoPixelStrip::ofxNeoPixelStrip(int posx, int posy,int numberOfLeds,int spacing)
+{
+    // Setup Positioning
+    size = numberOfLeds;
+    offsetX = 5;
+    offsetY = 5;
+    _spacing = spacing;
+    
+    actualX = offsetX+posx;
+    actualY = offsetY+posy;
+    
+    for (int i = 0; i < size; i++) {
+        // Generate the position of the grabber points
+        float rx = (offsetX+posx);
+        float ry = (offsetY+posy) + (i*spacing);
+        pos.push_back(ofVec2f(rx,ry));
+    }
+}
 //--------------------------------------------------------------
 void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int numberOfLeds,int spacing)
 {

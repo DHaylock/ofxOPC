@@ -8,6 +8,33 @@
 #include "ofxNeoPixelRing.h"
 
 //--------------------------------------------------------------
+ofxNeoPixelRing::ofxNeoPixelRing()
+{
+    
+}
+//--------------------------------------------------------------
+ofxNeoPixelRing::~ofxNeoPixelRing()
+{
+    
+}
+//--------------------------------------------------------------
+ofxNeoPixelRing::ofxNeoPixelRing(int posx,int posy,int numberOfLeds,int radiusOfRing)
+{
+    // Setup Positioning
+    size = numberOfLeds;
+    centerX = posx;
+    centerY = posy;
+    radius = radiusOfRing;
+    
+    for (int i = 0; i < size; i++) {
+        float angle = (1.0 * i) * (2.0 * M_PI)/(1.0 * size);
+        // Generate the position of the grabber points
+        float rx = centerX + (radius * cos(angle));
+        float ry = centerY + (radius * sin(angle));
+        pos.push_back(ofVec2f(rx,ry));
+    }
+}
+//--------------------------------------------------------------
 void ofxNeoPixelRing::setupLedRing(int posx,int posy,int numberOfLeds,int radiusOfRing)
 {
     // Setup Positioning

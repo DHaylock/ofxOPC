@@ -8,6 +8,42 @@
 #include "ofxNeoPixelGrid.h"
 
 //--------------------------------------------------------------
+ofxNeoPixelGrid::ofxNeoPixelGrid()
+{
+    
+}
+//--------------------------------------------------------------
+ofxNeoPixelGrid::~ofxNeoPixelGrid()
+{
+    
+}
+//--------------------------------------------------------------
+ofxNeoPixelGrid::ofxNeoPixelGrid(int cols,int rows,int posx,int posy,int spacing)
+{
+    // Setup Positioning
+    size = cols*rows;
+    actualX = posx;
+    actualY = posy;
+    _cols = cols;
+    _rows = rows;
+    
+    offsetX = 5;
+    offsetY = 5;
+    _spacing = spacing;
+    
+    float ry;
+    float rx;
+    
+    
+    for (int y = 0; y < _rows; y++) {
+        for (int x = 0; x < _cols; x++) {
+            rx = actualX+(x*_spacing);
+            ry = actualY+(y*_spacing);
+            pos.push_back(ofVec2f(rx,ry));
+        }
+    }
+}
+//--------------------------------------------------------------
 void ofxNeoPixelGrid::setupLedGrid(int cols,int rows,int posx,int posy,int spacing)
 {
     // Setup Positioning

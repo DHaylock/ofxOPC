@@ -9,8 +9,11 @@
 
 class ofxNeoPixelStrip {
     public:
-        ofxNeoPixelStrip(){}
-        virtual ~ofxNeoPixelStrip(){}
+        ofxNeoPixelStrip();
+        virtual ~ofxNeoPixelStrip();
+    
+        //! Constructor
+        ofxNeoPixelStrip(int posx, int posy,int numberOfLeds,int spacing);
     
         //! Setup Strip
         void setupLedStrip(int posx, int posy,int numberOfLeds,int spacing);

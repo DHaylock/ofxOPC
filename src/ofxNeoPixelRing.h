@@ -9,10 +9,13 @@
 
 class ofxNeoPixelRing {
     public:
-        ofxNeoPixelRing(){}
-        virtual ~ofxNeoPixelRing(){}
+        ofxNeoPixelRing();
+        virtual ~ofxNeoPixelRing();
     
-        
+        //! Constructor
+        ofxNeoPixelRing(int posx,int posy,int numberOfLeds,int radiusOfRing);
+    
+        //! Setup
         void setupLedRing(int posx,int posy,int numberOfLeds,int radiusOfRing);
     
         void drawGrabRegion(bool hideArea);
