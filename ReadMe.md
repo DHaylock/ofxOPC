@@ -108,10 +108,13 @@ else
 
 ![alt text](images/example_multiple_ofxNeoPixelStrips.gif "multiplestrips.gif")
 
+- Multiple Neopixel units and Syphon
+
+![alt text](images/example_syphon_input.gif "syphon.gif")
+
 Coming Soon
 
 - Neopixel Chained Rings
-- Multiple Neopixel units and Syphon
 
 ## Important 
 
