@@ -12,6 +12,9 @@
 
 class ofxGenericNeoPixelObject {
     public:
+    
+        ofxGenericNeoPixelObject(){}
+        virtual ~ofxGenericNeoPixelObject(){}
         //! Return Data Method
         vector <ofColor> colorData();
         
