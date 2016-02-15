@@ -61,9 +61,9 @@ void ofApp::draw()
     grid32x32.drawGrabRegion(hide);
     
     // Draw the output
-    grid5x7.drawGrid(opcClient.getStageWidth()+25, 25);
-    grid8x8.drawGrid(opcClient.getStageWidth()+25, 100);
-    grid32x32.drawGrid(opcClient.getStageWidth()+25, 175);
+    grid5x7.draw(opcClient.getStageWidth()+25, 25);
+    grid8x8.draw(opcClient.getStageWidth()+25, 100);
+    grid32x32.draw(opcClient.getStageWidth()+25, 175);
     
     // Report Messages
     stringstream ss;

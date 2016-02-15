@@ -66,10 +66,10 @@ void ofApp::draw()
     ring60px.drawGrabRegion(hide);
     
     // Draw the output
-    ring12px.drawRing(opcClient.getStageWidth()+100, 50);
-    ring16px.drawRing(opcClient.getStageWidth()+100, 125);
-    ring24px.drawRing(opcClient.getStageWidth()+100, 250);
-    ring60px.drawRing(opcClient.getStageWidth()+100, 425);
+    ring12px.draw(opcClient.getStageWidth()+100, 50);
+    ring16px.draw(opcClient.getStageWidth()+100, 125);
+    ring24px.draw(opcClient.getStageWidth()+100, 250);
+    ring60px.draw(opcClient.getStageWidth()+100, 425);
     
     // Report Messages
     stringstream ss;

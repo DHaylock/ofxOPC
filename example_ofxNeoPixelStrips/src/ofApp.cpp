@@ -65,10 +65,10 @@ void ofApp::draw()
     strip144px.drawGrabRegion(hide);
     
     // Draw the output
-    stick.drawStrip(opcClient.getStageWidth()+25, 10);
-    strip40px.drawStrip(opcClient.getStageWidth()+50, 10);
-    strip60px.drawStrip(opcClient.getStageWidth()+75, 10);
-    strip144px.drawStrip(opcClient.getStageWidth()+100, 10);
+    stick.draw(opcClient.getStageWidth()+25, 10);
+    strip40px.draw(opcClient.getStageWidth()+50, 10);
+    strip60px.draw(opcClient.getStageWidth()+75, 10);
+    strip144px.draw(opcClient.getStageWidth()+100, 10);
     
     // Report Messages
     stringstream ss;

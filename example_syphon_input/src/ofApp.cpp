@@ -94,12 +94,12 @@ void ofApp::draw()
     rightStrip.drawGrabRegion(hide);
     centerGrid.drawGrabRegion(hide);
     
-    leftRing.drawRing(opcClient.getStageWidth()+40, 40);
-    rightRing.drawRing(opcClient.getStageWidth()+120, 40);
-    centerRing.drawRing(opcClient.getStageWidth()+75, 150);
-    leftStrip.drawStrip(opcClient.getStageWidth()+225, 25);
-    rightStrip.drawStrip(opcClient.getStageWidth()+250, 25);
-    centerGrid.drawGrid(opcClient.getStageWidth()+40, 250);
+    leftRing.draw(opcClient.getStageWidth()+40, 40);
+    rightRing.draw(opcClient.getStageWidth()+120, 40);
+    centerRing.draw(opcClient.getStageWidth()+75, 150);
+    leftStrip.draw(opcClient.getStageWidth()+225, 25);
+    rightStrip.draw(opcClient.getStageWidth()+250, 25);
+    centerGrid.draw(opcClient.getStageWidth()+40, 250);
     
     // Report Messages
     stringstream ss;
