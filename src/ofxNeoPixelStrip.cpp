@@ -55,18 +55,6 @@ void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int numberOfLeds,int spa
     }
 }
 //--------------------------------------------------------------
-vector<ofVec2f> ofxNeoPixelStrip::getPixelCoordinates()
-{
-    colors.clear();
-    return pos;
-}
-//--------------------------------------------------------------
-vector <ofColor> ofxNeoPixelStrip::colorData()
-{
-    // Transmit Data
-    return colors;
-}
-//--------------------------------------------------------------
 void ofxNeoPixelStrip::drawGrabRegion(bool hideArea)
 {
     if (hideArea == true) {
@@ -113,7 +101,7 @@ void ofxNeoPixelStrip::ledStrip()
     }
 }
 //--------------------------------------------------------------
-void ofxNeoPixelStrip::drawStrip(int x, int y)
+void ofxNeoPixelStrip::draw(int x, int y)
 {
     // Where to draw the Strip!
     ofPushMatrix();

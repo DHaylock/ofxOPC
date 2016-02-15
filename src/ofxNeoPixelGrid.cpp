@@ -70,18 +70,6 @@ void ofxNeoPixelGrid::setupLedGrid(int cols,int rows,int posx,int posy,int spaci
     }
 }
 //--------------------------------------------------------------
-vector <ofColor> ofxNeoPixelGrid::colorData()
-{
-    // Transmit Data
-    return colors;
-}
-//--------------------------------------------------------------
-vector<ofVec2f> ofxNeoPixelGrid::getPixelCoordinates()
-{
-    colors.clear();
-    return pos;
-}
-//--------------------------------------------------------------
 void ofxNeoPixelGrid::drawGrabRegion(bool hideArea)
 {
     if (hideArea == true) {
@@ -127,7 +115,7 @@ void ofxNeoPixelGrid::ledGrid()
     }
 }
 //--------------------------------------------------------------
-void ofxNeoPixelGrid::drawGrid(int x, int y)
+void ofxNeoPixelGrid::draw(int x, int y)
 {
     // Where to draw the Grid!
     ofPushMatrix();

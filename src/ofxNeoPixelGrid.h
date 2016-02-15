@@ -7,8 +7,9 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "ofxGenericNeoPixelObject.hpp"
 
-class ofxNeoPixelGrid {
+class ofxNeoPixelGrid : public ofxGenericNeoPixelObject {
     public:
         ofxNeoPixelGrid();
         virtual ~ofxNeoPixelGrid();
@@ -17,35 +18,11 @@ class ofxNeoPixelGrid {
     
         //! Setup the grid cols = number of X rows = number of Y
         void setupLedGrid(int cols,int rows,int posx,int posy,int spacing);
-    
         void drawGrabRegion(bool hideArea);
-        void drawGrid(int x, int y);
-        
-        //! Return Data Method
-        vector <ofColor> colorData();
-        
-        //! Return the locations of the Pixels
-        vector <ofVec2f> getPixelCoordinates();
-        
-        // Hold the Captured Colors
-        vector <ofColor> colors;
+        void draw(int x, int y);
+    
     private:
-        
-        // Hold the Position of our Capture points
-        vector <ofVec2f> pos;
-        
-        // Variables
-        float offsetX;
-        float offsetY;
-        float actualX;
-        float actualY;
-        int size;
-        int _cols;
-        int _rows;
-        
-        ofPoint _pos;
-        int _spacing;
-        
+    
         // Draw Unit
         void ledGrid();
 };
