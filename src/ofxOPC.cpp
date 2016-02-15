@@ -48,11 +48,10 @@ void ofxOPC::setupStage(int width,int height)
     _stageHeight = height;
     noiseImage.allocate(_stageWidth/4, _stageHeight/4, OF_IMAGE_GRAYSCALE);
     
-    unsigned char* ap = noiseImage.getPixels();
     for(int x = 0; x < noiseImage.getWidth(); x++) {
         for(int y = 0; y < noiseImage.getHeight(); y++) {
-            int value = 255*ofNoise(x/100.0,y/100.0,ofGetElapsedTimef()*0.1);
-            ap[(int)(x+y*noiseImage.getWidth())] = value;
+            ofColor initialColor = ofColor(255*ofNoise(x/100.0,y/100.0,ofGetElapsedTimef()),255);
+            noiseImage.setColor((int)(x+y*noiseImage.getWidth()), initialColor);
         }
     }
     noiseImage.update();
@@ -287,11 +286,10 @@ void ofxOPC::drawDefaultEffects(int mode)
             break;
         case 8:
         {
-            unsigned char* ap = noiseImage.getPixels();
             for(int x = 0; x < noiseImage.getWidth(); x++) {
                 for(int y = 0; y < noiseImage.getHeight(); y++) {
-                    int value = 255*ofNoise(x/100.0,y/100.0,ofGetElapsedTimef());
-                    ap[(int)(x+y*noiseImage.getWidth())] = value;
+                    ofColor initialColor = ofColor(255*ofNoise(x/100.0,y/100.0,ofGetElapsedTimef()),255);
+                    noiseImage.setColor((int)(x+y*noiseImage.getWidth()), initialColor);
                 }
             }
             noiseImage.update();
@@ -302,6 +300,12 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
+        case 9:
+        {
+            
+        }
+            break;
+            
         default:
             break;
     }
