@@ -1,20 +1,20 @@
 //
-//  ofxGenericNeoPixelObject.hpp
+//  ofxNeoPixelObject.h
 //  Created by David Haylock on 15/02/2016.
 //
 //
 
-#ifndef ofxGenericNeoPixelObject_hpp
-#define ofxGenericNeoPixelObject_hpp
+#ifndef ofxNeoPixelObject_h
+#define ofxNeoPixelObject_h
 
 #include <stdio.h>
 #include "ofMain.h"
 
-class ofxGenericNeoPixelObject {
+class ofxNeoPixelObject {
     public:
     
-        ofxGenericNeoPixelObject(){}
-        virtual ~ofxGenericNeoPixelObject(){}
+        ofxNeoPixelObject(){}
+        virtual ~ofxNeoPixelObject(){}
         //! Return Data Method
         vector <ofColor> colorData();
         
@@ -49,4 +49,4 @@ class ofxGenericNeoPixelObject {
 
 
 
-#endif /* ofxGenericNeoPixelObject_hpp */
+#endif /* ofxGenericNeoPixelObject_h */

@@ -116,6 +116,7 @@ class ofxOPC  {
         unsigned char * screenPixels;
     
         ofImage noiseImage;
+        ofImage colorFadeImage;
     
         // For sending our data packets out to the Server
         ofxTCPClient client;

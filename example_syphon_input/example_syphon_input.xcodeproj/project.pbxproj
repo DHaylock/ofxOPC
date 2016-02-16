@@ -11,7 +11,7 @@
 		125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F399B91E98DC31CDA6DDACB4 /* ofxTCPManager.cpp */; };
 		1F558B76FB3412843DDAA031 /* ofxSyphonClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03EA4DA95B5E1B8409FC058E /* ofxSyphonClient.mm */; };
 		4D508D34156E7076531D9084 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D58DCB2C0AEFDE6171E29540 /* Syphon.framework */; };
-		634E48F81C728E3300FB8446 /* ofxGenericNeoPixelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E48ED1C728E3300FB8446 /* ofxGenericNeoPixelObject.cpp */; };
+		634E48F81C728E3300FB8446 /* ofxNeoPixelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E48ED1C728E3300FB8446 /* ofxNeoPixelObject.cpp */; };
 		634E48F91C728E3300FB8446 /* ofxNeoPixelGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E48EF1C728E3300FB8446 /* ofxNeoPixelGrid.cpp */; };
 		634E48FA1C728E3300FB8446 /* ofxNeoPixelRing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E48F11C728E3300FB8446 /* ofxNeoPixelRing.cpp */; };
 		634E48FB1C728E3300FB8446 /* ofxNeoPixelStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E48F41C728E3300FB8446 /* ofxNeoPixelStrip.cpp */; };
@@ -70,8 +70,8 @@
 		337B812806A0E7D26A029E5A /* ofxSyphonServerDirectory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSyphonServerDirectory.h; path = ../../../addons/ofxSyphon/src/ofxSyphonServerDirectory.h; sourceTree = SOURCE_ROOT; };
 		35BB9BB90DBABFD3B39F8DB6 /* ofxUDPManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUDPManager.cpp; path = ../../../addons/ofxNetwork/src/ofxUDPManager.cpp; sourceTree = SOURCE_ROOT; };
 		46BBCC26D60B589958BF0D03 /* ofxSyphonServer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSyphonServer.h; path = ../../../addons/ofxSyphon/src/ofxSyphonServer.h; sourceTree = SOURCE_ROOT; };
-		634E48ED1C728E3300FB8446 /* ofxGenericNeoPixelObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxGenericNeoPixelObject.cpp; sourceTree = "<group>"; };
-		634E48EE1C728E3300FB8446 /* ofxGenericNeoPixelObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ofxGenericNeoPixelObject.hpp; sourceTree = "<group>"; };
+		634E48ED1C728E3300FB8446 /* ofxNeoPixelObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNeoPixelObject.cpp; sourceTree = "<group>"; };
+		634E48EE1C728E3300FB8446 /* ofxNeoPixelObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxNeoPixelObject.h; sourceTree = "<group>"; };
 		634E48EF1C728E3300FB8446 /* ofxNeoPixelGrid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNeoPixelGrid.cpp; sourceTree = "<group>"; };
 		634E48F01C728E3300FB8446 /* ofxNeoPixelGrid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxNeoPixelGrid.h; sourceTree = "<group>"; };
 		634E48F11C728E3300FB8446 /* ofxNeoPixelRing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNeoPixelRing.cpp; sourceTree = "<group>"; };
@@ -187,8 +187,8 @@
 		634E48EC1C728E3300FB8446 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				634E48ED1C728E3300FB8446 /* ofxGenericNeoPixelObject.cpp */,
-				634E48EE1C728E3300FB8446 /* ofxGenericNeoPixelObject.hpp */,
+				634E48ED1C728E3300FB8446 /* ofxNeoPixelObject.cpp */,
+				634E48EE1C728E3300FB8446 /* ofxNeoPixelObject.h */,
 				634E48EF1C728E3300FB8446 /* ofxNeoPixelGrid.cpp */,
 				634E48F01C728E3300FB8446 /* ofxNeoPixelGrid.h */,
 				634E48F11C728E3300FB8446 /* ofxNeoPixelRing.cpp */,
@@ -376,7 +376,7 @@
 				634E48FB1C728E3300FB8446 /* ofxNeoPixelStrip.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				634E48F81C728E3300FB8446 /* ofxGenericNeoPixelObject.cpp in Sources */,
+				634E48F81C728E3300FB8446 /* ofxNeoPixelObject.cpp in Sources */,
 				634E48F91C728E3300FB8446 /* ofxNeoPixelGrid.cpp in Sources */,
 				960D20B191346612D5C05A6A /* ofxTCPClient.cpp in Sources */,
 				125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */,

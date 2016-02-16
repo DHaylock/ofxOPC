@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F399B91E98DC31CDA6DDACB4 /* ofxTCPManager.cpp */; };
-		634E49451C728F1100FB8446 /* ofxGenericNeoPixelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E493A1C728F1100FB8446 /* ofxGenericNeoPixelObject.cpp */; };
+		634E49451C728F1100FB8446 /* ofxNeoPixelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E493A1C728F1100FB8446 /* ofxNeoPixelObject.cpp */; };
 		634E49461C728F1100FB8446 /* ofxNeoPixelGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E493C1C728F1100FB8446 /* ofxNeoPixelGrid.cpp */; };
 		634E49471C728F1100FB8446 /* ofxNeoPixelRing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E493E1C728F1100FB8446 /* ofxNeoPixelRing.cpp */; };
 		634E49481C728F1100FB8446 /* ofxNeoPixelStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E49411C728F1100FB8446 /* ofxNeoPixelStrip.cpp */; };
@@ -57,8 +57,8 @@
 		2F519EB3B0DCD7378FB86ABE /* ofxUDPManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUDPManager.h; path = ../../../addons/ofxNetwork/src/ofxUDPManager.h; sourceTree = SOURCE_ROOT; };
 		30841703B7AC8487D16FB4AA /* ofxTCPServer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxTCPServer.h; path = ../../../addons/ofxNetwork/src/ofxTCPServer.h; sourceTree = SOURCE_ROOT; };
 		35BB9BB90DBABFD3B39F8DB6 /* ofxUDPManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUDPManager.cpp; path = ../../../addons/ofxNetwork/src/ofxUDPManager.cpp; sourceTree = SOURCE_ROOT; };
-		634E493A1C728F1100FB8446 /* ofxGenericNeoPixelObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxGenericNeoPixelObject.cpp; sourceTree = "<group>"; };
-		634E493B1C728F1100FB8446 /* ofxGenericNeoPixelObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ofxGenericNeoPixelObject.hpp; sourceTree = "<group>"; };
+		634E493A1C728F1100FB8446 /* ofxNeoPixelObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNeoPixelObject.cpp; sourceTree = "<group>"; };
+		634E493B1C728F1100FB8446 /* ofxNeoPixelObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxNeoPixelObject.h; sourceTree = "<group>"; };
 		634E493C1C728F1100FB8446 /* ofxNeoPixelGrid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNeoPixelGrid.cpp; sourceTree = "<group>"; };
 		634E493D1C728F1100FB8446 /* ofxNeoPixelGrid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxNeoPixelGrid.h; sourceTree = "<group>"; };
 		634E493E1C728F1100FB8446 /* ofxNeoPixelRing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNeoPixelRing.cpp; sourceTree = "<group>"; };
@@ -130,8 +130,8 @@
 		634E49391C728F1100FB8446 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				634E493A1C728F1100FB8446 /* ofxGenericNeoPixelObject.cpp */,
-				634E493B1C728F1100FB8446 /* ofxGenericNeoPixelObject.hpp */,
+				634E493A1C728F1100FB8446 /* ofxNeoPixelObject.cpp */,
+				634E493B1C728F1100FB8446 /* ofxNeoPixelObject.h */,
 				634E493C1C728F1100FB8446 /* ofxNeoPixelGrid.cpp */,
 				634E493D1C728F1100FB8446 /* ofxNeoPixelGrid.h */,
 				634E493E1C728F1100FB8446 /* ofxNeoPixelRing.cpp */,
@@ -294,7 +294,7 @@
 				634E49481C728F1100FB8446 /* ofxNeoPixelStrip.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				634E49491C728F1100FB8446 /* ofxOPC.cpp in Sources */,
-				634E49451C728F1100FB8446 /* ofxGenericNeoPixelObject.cpp in Sources */,
+				634E49451C728F1100FB8446 /* ofxNeoPixelObject.cpp in Sources */,
 				634E49461C728F1100FB8446 /* ofxNeoPixelGrid.cpp in Sources */,
 				960D20B191346612D5C05A6A /* ofxTCPClient.cpp in Sources */,
 				125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */,

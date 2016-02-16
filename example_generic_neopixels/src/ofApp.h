@@ -15,8 +15,7 @@ class ofApp : public ofBaseApp{
         void exit();
     
         ofxOPC opcClient;
-        map<int, ofxGenericNeoPixelObject*> neoPixelObjects;
-//        vector <ofxGenericNeoPixelObject*> neopixelObjects;
+        map<int, ofxNeoPixelObject*> neoPixelObjects;
     
         int effect;
         bool hide;

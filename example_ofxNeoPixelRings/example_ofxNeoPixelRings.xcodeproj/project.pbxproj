@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F399B91E98DC31CDA6DDACB4 /* ofxTCPManager.cpp */; };
 		57DCD2B2CBF228ED49BFAE90 /* ofxNeoPixelGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1520FF511E88B7F9C672EAD0 /* ofxNeoPixelGrid.cpp */; };
-		634E48E91C72889100FB8446 /* ofxGenericNeoPixelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E48E71C72889100FB8446 /* ofxGenericNeoPixelObject.cpp */; };
+		634E48E91C72889100FB8446 /* ofxNeoPixelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634E48E71C72889100FB8446 /* ofxNeoPixelObject.cpp */; };
 		66CA411C5A9664E27326BF36 /* ofxTCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C085E327DAB912CFA2A443D /* ofxTCPServer.cpp */; };
 		960D20B191346612D5C05A6A /* ofxTCPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF88F02779DD820913ACEA06 /* ofxTCPClient.cpp */; };
 		C0DF2DD6C7A9DAF1E84222ED /* ofxOPC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C24C81D88B85EC85495F7CA /* ofxOPC.cpp */; };
@@ -63,8 +63,8 @@
 		3C98599F512D19BB57939D95 /* ofxNeoPixelGrid.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxNeoPixelGrid.h; path = ../../../addons/ofxOPC/src/ofxNeoPixelGrid.h; sourceTree = SOURCE_ROOT; };
 		3EFD920E7CFE6B6B1066E3BA /* ofxNeoPixelRing.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxNeoPixelRing.cpp; path = ../../../addons/ofxOPC/src/ofxNeoPixelRing.cpp; sourceTree = SOURCE_ROOT; };
 		5E31517C6C120F6DEBCCB9CC /* ofxNeoPixelRing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxNeoPixelRing.h; path = ../../../addons/ofxOPC/src/ofxNeoPixelRing.h; sourceTree = SOURCE_ROOT; };
-		634E48E71C72889100FB8446 /* ofxGenericNeoPixelObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxGenericNeoPixelObject.cpp; path = ../src/ofxGenericNeoPixelObject.cpp; sourceTree = "<group>"; };
-		634E48E81C72889100FB8446 /* ofxGenericNeoPixelObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ofxGenericNeoPixelObject.hpp; path = ../src/ofxGenericNeoPixelObject.hpp; sourceTree = "<group>"; };
+		634E48E71C72889100FB8446 /* ofxNeoPixelObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxNeoPixelObject.cpp; path = ../src/ofxNeoPixelObject.cpp; sourceTree = "<group>"; };
+		634E48E81C72889100FB8446 /* ofxNeoPixelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxNeoPixelObject.h; path = ../src/ofxNeoPixelObject.h; sourceTree = "<group>"; };
 		BF88F02779DD820913ACEA06 /* ofxTCPClient.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPClient.cpp; path = ../../../addons/ofxNetwork/src/ofxTCPClient.cpp; sourceTree = SOURCE_ROOT; };
 		C8C9B823D7872F9CBF03A813 /* ofxTCPClient.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxTCPClient.h; path = ../../../addons/ofxNetwork/src/ofxTCPClient.h; sourceTree = SOURCE_ROOT; };
 		C8E2BE30E0CBB25AA8972B43 /* ofxNeoPixels.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxNeoPixels.h; path = ../../../addons/ofxOPC/src/ofxNeoPixels.h; sourceTree = SOURCE_ROOT; };
@@ -130,8 +130,8 @@
 		6790B6E991B473CAB93578A1 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				634E48E71C72889100FB8446 /* ofxGenericNeoPixelObject.cpp */,
-				634E48E81C72889100FB8446 /* ofxGenericNeoPixelObject.hpp */,
+				634E48E71C72889100FB8446 /* ofxNeoPixelObject.cpp */,
+				634E48E81C72889100FB8446 /* ofxNeoPixelObject.h */,
 				1520FF511E88B7F9C672EAD0 /* ofxNeoPixelGrid.cpp */,
 				3C98599F512D19BB57939D95 /* ofxNeoPixelGrid.h */,
 				3EFD920E7CFE6B6B1066E3BA /* ofxNeoPixelRing.cpp */,
@@ -290,7 +290,7 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				634E48E91C72889100FB8446 /* ofxGenericNeoPixelObject.cpp in Sources */,
+				634E48E91C72889100FB8446 /* ofxNeoPixelObject.cpp in Sources */,
 				960D20B191346612D5C05A6A /* ofxTCPClient.cpp in Sources */,
 				125506CD3E5F428AAFE5CC65 /* ofxTCPManager.cpp in Sources */,
 				66CA411C5A9664E27326BF36 /* ofxTCPServer.cpp in Sources */,

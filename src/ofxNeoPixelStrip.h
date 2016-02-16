@@ -6,9 +6,9 @@
 
 #include <iostream>
 #include "ofMain.h"
-#include "ofxGenericNeoPixelObject.hpp"
+#include "ofxNeoPixelObject.h"
 
-class ofxNeoPixelStrip : public ofxGenericNeoPixelObject {
+class ofxNeoPixelStrip : public ofxNeoPixelObject {
     public:
         ofxNeoPixelStrip();
         virtual ~ofxNeoPixelStrip();

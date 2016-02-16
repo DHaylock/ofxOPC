@@ -1,30 +1,30 @@
 //
-//  ofxGenericNeoPixelObject.cpp
+//  ofxNeoPixelObject.cpp
 //
 //  Created by David Haylock on 15/02/2016.
 //
 //
 
-#include "ofxGenericNeoPixelObject.hpp"
+#include "ofxNeoPixelObject.h"
 //--------------------------------------------------------------
-vector <ofColor> ofxGenericNeoPixelObject::colorData()
+vector <ofColor> ofxNeoPixelObject::colorData()
 {
     // Transmit Data
     return colors;
 }
 //--------------------------------------------------------------
-vector<ofVec2f> ofxGenericNeoPixelObject::getPixelCoordinates()
+vector<ofVec2f> ofxNeoPixelObject::getPixelCoordinates()
 {
     colors.clear();
     return pos;
 }
 //--------------------------------------------------------------
-void ofxGenericNeoPixelObject::drawGrabRegion(bool hideArea)
+void ofxNeoPixelObject::drawGrabRegion(bool hideArea)
 {
     
 }
 //--------------------------------------------------------------
-void ofxGenericNeoPixelObject::draw(int x, int y)
+void ofxNeoPixelObject::draw(int x, int y)
 {
 
 }

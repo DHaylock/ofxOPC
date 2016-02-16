@@ -47,6 +47,7 @@ void ofxOPC::setupStage(int width,int height)
     _stageWidth = width;
     _stageHeight = height;
     noiseImage.allocate(_stageWidth/4, _stageHeight/4, OF_IMAGE_GRAYSCALE);
+    colorFadeImage.allocate(_stageWidth/4, _stageHeight/4, OF_IMAGE_COLOR_ALPHA);
     
     for(int x = 0; x < noiseImage.getWidth(); x++) {
         for(int y = 0; y < noiseImage.getHeight(); y++) {
@@ -56,6 +57,15 @@ void ofxOPC::setupStage(int width,int height)
     }
     noiseImage.update();
     
+    for(int x = 0; x < colorFadeImage.getWidth(); x++) {
+        for(int y = 0; y < colorFadeImage.getHeight(); y++) {
+            ofColor initialColor;
+            int value = 255*(float)x/colorFadeImage.getWidth();
+            initialColor.setHsb(value, 200, 200);
+            colorFadeImage.setColor((int)(x+y*colorFadeImage.getWidth()), initialColor);
+        }
+    }
+    colorFadeImage.update();
     screenPixels = new unsigned char [_stageWidth*_stageHeight*4];
     screenCapture.allocate(_stageWidth, _stageHeight,GL_RGBA);
     screenCapture.begin();
@@ -302,7 +312,21 @@ void ofxOPC::drawDefaultEffects(int mode)
             break;
         case 9:
         {
-            
+            for(int x = 0; x < colorFadeImage.getWidth(); x++) {
+                for(int y = 0; y < colorFadeImage.getHeight(); y++) {
+                    ofColor initialColor;
+//                    int value = 255*(float)(128+ 128 + sin(ofGetElapsedTimef()*0.8))/colorFadeImage.getWidth();
+                    float value = (float)x*fmodf(ofGetElapsedTimef()*10,255)/colorFadeImage.getWidth();
+                    initialColor.setHsb(value, 200, 200);
+                    colorFadeImage.setColor(x,y, initialColor);
+                }
+            }
+            colorFadeImage.update();
+            ofPushMatrix();
+            ofScale(4, 4);
+            ofSetColor(255, 255, 255);
+            colorFadeImage.draw(0, 0);
+            ofPopMatrix();
         }
             break;
             
