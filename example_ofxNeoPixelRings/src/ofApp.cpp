@@ -10,7 +10,7 @@ void ofApp::setup()
     opcClient.setup("127.0.0.1", 7890);
     
     // You define the stage size and draw into the stage
-    opcClient.setupStage(480, 480);
+    opcClient.setupStage(500, 500);
     
     // Setup the rings
     ring12px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 12, 12);
@@ -27,7 +27,6 @@ void ofApp::update()
     opcClient.beginStage();
     
     // Draw what you want rendered here
-    
     // For now here are some default effects
     opcClient.drawDefaultEffects(effect);
     
@@ -58,7 +57,7 @@ void ofApp::update()
 void ofApp::draw()
 {
     ofBackground(0);
-    opcClient.drawStage();
+    opcClient.drawStage(hide);
     
     // Show the grabber area
     ring12px.drawGrabRegion(hide);
@@ -67,10 +66,10 @@ void ofApp::draw()
     ring60px.drawGrabRegion(hide);
     
     // Draw the output
-    ring12px.drawRing(opcClient.getStageWidth()+100, 50);
-    ring16px.drawRing(opcClient.getStageWidth()+100, 125);
-    ring24px.drawRing(opcClient.getStageWidth()+100, 250);
-    ring60px.drawRing(opcClient.getStageWidth()+100, 425);
+    ring12px.draw(opcClient.getStageWidth()+100, 50);
+    ring16px.draw(opcClient.getStageWidth()+100, 125);
+    ring24px.draw(opcClient.getStageWidth()+100, 250);
+    ring60px.draw(opcClient.getStageWidth()+100, 425);
     
     // Report Messages
     stringstream ss;

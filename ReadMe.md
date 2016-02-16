@@ -3,9 +3,9 @@ ofxOPC
 
 A openFrameworks addon for Open Pixel Control and FadeCandy Server
 
-ofxOPC is an addon for openFrameworks (v0.8.0+) that allows users to communicate to Neopixel LED units through Fadecandy and open pixel control. Draw graphics to the oF window, place the Neopixel grabber on the screen and the addon collects, encodes and sends the pixel data to the Fadecandy.
+ofxOPC is an addon for openFrameworks (v0.9.0+) that allows users to communicate to Neopixel LED units through Fadecandy and open pixel control. Draw graphics to the oF window, place the Neopixel grabber on the screen and the addon collects, encodes and sends the pixel data to the Fadecandy.
 
-![alt text](ofxOPC.gif "gif")
+![alt text](images/ofxOPC.gif "gif")
 
 If you would like to contribute to the addon feel free to fork, hack and mod the code.
 Also drop me a line and let me know how you end up using the addon.
@@ -14,7 +14,7 @@ Also drop me a line and let me know how you end up using the addon.
 
 ## Requirements
 
-- openFrameworks v0.8.0+
+- openFrameworks v0.9.0+
 - ofxNetwork - comes as part of the openFrameworks download
 - Fadecandy unit @scanlime
 - Fadecandy server <a href='https://github.com/scanlime/fadecandy'>https://github.com/scanlime/fadecandy</a> 
@@ -22,16 +22,9 @@ Also drop me a line and let me know how you end up using the addon.
 ## What the addon includes
 
 - The ofxOPC client class
-- So far every (known) Neopixel unit in its own class with its own implementation.
-- 12px Ring
-- 16px Ring
-- 24px Ring
-- 60px Ring
-- Neopixel Strip
-- Neopixel Stick
-- Neopixel Grid 8x8
-- Neopixel Grid 32x32
-- Neopixel Shield 5x8
+- ofxNeoPixelRing
+- ofxNeoPixelStrip
+- ofxNeoPixelGrid
 
 ## Getting Started
 
@@ -45,65 +38,87 @@ Also drop me a line and let me know how you end up using the addon.
 
 - Create an ofxOPC client and a Neopixel unit in your .h file.
 
-<code>
+```
 	ofxOPC opcClient;
-	NeoPixelRing24px ring;
-</code>
+	ofxNeoPixelRing ring;
+```
 
 - Then in the .cpp file setup the LED unit and the OPC client.
 
-<code>
+```
 	opcClient.setup("127.0.0.1", 7890);
-	ring.setupLedRing();
-</code>
+	opcClient.setupStage(500,500);
+	ring.setupLedRing(posX,posY,numLeds,spacing);
+```
 
-- Then grab the image data you want by positioning the grabber over the area. The isConnected method protects the application from crashing if connection is lost to the server.
+- A new feature is the Stage. The stage is where you draw your graphics for the leds. Essentially its an FBO! But it gives you access to the pixel data of the screen. In the update function call:
 
-<code>
-	ring24px.grabImageData(ofPoint(ofGetWidth()/2,ofGetHeight()/2));
+```
+    opcClient.beginStage();
     
-    ring24px.update();
+    opcClient.drawDefaultEffects(effect);
+    //or your own graphics
+    opcClient.endStage();
     
-    if (!opcClient.isConnected())
-    {
-        opcClient.tryConnecting();
-    }
-    else
-    {
-        opcClient.writeChannelOne(ring24px.colorData());
-    }
-</code>
+```
+- Then write your data to the leds
 
-- Draw the resulting data to our visualisor
+````
+if (!opcClient.isConnected()) 
+{
+	opcClient.tryConnecting();
+}
+else
+{
+	opcClient.writeChannelOne(ring24px.colorData());
+}
+````
 
-<code>
+- Draw the resulting data to our visualiser
+
+```
     ofBackground(0);
-   
-    ring24px.drawGrabRegion(true);
-
-    ring24px.drawRing(50, 50);
-</code>
+    opcClient.drawStage(hide);
+    ring12px.drawGrabRegion(hide);
+    ring12px.drawRing(opcClient.getStageWidth()+100, 50);
+```
 
 - Your Leds should start to flash or fade depending on what you put underneath the grabber.
 
 - See the examples for more specific details on each of the Neopixel units.
 
 ## Examples
-- 12px Ring
-- 16px Ring
-- 24px Ring
-- 60px Ring
-- Neopixel Strip
-- Neopixel Stick
-- Neopixel Grid 8x8
-- Neopixel Shield 5x8
-- Neopixel Multiple Strips
-- Neopixel Chained Rings
+- ofxNeoPixelRings
+
+![alt text](images/example_ofxNeoPixelRings.gif "rings.gif")
+
+- ofxNeoPixelStrips
+
+![alt text](images/example_ofxNeoPixelStrips.gif "strips.gif")
+
+- ofxNeoPixelGrids
+
+![alt text](images/example_ofxNeoPixelGrids.gif "grids.gif")
+
+- Big Grid
+
+![alt text](images/example_BigGrid.gif "biggrid.gif")
+
+- Multiple Strips
+
+![alt text](images/example_multiple_ofxNeoPixelStrips.gif "multiplestrips.gif")
+
 - Multiple Neopixel units and Syphon
+
+![alt text](images/example_syphon_input.gif "syphon.gif")
+
+Coming Soon
+
+- Neopixel Chained Rings
 
 ## Important 
 
-- The Fadecandy drives 8 x 64 LEDS = 512 LEDs, thats one DMX Universe. However, each pin only drives 64 LEDs. If you want to connect 1 or more units with 64 LEDs each, separate the data accross two channels. For clarity and less risk of overwriting your data.
+The Fadecandy drives 8 x 64 LEDS = 512 LEDs, thats one DMX Universe. However, each pin only drives 64 LEDs. If you want to connect 1 or more units with 64 LEDs each, separate the data accross two channels. For clarity and less risk of overwriting your data.
 
 <code>
 	opcClient.writeChannelOne(ring60px.colorData());

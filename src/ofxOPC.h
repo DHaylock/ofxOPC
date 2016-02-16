@@ -57,7 +57,7 @@ class ofxOPC  {
         //! Close Fbo
         void endStage();
         //! Draw Fbo
-        void drawStage();
+        void drawStage(bool drawGrid,int gridSpace = 50);
     
         int getStageWidth();
         int getStageHeight();
@@ -114,6 +114,9 @@ class ofxOPC  {
         int _stageWidth;
         int _stageHeight;
         unsigned char * screenPixels;
+    
+        ofImage noiseImage;
+        ofImage colorFadeImage;
     
         // For sending our data packets out to the Server
         ofxTCPClient client;

@@ -23,7 +23,6 @@ void ofApp::update()
     opcClient.beginStage();
     
     // Draw what you want rendered here
-    
     // For now here are some default effects
     opcClient.drawDefaultEffects(effect);
     
@@ -47,13 +46,13 @@ void ofApp::update()
 void ofApp::draw()
 {
     ofBackground(0);
-    opcClient.drawStage();
+    opcClient.drawStage(hide);
     
     // Show the grabber area
     grid32x32.drawGrabRegion(hide);
     
     // Draw the output
-    grid32x32.drawGrid(opcClient.getStageWidth()+50, 50);
+    grid32x32.draw(opcClient.getStageWidth()+50, 50);
     
     // Report Messages
     stringstream ss;

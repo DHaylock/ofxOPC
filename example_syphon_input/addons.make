@@ -1,0 +1,3 @@
+ofxNetwork
+ofxOPC
+ofxSyphon

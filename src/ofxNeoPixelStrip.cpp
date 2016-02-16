@@ -5,8 +5,19 @@
 //
 
 #include "ofxNeoPixelStrip.h"
+
 //--------------------------------------------------------------
-void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int numberOfLeds,int spacing)
+ofxNeoPixelStrip::ofxNeoPixelStrip()
+{
+    
+}
+//--------------------------------------------------------------
+ofxNeoPixelStrip::~ofxNeoPixelStrip()
+{
+    
+}
+//--------------------------------------------------------------
+ofxNeoPixelStrip::ofxNeoPixelStrip(int posx, int posy,int numberOfLeds,int spacing)
 {
     // Setup Positioning
     size = numberOfLeds;
@@ -25,16 +36,23 @@ void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int numberOfLeds,int spa
     }
 }
 //--------------------------------------------------------------
-vector<ofVec2f> ofxNeoPixelStrip::getPixelCoordinates()
+void ofxNeoPixelStrip::setupLedStrip(int posx, int posy,int numberOfLeds,int spacing)
 {
-    colors.clear();
-    return pos;
-}
-//--------------------------------------------------------------
-vector <ofColor> ofxNeoPixelStrip::colorData()
-{
-    // Transmit Data
-    return colors;
+    // Setup Positioning
+    size = numberOfLeds;
+    offsetX = 5;
+    offsetY = 5;
+    _spacing = spacing;
+    
+    actualX = offsetX+posx;
+    actualY = offsetY+posy;
+    
+    for (int i = 0; i < size; i++) {
+        // Generate the position of the grabber points
+        float rx = (offsetX+posx);
+        float ry = (offsetY+posy) + (i*spacing);
+        pos.push_back(ofVec2f(rx,ry));
+    }
 }
 //--------------------------------------------------------------
 void ofxNeoPixelStrip::drawGrabRegion(bool hideArea)
@@ -83,7 +101,7 @@ void ofxNeoPixelStrip::ledStrip()
     }
 }
 //--------------------------------------------------------------
-void ofxNeoPixelStrip::drawStrip(int x, int y)
+void ofxNeoPixelStrip::draw(int x, int y)
 {
     // Where to draw the Strip!
     ofPushMatrix();

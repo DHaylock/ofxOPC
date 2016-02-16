@@ -10,7 +10,7 @@ void ofApp::setup()
     opcClient.setup("127.0.0.1", 7890);
     
     // You define the stage size and draw into the stage
-    opcClient.setupStage(480, 480);
+    opcClient.setupStage(500, 500);
     
     grid5x7.setupLedGrid(5, 7, 10, 10, 8);
     grid8x8.setupLedGrid(8, 8, 10+(7*8), 10, 8);
@@ -53,7 +53,7 @@ void ofApp::update()
 void ofApp::draw()
 {
     ofBackground(0);
-    opcClient.drawStage();
+    opcClient.drawStage(hide);
     
     // Show the grabber area
     grid5x7.drawGrabRegion(hide);
@@ -61,9 +61,9 @@ void ofApp::draw()
     grid32x32.drawGrabRegion(hide);
     
     // Draw the output
-    grid5x7.drawGrid(opcClient.getStageWidth()+100, 50);
-    grid8x8.drawGrid(opcClient.getStageWidth()+100, 125);
-    grid32x32.drawGrid(opcClient.getStageWidth()+100, 200);
+    grid5x7.draw(opcClient.getStageWidth()+25, 25);
+    grid8x8.draw(opcClient.getStageWidth()+25, 100);
+    grid32x32.draw(opcClient.getStageWidth()+25, 175);
     
     // Report Messages
     stringstream ss;
