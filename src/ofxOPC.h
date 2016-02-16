@@ -117,7 +117,7 @@ class ofxOPC  {
     
         ofImage noiseImage;
         ofImage colorFadeImage;
-    
+        deque<ofColor> gloriousColor;
         // For sending our data packets out to the Server
         ofxTCPClient client;
     

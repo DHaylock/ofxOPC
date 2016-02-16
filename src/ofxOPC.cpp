@@ -56,9 +56,8 @@ void ofxOPC::setupStage(int width,int height)
         }
     }
     noiseImage.update();
-    
-    for(int x = 0; x < colorFadeImage.getWidth(); x++) {
-        for(int y = 0; y < colorFadeImage.getHeight(); y++) {
+    for(int y = 0; y < colorFadeImage.getHeight(); y++) {
+        for(int x = 0; x < colorFadeImage.getWidth(); x++) {
             ofColor initialColor;
             int value = 255*(float)x/colorFadeImage.getWidth();
             initialColor.setHsb(value, 200, 200);
@@ -312,16 +311,6 @@ void ofxOPC::drawDefaultEffects(int mode)
             break;
         case 9:
         {
-            for(int x = 0; x < colorFadeImage.getWidth(); x++) {
-                for(int y = 0; y < colorFadeImage.getHeight(); y++) {
-                    ofColor initialColor;
-//                    int value = 255*(float)(128+ 128 + sin(ofGetElapsedTimef()*0.8))/colorFadeImage.getWidth();
-                    float value = (float)x*fmodf(ofGetElapsedTimef()*10,255)/colorFadeImage.getWidth();
-                    initialColor.setHsb(value, 200, 200);
-                    colorFadeImage.setColor(x,y, initialColor);
-                }
-            }
-            colorFadeImage.update();
             ofPushMatrix();
             ofScale(4, 4);
             ofSetColor(255, 255, 255);
