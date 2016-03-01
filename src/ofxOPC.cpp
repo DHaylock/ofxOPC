@@ -311,14 +311,68 @@ void ofxOPC::drawDefaultEffects(int mode)
             break;
         case 9:
         {
+//            ofPushMatrix();
+//            ofScale(4, 4);
+//            ofSetColor(255, 255, 255);
+//            colorFadeImage.draw(0, 0);
+//            ofPopMatrix();
+        }
+            break;
+        case 10:
+        {
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
             ofPushMatrix();
-            ofScale(4, 4);
-            ofSetColor(255, 255, 255);
-            colorFadeImage.draw(0, 0);
+            int x = (int)(getStageWidth()/2 + getStageWidth()/2 * sin(ofGetElapsedTimef()));
+            int x1 = (int)(getStageWidth()/2 + getStageWidth()/2 * sin(ofGetElapsedTimef()*2));
+            int x2 = (int)(getStageWidth()/2 + getStageWidth()/2 * sin(ofGetElapsedTimef()*4));
+            int w = (int)(35 + 30 * sin(ofGetElapsedTimef()*0.6));
+            ofDrawRectangle(x, getStageCenterY()-_stageHeight, w, _stageHeight*2);
+            ofDrawRectangle(x1, getStageCenterY()-_stageHeight, w, _stageHeight*2);
+            ofDrawRectangle(x2, getStageCenterY()-_stageHeight, w, _stageHeight*2);
             ofPopMatrix();
         }
             break;
-            
+        case 11:
+        {
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofPushMatrix();
+            int y = (int)(getStageHeight()/2 + getStageHeight()/2 * sin(ofGetElapsedTimef()));
+            int y1 = (int)(getStageHeight()/2 + getStageHeight()/2 * sin(ofGetElapsedTimef()*2));
+            int y2 = (int)(getStageHeight()/2 + getStageHeight()/2 * sin(ofGetElapsedTimef()*4));
+            int h = (int)(35 + 30 * sin(ofGetElapsedTimef()*0.6));
+            ofDrawRectangle(getStageCenterX()-(_stageWidth/2), y, _stageWidth, h);
+            ofDrawRectangle(getStageCenterX()-(_stageWidth/2), y1, _stageWidth, h);
+            ofDrawRectangle(getStageCenterX()-(_stageWidth/2), y2, _stageWidth, h);
+            ofPopMatrix();
+        }
+            break;
+        case 12:
+        {
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofPushMatrix();
+            int x = (int)(getStageWidth()/2 + getStageWidth()/2 * sin(ofGetElapsedTimef()));
+            int w = (int)(_stageWidth/2 + _stageWidth/2 * sin(ofGetElapsedTimef()*0.6));
+            ofDrawRectangle(0, getStageCenterY()-_stageHeight, w, _stageHeight*2);
+            ofPopMatrix();
+        }
+            break;
+        case 13:
+        {
+            float hue = fmodf(ofGetElapsedTimef()*10,255);
+            ofColor c = ofColor::fromHsb(hue, 255, 255);
+            ofSetColor(c);
+            ofPushMatrix();
+            int h = (int)(_stageHeight/2 + _stageHeight/2 * sin(ofGetElapsedTimef()*0.6));
+            ofDrawRectangle(0, 0, _stageWidth, h);
+            ofPopMatrix();
+        }
+            break;
         default:
             break;
     }
