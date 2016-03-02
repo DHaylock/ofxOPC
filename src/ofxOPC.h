@@ -44,7 +44,9 @@ public:
         // If the particle is still alive, draw it
         if (intensity >= 1) {
             ofEnableBlendMode(OF_BLENDMODE_ADD);
-            ofSetColor(ofColor(hue, 50, intensity));
+            ofColor c;
+            c.setHsb(hue, 200, intensity);
+            ofSetColor(c);
             ringImage.draw(x - size/2, y - size/2, size,size);
             ofDisableBlendMode();
         }
