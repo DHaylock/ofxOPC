@@ -15,6 +15,7 @@ void ofxOPC::setup(string address, int port)
     moveCounter = 0;
     labels.load( "../../../resources/Verdana.ttf", 13);
     dot.load("../../../resources/dot.png");
+    ringImage.load("../../../resources/ring.png");
     connectionAttempts = 0;
     tryReconnecting = false;
     startTime = ofGetElapsedTimeMillis();  // get the start time
@@ -44,6 +45,7 @@ void ofxOPC::setup(string address, int port)
 //--------------------------------------------------------------
 void ofxOPC::setupStage(int width,int height)
 {
+    
     _stageWidth = width;
     _stageHeight = height;
     noiseImage.allocate(_stageWidth/4, _stageHeight/4, OF_IMAGE_GRAYSCALE);
@@ -311,11 +313,18 @@ void ofxOPC::drawDefaultEffects(int mode)
             break;
         case 9:
         {
-//            ofPushMatrix();
-//            ofScale(4, 4);
-//            ofSetColor(255, 255, 255);
-//            colorFadeImage.draw(0, 0);
-//            ofPopMatrix();
+            float prevX = smoothX;
+            float prevY = smoothY;
+            smoothX += (ofGetMouseX() - smoothX) * 0.1;
+            smoothY += (ofGetMouseY() - smoothY) * 0.1;
+            
+            // At every frame, randomly respawn one ring
+            rings[int(ofRandom(100))].respawn(getStageHeight(),prevX, prevY, smoothX, smoothY);
+            
+            // Give each ring a chance to redraw and update
+            for (int i = 0; i < 100; i++) {
+                rings[i].draw(ringImage);
+            }
         }
             break;
         case 10:
