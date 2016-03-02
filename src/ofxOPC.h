@@ -25,9 +25,10 @@ public:
         
         // Intensity is just the distance between mouse points
         intensity = ofDist(x1, y1, x2, y2);
+        intensity = intensity * 2;
         
         // Hue is the angle of mouse movement, scaled from -PI..PI to 0..100
-        hue = ofMap(atan2(y2 - y1, x2 - x1), -PI, PI, 0, 100);
+        hue = ofMap(atan2(y2 - y1, x2 - x1), -PI, PI, 0, 255);
         
         // Default size is based on the screen size
         size = _stageHeight * 0.1;
