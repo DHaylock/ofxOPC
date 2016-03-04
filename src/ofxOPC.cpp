@@ -45,11 +45,12 @@ void ofxOPC::setup(string address, int port)
 //--------------------------------------------------------------
 void ofxOPC::setupStage(int width,int height)
 {
-    
     _stageWidth = width;
     _stageHeight = height;
     noiseImage.allocate(_stageWidth/4, _stageHeight/4, OF_IMAGE_GRAYSCALE);
     colorFadeImage.allocate(_stageWidth/4, _stageHeight/4, OF_IMAGE_COLOR_ALPHA);
+ 
+    ofSetCircleResolution(200);
     
     for(int x = 0; x < noiseImage.getWidth(); x++) {
         for(int y = 0; y < noiseImage.getHeight(); y++) {
@@ -57,6 +58,8 @@ void ofxOPC::setupStage(int width,int height)
             noiseImage.setColor((int)(x+y*noiseImage.getWidth()), initialColor);
         }
     }
+    
+    pos_y = 0;
     noiseImage.update();
     for(int y = 0; y < colorFadeImage.getHeight(); y++) {
         for(int x = 0; x < colorFadeImage.getWidth(); x++) {
@@ -380,6 +383,27 @@ void ofxOPC::drawDefaultEffects(int mode)
             int h = (int)(_stageHeight/2 + _stageHeight/2 * sin(ofGetElapsedTimef()*0.6));
             ofDrawRectangle(0, 0, _stageWidth, h);
             ofPopMatrix();
+        }
+            break;
+        case 14:
+        {
+
+            ofPushMatrix();
+            ofPushStyle();
+            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            int linesInterval = getStageHeight()/2;
+            int step = 255/linesInterval;
+            int indents = getStageHeight()/linesInterval;
+            pos_y = int(ofGetElapsedTimef()*32);
+            for (int y = 0; y < getStageHeight(); y++) {
+                
+                ofColor c = ofColor::fromHsb((pos_y+y*step)%255, 255, 255);
+                ofSetColor(c);
+                ofDrawRectangle(0, y, _stageWidth, y);
+            }
+            ofDisableBlendMode();
+            ofPopMatrix();
+            ofPopStyle();
         }
             break;
         default:

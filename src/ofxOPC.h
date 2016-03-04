@@ -149,6 +149,7 @@ class ofxOPC  {
         string _address;
         int _port;
         int _w,_h;
+        int pos_y;
 
     private:
         ofTrueTypeFont labels;
