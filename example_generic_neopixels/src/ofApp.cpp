@@ -19,7 +19,7 @@ void ofApp::setup()
     neoPixelObjects.insert( std::pair<int, ofxNeoPixelObject*>(2,new ofxNeoPixelRing(150, opcClient.getStageCenterY(), 24, 25)) );
     neoPixelObjects.insert( std::pair<int, ofxNeoPixelObject*>(3,new ofxNeoPixelRing(opcClient.getStageWidth()-150, opcClient.getStageCenterY(), 24, 25)) );
     neoPixelObjects.insert( std::pair<int, ofxNeoPixelObject*>(4,new ofxNeoPixelRing(opcClient.getStageCenterX(), opcClient.getStageCenterY(), 60, 50)) );
-    neoPixelObjects.insert( std::pair<int, ofxNeoPixelObject*>(5,new ofxNeoPixelGrid(8, 8, opcClient.getStageCenterX()-(4*25)+(25/2), opcClient.getStageCenterY()-(4*25)+(25/2), 25)) );
+    neoPixelObjects.insert( std::pair<int, ofxNeoPixelObject*>(5,new ofxNeoPixelGrid(8, 8, opcClient.getStageCenterX()-(4*25)+(25/2), opcClient.getStageCenterY()-(4*25)+(25/2), 25)));
 }
 //--------------------------------------------------------------
 void ofApp::update()
