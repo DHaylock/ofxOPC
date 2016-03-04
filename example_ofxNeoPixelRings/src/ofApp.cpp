@@ -14,9 +14,11 @@ void ofApp::setup()
     
     // Setup the rings
     ring12px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 12, 12);
-    ring16px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 16, 28);
-    ring24px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 24, 48);
-    ring60px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 60, 70);
+    jewel.setupLedJewel(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 28);
+    ring16px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 16, 48);
+    ring24px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 24, 70);
+    ring60px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 60, 100);
+
 }
 //--------------------------------------------------------------
 void ofApp::update()
@@ -37,6 +39,7 @@ void ofApp::update()
     opcClient.getStagePixels(ring16px.getPixelCoordinates(), ring16px.colors);
     opcClient.getStagePixels(ring24px.getPixelCoordinates(), ring24px.colors);
     opcClient.getStagePixels(ring60px.getPixelCoordinates(), ring60px.colors);
+    opcClient.getStagePixels(jewel.getPixelCoordinates(), jewel.colors);
     
     // If the client is not connected do not try and send information
     if (!opcClient.isConnected()) {
@@ -49,6 +52,7 @@ void ofApp::update()
         opcClient.writeChannelTwo(ring16px.colorData());
         opcClient.writeChannelThree(ring24px.colorData());
         opcClient.writeChannelFour(ring60px.colorData());
+        opcClient.writeChannelFive(jewel.colorData());
     }
     
     opcClient.update();
@@ -64,12 +68,16 @@ void ofApp::draw()
     ring16px.drawGrabRegion(hide);
     ring24px.drawGrabRegion(hide);
     ring60px.drawGrabRegion(hide);
+    jewel.drawGrabRegion(hide);
     
+    int x = opcClient.getStageWidth()+150;
+    int y = 200;
     // Draw the output
-    ring12px.draw(opcClient.getStageWidth()+100, 50);
-    ring16px.draw(opcClient.getStageWidth()+100, 125);
-    ring24px.draw(opcClient.getStageWidth()+100, 250);
-    ring60px.draw(opcClient.getStageWidth()+100, 425);
+    ring60px.draw(x,y);
+    ring24px.draw(x,y);
+    ring16px.draw(x,y);
+    jewel.draw(x,y);
+    ring12px.draw(x,y);
     
     // Report Messages
     stringstream ss;

@@ -19,6 +19,8 @@ class ofApp : public ofBaseApp{
         ofxNeoPixelRing ring24px;
         ofxNeoPixelRing ring60px;
     
+        ofxNeoPixelJewel jewel;
+    
         int effect;
         bool hide;
 };
