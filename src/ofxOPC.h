@@ -147,6 +147,7 @@ class ofxOPC  {
         void writeChannelEight(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
 
         string _address;
+        vector <string> error;
         int _port;
         int _w,_h;
         int pos_y;
