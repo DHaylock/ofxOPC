@@ -25,6 +25,7 @@ Also drop me a line and let me know how you end up using the addon.
 - ofxNeoPixelRing
 - ofxNeoPixelStrip
 - ofxNeoPixelGrid
+- ofxNeoPixelJewel
 
 ## Getting Started
 
