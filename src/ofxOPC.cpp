@@ -141,6 +141,19 @@ void ofxOPC::getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData)
     }
 }
 //--------------------------------------------------------------
+vector<ofColor> ofxOPC::getChainedNeopixels(vector<vector<ofColor> > colors)
+{
+    vector<ofColor> returnData;
+    for (int i = 0; i < colors.size(); i++) {
+        for (int e = 0 ; e < colors[i].size(); e++) {
+            returnData.push_back(colors[i][e]);
+        }
+
+    }
+    error.push_back(ofToString(returnData.size()));
+    return returnData;
+}
+//--------------------------------------------------------------
 void ofxOPC::drawStage(bool drawGrid,int gridSpace)
 {
     ofPushMatrix();

@@ -135,7 +135,11 @@ class ofxOPC  {
         void writeChannelSeven(vector <ofColor> pix);
         void writeChannelEight(vector <ofColor> pix);
     
-        //Chaining TODO:
+    
+        // Function to Chain the data together
+        vector <ofColor> getChainedNeopixels(vector<vector<ofColor> > colors);
+    
+        // Chain Three Units
         void writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
         void writeChannelOne(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
         void writeChannelTwo(vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);
