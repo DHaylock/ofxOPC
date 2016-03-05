@@ -14,7 +14,7 @@ public:
     void exit();
     
     ofxOPC opcClient;
-    map<int,ofxNeoPixelObject*> rings;
+    map<int,ofxNeoPixelObject*> neoPixels;
     vector<ofVec2f> ringOrigins;
     
     int effect;

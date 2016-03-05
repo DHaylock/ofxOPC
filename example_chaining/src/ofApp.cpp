@@ -21,7 +21,7 @@ void ofApp::setup()
     
     // Setup the rings
     for (int i = 0; i < ringOrigins.size(); i++) {
-        rings.insert(std::pair<int, ofxNeoPixelObject*>(i,new ofxNeoPixelRing(ringOrigins[i].x,ringOrigins[i].y, 12, 20)));
+        neoPixels.insert(std::pair<int, ofxNeoPixelObject*>(i,new ofxNeoPixelRing(ringOrigins[i].x,ringOrigins[i].y, 12, 20)));
     }
 }
 //--------------------------------------------------------------
@@ -40,8 +40,8 @@ void ofApp::update()
     opcClient.endStage();
     
     // New Get Method
-    for (int i = 0; i < rings.size(); i++) {
-        opcClient.getStagePixels(rings.at(i)->getPixelCoordinates(), rings.at(i)->colors);
+    for (int i = 0; i < neoPixels.size(); i++) {
+        opcClient.getStagePixels(neoPixels.at(i)->getPixelCoordinates(), neoPixels.at(i)->colors);
     }
     
     // If the client is not connected do not try and send information
@@ -54,13 +54,13 @@ void ofApp::update()
             vector <vector<ofColor> > bank;
             if(i == 0) {
                 for (int unit = 0; unit < 4; unit++) {
-                    bank.push_back(rings[unit]->colorData());
+                    bank.push_back(neoPixels[unit]->colorData());
                 }
                 opcClient.writeChannel(i,opcClient.getChainedNeopixels(bank));
             }
             else {
                 for (int unit = (i*5); unit < (i*5)+4; unit++) {
-                    bank.push_back(rings[unit]->colorData());
+                    bank.push_back(neoPixels[unit]->colorData());
                 }
                 opcClient.writeChannel(i,opcClient.getChainedNeopixels(bank));
             }
@@ -74,9 +74,9 @@ void ofApp::draw()
     opcClient.drawStage(hide);
     
     // Show the grabber area
-    for (int i = 0; i < rings.size(); i++) {
-        rings.at(i)->drawGrabRegion(hide);
-        rings.at(i)->draw(opcClient.getStageWidth()+ringOrigins[i].x+25,ringOrigins[i].y);
+    for (int i = 0; i < neoPixels.size(); i++) {
+        neoPixels.at(i)->drawGrabRegion(hide);
+        neoPixels.at(i)->draw(opcClient.getStageWidth()+ringOrigins[i].x+25,ringOrigins[i].y);
     }
     
     // Report Messages
