@@ -50,49 +50,22 @@ void ofApp::update()
         opcClient.tryConnecting();
     }
     else {
-
-        vector<ofColor> bankOne;
-        for (int unit = 0; unit < 4; unit++) {
-            for (int i = 0; i < rings[unit]->colorData().size(); i++) {
-                bankOne.push_back(rings[unit]->colorData()[i]);
+        for (int i = 0; i < 5; i++) {
+            vector <vector<ofColor> > bank;
+            if(i == 0) {
+                for (int unit = 0; unit < 4; unit++) {
+                    bank.push_back(rings[unit]->colorData());
+                }
+                opcClient.writeChannel(i,opcClient.getChainedNeopixels(bank));
             }
-        }
-        
-        vector<ofColor> bankTwo;
-        for (int unit = 5; unit < 9; unit++) {
-            for (int i = 0; i < rings[unit]->colorData().size(); i++) {
-                bankTwo.push_back(rings[unit]->colorData()[i]);
+            else {
+                for (int unit = (i*5); unit < (i*5)+4; unit++) {
+                    bank.push_back(rings[unit]->colorData());
+                }
+                opcClient.writeChannel(i,opcClient.getChainedNeopixels(bank));
             }
-        }
-        
-        vector<ofColor> bankThree;
-        for (int unit = 10; unit < 14; unit++) {
-            for (int i = 0; i < rings[unit]->colorData().size(); i++) {
-                bankThree.push_back(rings[unit]->colorData()[i]);
-            }
-        }
-        
-        vector<ofColor> bankFour;
-        for (int unit = 15; unit < 19; unit++) {
-            for (int i = 0; i < rings[unit]->colorData().size(); i++) {
-                bankFour.push_back(rings[unit]->colorData()[i]);
-            }
-        }
-        
-        vector<ofColor> bankFive;
-        for (int unit = 20; unit < 24; unit++) {
-            for (int i = 0; i < rings[unit]->colorData().size(); i++) {
-                bankFive.push_back(rings[unit]->colorData()[i]);
-            }
-        }
-    
-        opcClient.writeChannelOne(bankOne);
-        opcClient.writeChannelTwo(bankTwo);
-        opcClient.writeChannelThree(bankThree);
-        opcClient.writeChannelFour(bankFour);
-        opcClient.writeChannelFive(bankFive);
+        }        
     }
-
 }
 //--------------------------------------------------------------
 void ofApp::draw()
