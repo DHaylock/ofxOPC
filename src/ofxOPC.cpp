@@ -270,7 +270,6 @@ void ofxOPC::writeChannel(uint8_t channel, vector<ofColor>pix)
         }
     }
     
-    
     // Send the data
     client.sendRawBytes((char *)(OPC_SPC_packet), OPC_SPC_packet_length);
 }
@@ -281,12 +280,10 @@ void ofxOPC::writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor
     pix1.insert(pix1.end(), pix3.begin(),pix3.end());
     
     // Bail early if there's no pixel data
-    if(pix1.empty() && pix2.empty() && pix3.empty())
-    {
+    if(pix1.empty() && pix2.empty() && pix3.empty()) {
         return;
         
     } else if(channel < 1 || channel > 8) {
-        // TODO: Emit error
         return;
     }
     
@@ -430,7 +427,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopStyle();
         }
             break;
-            
+        // Rotating Dots
         case 1:
         {
             // Like the processing example draw dot images and rotate
@@ -457,7 +454,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
-            
+        // Block Circle
         case 2:
         {
             // Changes the color of a Circle
@@ -469,7 +466,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopStyle();
         }
             break;
-            
+        // Fade to White
         case 3:
         {
             // Fade to full brightness then to zero
@@ -479,7 +476,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopStyle();
         }
             break;
-            
+        // Rotating Circle
         case 4:
         {
             ofEnableBlendMode(OF_BLENDMODE_ADD);
@@ -505,17 +502,20 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofDisableBlendMode();
         }
             break;
-            
+        // Dot Image
         case 5:
         {
+            int w = 300;
+            int h = 300;
             ofPushStyle();
             float hue = fmodf(ofGetElapsedTimef()*10,255);
             ofColor c = ofColor::fromHsb(hue, 255, 255);
             ofSetColor(c);
-            dot.draw(ofGetMouseX()-75, ofGetMouseY()-75, 150,150);
+            dot.draw(ofGetMouseX()-(w*0.5), ofGetMouseY()-(h*0.5), w,h);
             ofPopStyle();
         }
             break;
+        // Rotating Line
         case 6:
         {
             float rotationAmount = ofGetElapsedTimeMillis()/5;
@@ -533,6 +533,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
+        // Moving Text
         case 7:
         {
             if (moveCounter < -labels.getStringBoundingBox("Hello World", 0, 0).width) {
@@ -552,6 +553,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
+        // Noise Image
         case 8:
         {
             for(int x = 0; x < noiseImage.getWidth(); x++) {
@@ -568,6 +570,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
+        // Wavefront
         case 9:
         {
             float prevX = smoothX;
@@ -584,6 +587,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             }
         }
             break;
+        // Color changing moving lines (horizontal)
         case 10:
         {
             float hue = fmodf(ofGetElapsedTimef()*10,255);
@@ -600,6 +604,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
+        // Color changing moving lines (vertical)
         case 11:
         {
             float hue = fmodf(ofGetElapsedTimef()*10,255);
@@ -616,6 +621,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
+        // Horizontal Filling Box
         case 12:
         {
             float hue = fmodf(ofGetElapsedTimef()*10,255);
@@ -628,6 +634,7 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
+        // Vertical Filling Box
         case 13:
         {
             float hue = fmodf(ofGetElapsedTimef()*10,255);
@@ -639,9 +646,9 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofPopMatrix();
         }
             break;
+        // Color Scroll
         case 14:
         {
-            
             ofPushMatrix();
             ofPushStyle();
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
@@ -658,6 +665,24 @@ void ofxOPC::drawDefaultEffects(int mode)
             ofDisableBlendMode();
             ofPopMatrix();
             ofPopStyle();
+        }
+            break;
+        // Strobe
+        case 15:
+        {
+            ofPushMatrix();
+            ofPushStyle();
+            
+            int probability = 100-10;
+            if (ofRandom(0,100) > probability) {
+                ofSetColor(ofColor::white);
+            }
+            else {
+                ofSetColor(ofColor::black);
+            }
+            ofDrawRectangle(0, 0, getStageWidth(), getStageHeight());
+            ofPopStyle();
+            ofPopMatrix();
         }
             break;
         default:
