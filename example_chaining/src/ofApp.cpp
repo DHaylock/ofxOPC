@@ -12,6 +12,8 @@ void ofApp::setup()
     // You define the stage size and draw into the stage
     opcClient.setupStage(250, 250);
     
+    defaultEffects.setup(opcClient.getStageCenterX(), opcClient.getStageCenterY(), opcClient.getStageWidth(), opcClient.getStageHeight());
+    
     // Setup the Grabbing positions
     for (int y = 0; y < 5; y++) {
         for (int x = 0; x < 5; x++) {
@@ -35,7 +37,7 @@ void ofApp::update()
     
     // Draw what you want rendered here
     // For now here are some default effects
-    opcClient.drawDefaultEffects(effect);
+    defaultEffects.draw(effect);
     
     opcClient.endStage();
     

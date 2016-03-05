@@ -17,6 +17,8 @@ class ofApp : public ofBaseApp{
         ofxNeoPixelGrid grid5x7;
         ofxNeoPixelGrid grid32x32;
     
+        Effects defaultEffects;
+    
         int effect;
         bool hide;
 };

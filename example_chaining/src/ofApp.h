@@ -17,6 +17,8 @@ public:
     map<int,ofxNeoPixelObject*> neoPixels;
     vector<ofVec2f> ringOrigins;
     
+    Effects defaultEffects;
+    
     int effect;
     bool hide;
 };

@@ -14,6 +14,8 @@ void ofApp::setup()
     // You define the stage size and draw into the stage
     opcClient.setupStage(500, 500);
     
+    defaultEffects.setup(opcClient.getStageCenterX(), opcClient.getStageCenterY(), opcClient.getStageWidth(), opcClient.getStageHeight());
+    
     //Construct the objects
     leftStrip.setupLedStrip(50, opcClient.getStageCenterY()-(30*5), 60, 5);
     rightStrip.setupLedStrip(opcClient.getStageWidth()-50, opcClient.getStageCenterY()-(30*5), 60, 5);
@@ -21,8 +23,6 @@ void ofApp::setup()
     rightRing.setupLedRing(opcClient.getStageWidth()-150, opcClient.getStageCenterY(), 24, 25);
     centerRing.setupLedRing(opcClient.getStageCenterX(), opcClient.getStageCenterY(), 60, 50);
     centerGrid.setupLedGrid(8, 8, opcClient.getStageCenterX()-(4*25)+(25/2), opcClient.getStageCenterY()-(4*25)+(25/2), 25);
-    
-    
     
     // Setup Syphon
     dir.setup();
@@ -38,6 +38,8 @@ void ofApp::update()
 {
     ofSetWindowTitle("example_syphon_input");
     
+    opcClient.update();
+    
     // Now Draw the effects to the stage
     opcClient.beginStage();
     if (syphonActive) {
@@ -47,7 +49,7 @@ void ofApp::update()
             syphonClient.draw(0, 0);
     }
     else {
-        opcClient.drawDefaultEffects(effect);
+        defaultEffects.draw(effect);
     }
 
     opcClient.endStage();
@@ -78,8 +80,6 @@ void ofApp::update()
         opcClient.writeChannelFive(rightStrip.colorData());
         opcClient.writeChannelSix(centerGrid.colorData());
     }
-    
-    opcClient.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()

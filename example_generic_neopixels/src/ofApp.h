@@ -15,6 +15,7 @@ class ofApp : public ofBaseApp{
         void exit();
     
         ofxOPC opcClient;
+        Effects defaultEffects;
         map<int, ofxNeoPixelObject*> neoPixelObjects;
     
         int effect;

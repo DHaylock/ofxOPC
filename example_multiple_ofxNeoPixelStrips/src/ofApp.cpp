@@ -12,6 +12,8 @@ void ofApp::setup()
     // You define the stage size and draw into the stage
     opcClient.setupStage(500, 500);
     
+    defaultEffects.setup(opcClient.getStageCenterX(), opcClient.getStageCenterY(), opcClient.getStageWidth(), opcClient.getStageHeight());
+    
     for (int x = 0; x < 8; x++) {
         strips.push_back(ofxNeoPixelStrip(((opcClient.getStageWidth()/8)/2)+(x*(opcClient.getStageWidth()/8)), opcClient.getStageCenterY()-(30*5), 60, 5));
     }
@@ -22,12 +24,14 @@ void ofApp::update()
 {
     ofSetWindowTitle("example_ofxNeoPixelStrips");
     
+    opcClient.update();
+    
     // Now Draw the effects to the stage
     opcClient.beginStage();
     
     // Draw what you want rendered here
     // For now here are some default effects
-    opcClient.drawDefaultEffects(effect);
+    defaultEffects.draw(effect);
     
     opcClient.endStage();
     
@@ -47,8 +51,6 @@ void ofApp::update()
             opcClient.writeChannel(i, strips[i].colorData());
         }
     }
-    
-    opcClient.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()

@@ -18,8 +18,9 @@ class ofApp : public ofBaseApp{
         ofxNeoPixelRing ring16px;
         ofxNeoPixelRing ring24px;
         ofxNeoPixelRing ring60px;
-    
         ofxNeoPixelJewel jewel;
+    
+        Effects defaultEffects;
     
         int effect;
         bool hide;

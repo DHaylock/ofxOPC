@@ -12,6 +12,8 @@ void ofApp::setup()
     // You define the stage size and draw into the stage
     opcClient.setupStage(320, 320);
     
+    defaultEffects.setup(opcClient.getStageCenterX(), opcClient.getStageCenterY(), opcClient.getStageWidth(), opcClient.getStageHeight());
+    
     grid32x32.setupLedGrid(32, 32, 1, 1, 10);
 }
 //--------------------------------------------------------------
@@ -19,12 +21,14 @@ void ofApp::update()
 {
     ofSetWindowTitle("example_BigGrid");
     
+    opcClient.update();
+    
     // Now Draw the effects to the stage
     opcClient.beginStage();
     
     // Draw what you want rendered here
     // For now here are some default effects
-    opcClient.drawDefaultEffects(effect);
+    defaultEffects.draw(effect);
     
     opcClient.endStage();
     
@@ -40,7 +44,6 @@ void ofApp::update()
         // Write out the first set of data
         // To do!
     }
-    opcClient.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()

@@ -13,6 +13,8 @@ void ofApp::setup()
     // You define the stage size and draw into the stage
     opcClient.setupStage(500, 500);
     
+    defaultEffects.setup(opcClient.getStageCenterX(), opcClient.getStageCenterY(), opcClient.getStageWidth(), opcClient.getStageHeight());
+    
     // Construct the objects
     neoPixelObjects.insert( std::pair<int, ofxNeoPixelObject*>(0,new ofxNeoPixelStrip(50, opcClient.getStageCenterY()-(30*5), 60, 5)) );
     neoPixelObjects.insert( std::pair<int, ofxNeoPixelObject*>(1,new ofxNeoPixelStrip(opcClient.getStageWidth()-50, opcClient.getStageCenterY()-(30*5), 60, 5)) );
@@ -26,9 +28,11 @@ void ofApp::update()
 {
     ofSetWindowTitle("example_generic_neopixels");
     
+    opcClient.update();
+    
     // Now Draw the effects to the stage
     opcClient.beginStage();
-    opcClient.drawDefaultEffects(effect);
+    defaultEffects.draw(effect);
     opcClient.endStage();
     
     // Get Objects
@@ -47,8 +51,6 @@ void ofApp::update()
             opcClient.writeChannel(i, neoPixelObjects[i]->colorData());
         }
     }
-    
-    opcClient.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()

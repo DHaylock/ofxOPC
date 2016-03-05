@@ -12,6 +12,8 @@ void ofApp::setup()
     // You define the stage size and draw into the stage
     opcClient.setupStage(500, 500);
     
+    defaultEffects.setup(opcClient.getStageCenterX(), opcClient.getStageCenterY(), opcClient.getStageWidth(), opcClient.getStageHeight());
+    
     // Setup the rings
     ring12px.setupLedRing(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 12, 12);
     jewel.setupLedJewel(opcClient.getStageCenterX(),opcClient.getStageCenterY(), 28);
@@ -24,13 +26,14 @@ void ofApp::setup()
 void ofApp::update()
 {
     ofSetWindowTitle("example_ofxNeoPixelRings");
+    opcClient.update();
     
     // Now Draw the effects to the stage
     opcClient.beginStage();
     
     // Draw what you want rendered here
     // For now here are some default effects
-    opcClient.drawDefaultEffects(effect);
+    defaultEffects.draw(effect);
     
     opcClient.endStage();
     
@@ -55,7 +58,7 @@ void ofApp::update()
         opcClient.writeChannelFive(jewel.colorData());
     }
     
-    opcClient.update();
+
 }
 //--------------------------------------------------------------
 void ofApp::draw()

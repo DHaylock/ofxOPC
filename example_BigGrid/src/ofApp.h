@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOPC.h"
+#include "Effects.h"
 
 class ofApp : public ofBaseApp{
 
@@ -15,6 +16,7 @@ class ofApp : public ofBaseApp{
         void exit();
         
         ofxOPC opcClient;
+        Effects defaultEffects;
         ofxNeoPixelGrid grid32x32;
         
         int effect;

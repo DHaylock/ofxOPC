@@ -65,6 +65,7 @@
 		3C98599F512D19BB57939D95 /* ofxNeoPixelGrid.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxNeoPixelGrid.h; path = ../../../addons/ofxOPC/src/ofxNeoPixelGrid.h; sourceTree = SOURCE_ROOT; };
 		3EFD920E7CFE6B6B1066E3BA /* ofxNeoPixelRing.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxNeoPixelRing.cpp; path = ../../../addons/ofxOPC/src/ofxNeoPixelRing.cpp; sourceTree = SOURCE_ROOT; };
 		5E31517C6C120F6DEBCCB9CC /* ofxNeoPixelRing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxNeoPixelRing.h; path = ../../../addons/ofxOPC/src/ofxNeoPixelRing.h; sourceTree = SOURCE_ROOT; };
+		63E65F661C8B56FF00C2E22A /* Effects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Effects.h; path = ../src/Effects.h; sourceTree = "<group>"; };
 		BF88F02779DD820913ACEA06 /* ofxTCPClient.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPClient.cpp; path = ../../../addons/ofxNetwork/src/ofxTCPClient.cpp; sourceTree = SOURCE_ROOT; };
 		C8C9B823D7872F9CBF03A813 /* ofxTCPClient.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxTCPClient.h; path = ../../../addons/ofxNetwork/src/ofxTCPClient.h; sourceTree = SOURCE_ROOT; };
 		C8E2BE30E0CBB25AA8972B43 /* ofxNeoPixels.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxNeoPixels.h; path = ../../../addons/ofxOPC/src/ofxNeoPixels.h; sourceTree = SOURCE_ROOT; };
@@ -141,6 +142,7 @@
 				FDDA157BEF92629BF3E6A80D /* ofxNeoPixelStrip.h */,
 				2C24C81D88B85EC85495F7CA /* ofxOPC.cpp */,
 				33F3EFB014D3C27B5DEAB7C8 /* ofxOPC.h */,
+				63E65F661C8B56FF00C2E22A /* Effects.h */,
 			);
 			name = src;
 			sourceTree = "<group>";

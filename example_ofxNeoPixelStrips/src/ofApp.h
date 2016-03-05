@@ -19,6 +19,8 @@ class ofApp : public ofBaseApp{
         ofxNeoPixelStrip strip60px;
         ofxNeoPixelStrip strip144px;
 
+        Effects defaultEffects;
+    
         int effect;
         bool hide;
 };

@@ -16,6 +16,7 @@ public:
     ofxOPC opcClient;
     
     deque <ofxNeoPixelStrip> strips;
+    Effects defaultEffects;
     
     int effect;
     bool hide;

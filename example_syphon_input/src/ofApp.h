@@ -31,6 +31,8 @@ class ofApp : public ofBaseApp{
         ofxNeoPixelRing rightRing;
         ofxNeoPixelGrid centerGrid;
     
+        Effects defaultEffects;
+    
         int effect;
         bool hide;
         bool syphonActive;

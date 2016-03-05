@@ -5,57 +5,11 @@
 //  Created by David Haylock on 25/05/2014.
 //
 #include "ofMain.h"
+#include "Effects.h"
 #include "ofxNetwork.h"
 #include "ofxNeoPixelStrip.h"
 #include "ofxNeoPixelRing.h"
 #include "ofxNeoPixelGrid.h"
-
-class Ring {
-public:
-    
-    Ring() {}
-    ~Ring() {}
-    
-    void respawn(int stageHeight,float x1,float y1,float x2,float y2) {
-        
-        _stageHeight = stageHeight;
-        // Start at the newer mouse position
-        x = x2;
-        y = y2;
-        
-        // Intensity is just the distance between mouse points
-        intensity = ofDist(x1, y1, x2, y2);
-        intensity = intensity * 2;
-        
-        // Hue is the angle of mouse movement, scaled from -PI..PI to 0..100
-        hue = ofMap(atan2(y2 - y1, x2 - x1), -PI, PI, 0, 255);
-        
-        // Default size is based on the screen size
-        size = _stageHeight * 0.1;
-    }
-    
-    void draw(ofImage ringImage) {
-        ofPushStyle();
-        // Particles fade each frame
-        intensity *= 0.95;
-        
-        // They grow at a rate based on their intensity
-        size += _stageHeight * intensity * 0.01;
-        
-        // If the particle is still alive, draw it
-        if (intensity >= 1) {
-            ofEnableBlendMode(OF_BLENDMODE_ADD);
-            ofColor c;
-            c.setHsb(hue, 200, intensity);
-            ofSetColor(c);
-            ringImage.draw(x - size/2, y - size/2, size,size);
-            ofDisableBlendMode();
-        }
-        ofPopStyle();
-    }
-private:
-    float x, y, size, intensity, hue,_stageHeight;
-};
 
 //------------------------------------------------------------------------------
 typedef struct OPCPacket_Header {
@@ -92,8 +46,6 @@ class ofxOPC  {
         void setup(string address,int port);
         void update();
         void draw();
-        void drawDefaultEffects(int mode);
-        ofImage dot;
 
         //! Set the FBOS Size
         void setupStage(int width, int height);
@@ -154,28 +106,19 @@ class ofxOPC  {
         vector <string> error;
         int _port;
         int _w,_h;
-        int pos_y;
 
     private:
         ofTrueTypeFont labels;
     
         void connect();
         void disconnect();
-        int moveCounter;
         ofFbo screenCapture;
         int _stageWidth;
         int _stageHeight;
         unsigned char * screenPixels;
     
-        ofImage noiseImage;
-        ofImage colorFadeImage;
-        ofImage ringImage;
-        deque<ofColor> gloriousColor;
         // For sending our data packets out to the Server
         ofxTCPClient client;
-    
-        Ring rings[100];
-        float smoothX, smoothY;
     
         // Reconnection Stuff
         float timer;

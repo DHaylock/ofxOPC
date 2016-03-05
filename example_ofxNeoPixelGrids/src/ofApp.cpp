@@ -12,6 +12,8 @@ void ofApp::setup()
     // You define the stage size and draw into the stage
     opcClient.setupStage(500, 500);
     
+    defaultEffects.setup(opcClient.getStageCenterX(), opcClient.getStageCenterY(), opcClient.getStageWidth(), opcClient.getStageHeight());
+    
     grid5x7.setupLedGrid(5, 7, 10, 10, 8);
     grid8x8.setupLedGrid(8, 8, 10+(7*8), 10, 8);
     grid32x32.setupLedGrid(32, 32, 10, 10+(10*8), 8);
@@ -21,13 +23,14 @@ void ofApp::update()
 {
     ofSetWindowTitle("example_ofxNeoPixelGrids");
     
+    opcClient.update();
+    
     // Now Draw the effects to the stage
     opcClient.beginStage();
     
     // Draw what you want rendered here
-    
     // For now here are some default effects
-    opcClient.drawDefaultEffects(effect);
+    defaultEffects.draw(effect);
     
     opcClient.endStage();
     
@@ -46,8 +49,6 @@ void ofApp::update()
         opcClient.writeChannelOne(grid5x7.colorData());
         opcClient.writeChannelTwo(grid8x8.colorData());
     }
-    
-    opcClient.update();
 }
 //--------------------------------------------------------------
 void ofApp::draw()
