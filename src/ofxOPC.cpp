@@ -13,8 +13,14 @@ void ofxOPC::setup(string address, int port)
     _address = address;
     
 
+    // If this an example it will use this resource
     labels.load( "../../../resources/Verdana.ttf", 13);
 
+    // If not it will searching the data directory for the resource5
+    if (!labels.isLoaded()) {
+        labels.load("Verdana.ttf", 13);
+    }
+    
     connectionAttempts = 0;
     tryReconnecting = false;
     startTime = ofGetElapsedTimeMillis();  // get the start time

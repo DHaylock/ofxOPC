@@ -9,7 +9,7 @@
 #include <iostream>
 #include "ofMain.h"
 #include "ofxNeoPixelObject.h"
-
+#include <math.h>
 //-------------------------------------------------------------------------------
 class ofxNeoPixelRing : public ofxNeoPixelObject{
     public:

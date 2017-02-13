@@ -71,6 +71,20 @@ class Effects {
             
             dot.load("../../../resources/dot.png");
             ringImage.load("../../../resources/ring.png");
+            lineImage.load("../../../resources/line.png");
+            
+            videoPlayer.load("../../../resources/fingers.mov");
+            videoPlayer.setLoopState(OF_LOOP_NORMAL);
+            videoPlayer.play();
+            
+            
+            if (!dot.isAllocated() || !ringImage.isAllocated() || !lineImage.isAllocated()) {
+                dot.load("dot.png");
+                ringImage.load("ring.png");
+                lineImage.load("line.png");
+//                videoPlayer.load("fingers.mov");
+            }
+            
             
             noiseImage.allocate(stageWidth/4, stageHeight/4, OF_IMAGE_GRAYSCALE);
             colorFadeImage.allocate(stageWidth/4, stageHeight/4, OF_IMAGE_COLOR_ALPHA);
@@ -98,10 +112,11 @@ class Effects {
         }
         //----------------------------------------------------------
         void update(){
-            
+            videoPlayer.update();
         }
         //----------------------------------------------------------
         void draw(int mode){
+            update();
             switch (mode) {
                 case 0:
                 {
@@ -352,9 +367,38 @@ class Effects {
                     ofPopMatrix();
                 }
                     break;
+                case 16:
+                {
+                    float hue = fmodf(ofGetElapsedTimef()*10,255);
+                    ofColor c = ofColor::fromHsb(hue, 255, 255);
+                    ofSetColor(c);
+                    ofPushMatrix();
+                    int x = (int)(_stageWidth/2 + _stageWidth/2 * sin(ofGetElapsedTimef()));
+                    int x1 = (int)(_stageWidth/2 + _stageWidth/2 * sin(ofGetElapsedTimef()*2));
+                    int x2 = (int)(_stageWidth/2 + _stageWidth/2 * sin(ofGetElapsedTimef()*4));
+                    int w = (int)(60 + 150 * sin(ofGetElapsedTimef()*0.5));
+                    ofPushStyle();
+                    ofEnableBlendMode(OF_BLENDMODE_ADD);
+                    lineImage.draw(x, _stageCenterY-_stageHeight, w, _stageHeight*2);
+                    lineImage.draw(x1, _stageCenterY-_stageHeight, w, _stageHeight*2);
+                    lineImage.draw(x2, _stageCenterY-_stageHeight, w, _stageHeight*2);
+                    ofDisableBlendMode();
+                    ofPopStyle();
+                    ofPopMatrix();
+                }
+                    break;
+                case 17:
+                {
+                    ofPushStyle();
+                    ofSetColor(ofColor::white);
+                    videoPlayer.draw(0,0,_stageWidth,_stageHeight);
+                    ofPopStyle();
+                }
+                    break;
                 default:
                     break;
             }
+            
         }
     
     private:
@@ -370,7 +414,10 @@ class Effects {
         ofImage noiseImage;
         ofImage colorFadeImage;
         ofImage ringImage;
+        ofImage lineImage;
         deque<ofColor> gloriousColor;
+        ofVideoPlayer videoPlayer;
+    
         int pos_y;
         int moveCounter;
     protected:
