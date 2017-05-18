@@ -13,7 +13,7 @@ vector <ofColor> ofxNeoPixelObject::colorData()
     return colors;
 }
 //--------------------------------------------------------------
-vector<ofVec2f> ofxNeoPixelObject::getPixelCoordinates()
+vector<ofPoint> ofxNeoPixelObject::getPixelCoordinates()
 {
     colors.clear();
     return pos;

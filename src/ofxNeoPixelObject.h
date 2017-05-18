@@ -19,7 +19,7 @@ class ofxNeoPixelObject {
         vector <ofColor> colorData();
         
         //! Return the locations of the Pixels
-        vector <ofVec2f> getPixelCoordinates();
+        vector <ofPoint> getPixelCoordinates();
         
         // Variables
         int size;
@@ -37,7 +37,7 @@ class ofxNeoPixelObject {
         // Hold the Captured Colors
         vector <ofColor> colors;
         // Hold the Position of our Capture points
-        vector <ofVec2f> pos;
+        vector <ofPoint> pos;
     
         virtual void drawGrabRegion(bool hideArea);
         virtual void draw(int x,int y);
