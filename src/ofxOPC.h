@@ -10,6 +10,7 @@
 #include "ofxNeoPixelStrip.h"
 #include "ofxNeoPixelRing.h"
 #include "ofxNeoPixelGrid.h"
+#include "ofxNeoPixelCustomObject.h"
 
 //------------------------------------------------------------------------------
 typedef struct OPCPacket_Header {
@@ -43,7 +44,7 @@ typedef struct OPCPacket {
 class ofxOPC  {
     
     public:
-        void setup(string address,int port);
+		void setup(string address,int port);
         void update();
         void draw();
 
@@ -64,7 +65,7 @@ class ofxOPC  {
         int getStageCenterY();
         ofPoint getStageCenter();
         ofPixels getStagePixels();
-        void getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData);
+        void getStagePixels(vector<ofPoint> pixels,vector <ofColor> &colorData);
 
     
         void cleanup();
@@ -73,7 +74,10 @@ class ofxOPC  {
         void tryConnecting();
         void retryConnecting();
         void sendFirmwareConfigPacket(); // Not used
-    
+	
+		//! For writing auto data segementation
+		void autoWriteData(vector <ofColor> pix);
+	
         //! For writing custom channels
         void writeChannel(uint8_t channel, vector <ofColor> pix);
     

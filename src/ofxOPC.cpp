@@ -11,8 +11,7 @@ void ofxOPC::setup(string address, int port)
     // Copy the Address and port to the variables
     _port = port;
     _address = address;
-    
-
+    	
     // If this an example it will use this resource
     labels.load( "../../../resources/Verdana.ttf", 13);
 
@@ -108,17 +107,20 @@ ofPixels ofxOPC::getStagePixels()
     return tempPixs;
 }
 //--------------------------------------------------------------
-void ofxOPC::getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData)
+void ofxOPC::getStagePixels(vector<ofPoint> pixels,vector <ofColor> &colorData)
 {
     ofPixels tempPixs;
     tempPixs.setFromPixels(screenPixels, _stageWidth, _stageHeight, OF_IMAGE_COLOR_ALPHA);
     
-    for (int i = 0; i < pixels.size(); i++) {
-        if (pixels[i].x < 0 || pixels[i].x > getStageWidth() || pixels[i].y < 0 || pixels[i].y > getStageHeight()) {
+    for (int i = 0; i < pixels.size(); i++)
+	{
+        if (pixels[i].x < 0 || pixels[i].x > getStageWidth() || pixels[i].y < 0 || pixels[i].y > getStageHeight())
+		{
             error.push_back("Pixels are outside the Stage Area");
             return;
         }
-        else {
+        else
+		{
             colorData.push_back(tempPixs.getColor(pixels[i].x, pixels[i].y));
         }
     }
@@ -127,11 +129,12 @@ void ofxOPC::getStagePixels(vector<ofVec2f> pixels,vector <ofColor> &colorData)
 vector<ofColor> ofxOPC::getChainedNeopixels(vector<vector<ofColor> > colors)
 {
     vector<ofColor> returnData;
-    for (int i = 0; i < colors.size(); i++) {
-        for (int e = 0 ; e < colors[i].size(); e++) {
+    for (int i = 0; i < colors.size(); i++)
+	{
+        for (int e = 0 ; e < colors[i].size(); e++)
+		{
             returnData.push_back(colors[i][e]);
         }
-
     }
     error.push_back(ofToString(returnData.size()));
     return returnData;
@@ -151,16 +154,19 @@ void ofxOPC::drawStage(bool drawGrid,int gridSpace)
     string st = (isConnected()) ? "Fade Candy Connected " : "Fade Candy Not Connected";
     ss << "Input Stage" << endl;
     ss << st << endl;
-    for (int i = 0; i < error.size(); i++) {
-        ss << error[i] << endl;
-    }
+	
+	for (int i = 0; i < error.size(); i++) ss << error[i] << endl;
+	
     labels.drawString(ss.str(),10, _stageHeight+labels.getLineHeight());
     ofPopStyle();
     ofPopMatrix();
     
-    if (drawGrid) {
-        for (int y = 0; y < _stageHeight; y+=gridSpace) {
-            for (int x = 0; x < _stageWidth; x+=gridSpace) {
+    if (drawGrid)
+	{
+        for (int y = 0; y < _stageHeight; y+=gridSpace)
+		{
+            for (int x = 0; x < _stageWidth; x+=gridSpace)
+			{
                 ofSetColor(255,100);
                 ofDrawLine(x,0,x,_stageHeight);
                 ofDrawLine(0,y,_stageWidth,y);
@@ -220,6 +226,39 @@ void ofxOPC::writeChannelEight(vector<ofColor>pix)
 {
     writeChannel(CHANNEL_EIGHT, pix);
 }
+
+//--------------------------------------------------------------
+void ofxOPC::autoWriteData(vector<ofColor>pix)
+{
+	// Bail early if there's no pixel data or there is too much data
+	if(pix.empty())
+	{
+		ofLogError() << "No Data";
+		return;
+	}
+	
+	// If there is more than 64 pixels per channel limit the amount to 60
+	if (pix.size() > 64)
+	{
+		int a = (int)(ofGetElapsedTimef()*100);
+		int channelsToWriteTo = pix.size() / 64;
+		if(a % 500 == 0) ofLogNotice() << "Auto Splitting " << channelsToWriteTo;
+		
+		for (int c = 1; c < channelsToWriteTo; c++)
+		{
+			uint8_t channel = c;
+			uint16_t channel_offset = (channel - 1) * 64;
+			for (unsigned int i = 0; i < 64; i++)
+			{
+				OPC_SPC_packet_data[channel_offset + i].r = pix[channel_offset+i].r;
+				OPC_SPC_packet_data[channel_offset + i].g = pix[channel_offset+i].g;
+				OPC_SPC_packet_data[channel_offset + i].b = pix[channel_offset+i].b;
+			}
+			client.sendRawBytes((char *)(OPC_SPC_packet), OPC_SPC_packet_length);
+		}
+	}
+}
+
 //--------------------------------------------------------------
 void ofxOPC::writeChannel(uint8_t channel, vector<ofColor>pix)
 {
@@ -236,17 +275,20 @@ void ofxOPC::writeChannel(uint8_t channel, vector<ofColor>pix)
 
     uint16_t channel_offset = (channel - 1) * 64;
     // If there is more than 64 pixels per channel limit the amount to 60
-    if (pix.size() > 64) {
+    if (pix.size() > 64)
+	{
         ofLogError() << "Too Much Data on Channel: "+ofToString(unsigned(channel))+" Limiting to 64 pixels";
         error.push_back("Too Much Data on Channel: "+ofToString(unsigned(channel))+" Limiting to 64 pixels");
-        for (unsigned int i = 0; i < 64; i++) {
+        for (unsigned int i = 0; i < 64; i++)
+		{
             OPC_SPC_packet_data[channel_offset + i].r = pix[i].r;
             OPC_SPC_packet_data[channel_offset + i].g = pix[i].g;
             OPC_SPC_packet_data[channel_offset + i].b = pix[i].b;
         }
     }
     else {
-        for (unsigned int i = 0; i < pix.size(); i++) {
+        for (unsigned int i = 0; i < pix.size(); i++)
+		{
             OPC_SPC_packet_data[channel_offset + i].r = pix[i].r;
             OPC_SPC_packet_data[channel_offset + i].g = pix[i].g;
             OPC_SPC_packet_data[channel_offset + i].b = pix[i].b;
@@ -263,27 +305,33 @@ void ofxOPC::writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor
     pix1.insert(pix1.end(), pix3.begin(),pix3.end());
     
     // Bail early if there's no pixel data
-    if(pix1.empty() && pix2.empty() && pix3.empty()) {
+    if(pix1.empty() && pix2.empty() && pix3.empty())
+	{
         return;
-        
-    } else if(channel < 1 || channel > 8) {
+    }
+	else if(channel < 1 || channel > 8)
+	{
         return;
     }
     
     uint16_t channel_offset = (channel - 1) * 64;
 
     // If there is more than 64 pixels per channel limit the amount to 60
-    if (pix1.size() > 64) {
+    if (pix1.size() > 64)
+	{
         ofLogError() << "Too Much Data on Channel: "+ofToString(unsigned(channel))+" Limiting to 64 pixels";
         error.push_back("Too Much Data on Channel: "+ofToString(unsigned(channel))+" Limiting to 64 pixels");
-        for (unsigned int i = 0; i < 64; i++) {
+        for (unsigned int i = 0; i < 64; i++)
+		{
             OPC_SPC_packet_data[channel_offset + i].r = pix1[i].r;
             OPC_SPC_packet_data[channel_offset + i].g = pix1[i].g;
             OPC_SPC_packet_data[channel_offset + i].b = pix1[i].b;
         }
     }
-    else {
-        for (unsigned int i = 0; i < pix1.size(); i++) {
+    else
+	{
+        for (unsigned int i = 0; i < pix1.size(); i++)
+		{
             OPC_SPC_packet_data[channel_offset + i].r = pix1[i].r;
             OPC_SPC_packet_data[channel_offset + i].g = pix1[i].g;
             OPC_SPC_packet_data[channel_offset + i].b = pix1[i].b;
