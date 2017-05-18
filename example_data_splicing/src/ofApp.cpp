@@ -45,19 +45,36 @@ void ofApp::update()
 	// Loop through the grid colors and put 60 colors into seperate containers
 	for (int i = 0; i < grid12x15.colorData().size(); i++)
 	{
-		if (i < 59)
+		if (i < 60)
 		{
 			channelOne.push_back(grid12x15.colorData()[i]);
 		}
-		else if (i > 59 && i < (59+60))
+		else if (i >= 60 && i <= (59+60))
 		{
 			channelTwo.push_back(grid12x15.colorData()[i]);
 		}
-		else if (i > (59+60) && i < (59+(60*2)))
+		else if (i >= (59+60) && i <= (59+(60*2)))
 		{
 			channelThree.push_back(grid12x15.colorData()[i]);
 		}
 	}
+	
+	vector<int> ch1and3;
+	vector<int> ch2;
+	
+	
+	ch1and3.push_back(1);
+	ch1and3.push_back(3);
+	
+	ch2.push_back(0);
+	ch2.push_back(2);
+	ch2.push_back(4);
+	
+	spliceAndReverse(channelOne, 12,ch1and3);
+	spliceAndReverse(channelTwo, 12,ch2);
+	spliceAndReverse(channelThree, 12,ch1and3);
+
+	
 	
 	// If the client is not connected do not try and send information
 	if (!opcClient.isConnected())
@@ -117,6 +134,9 @@ void ofApp::keyPressed(int key)
 	}
 	if (key == ' ') {
 		hide = !hide;
+		cout << channelOne.size() << endl;
+		cout << channelTwo.size() << endl;
+		cout << channelThree.size() << endl;
 	}
 }
 //--------------------------------------------------------------
@@ -130,3 +150,30 @@ void ofApp::exit()
 	// Close Connection
 	opcClient.close();
 }
+//--------------------------------------------------------------
+void ofApp::spliceAndReverse(vector<ofColor> &tmpPixels, int spliceIndex,vector<int> invertedRows)
+{
+	vector<vector<ofColor> > reversedChunks;
+
+	reversedChunks.resize(invertedRows.size());
+	
+	// 0 row 1*
+	// 1 row 2*
+	// 2 row 3*
+	// 3 row 4*
+	// 4 row 5*
+	
+	for (int i = 0; i < invertedRows.size(); i++)
+	{
+		vector<ofColor> tmp(&tmpPixels[((invertedRows[i])*spliceIndex)],&tmpPixels[((invertedRows[i]+1)*spliceIndex)]);
+		reversedChunks[i] = tmp;
+		reverse(reversedChunks[i].begin(),reversedChunks[i].end());
+	}
+	
+	for (int i = 0; i < invertedRows.size(); i++)
+	{
+		swap_ranges(tmpPixels.begin()+(invertedRows[i]*spliceIndex), tmpPixels.begin()+(((invertedRows[i]+1)*spliceIndex)), reversedChunks[i].begin());
+	}
+}
+
+	

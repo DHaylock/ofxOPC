@@ -2,7 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxOPC.h"
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp
+{
 	
 public:
 	void setup();
@@ -19,6 +20,8 @@ public:
 	vector<ofColor> channelOne;
 	vector<ofColor> channelTwo;
 	vector<ofColor> channelThree;
+	
+	void spliceAndReverse(vector<ofColor> &tmpPixels,int spliceIndex,vector<int> invertedRows);
 	
 	int effect;
 	bool hide;
