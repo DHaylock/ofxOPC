@@ -24,7 +24,7 @@ public:
         
         // Intensity is just the distance between mouse points
         intensity = ofDist(x1, y1, x2, y2);
-        intensity = intensity * 2;
+        intensity = intensity * 5;
         
         // Hue is the angle of mouse movement, scaled from -PI..PI to 0..100
         hue = ofMap(atan2(y2 - y1, x2 - x1), -PI, PI, 0, 255);
@@ -54,6 +54,32 @@ public:
     }
 private:
     float x, y, size, intensity, hue,_stageHeight;
+};
+
+class Particle {
+	public:
+	
+	void spawn(ofPoint startPoint,int startSize)
+	{
+		pos = startPoint;
+		size = startSize;
+	}
+	
+	void draw()
+	{
+		size += 2;
+		ofPushStyle();
+		ofNoFill();
+		ofSetLineWidth(4);
+		ofEnableBlendMode(OF_BLENDMODE_ADD);
+		ofSetColor(255,200);
+		ofDrawCircle(pos,size);
+		ofDisableBlendMode();
+		ofPopStyle();
+	}
+	
+	ofPoint pos;
+	float size;
 };
 
 class Effects {
@@ -395,12 +421,27 @@ class Effects {
                     ofPopStyle();
                 }
                     break;
+					
+				case 18:
+				{
+					int r = ofRandom(5,60);
+					if(ofGetFrameNum() % r == 0) pts[int(ofRandom(100))].spawn(ofPoint(_stageWidth/2,_stageHeight/2),1);
+					
+					ofPushStyle();
+					for(int i = 0; i < 100; i++)
+					{
+						pts[i].draw();
+					}
+					ofPopStyle();
+				}
+					break;
+					
                 default:
                     break;
             }
-            
+			
         }
-    
+	
     private:
         int _stageWidth;
         int _stageHeight;
@@ -409,6 +450,7 @@ class Effects {
     
         ofImage dot;
         Ring rings[100];
+		Particle pts[100];
         float smoothX, smoothY;
         
         ofImage noiseImage;

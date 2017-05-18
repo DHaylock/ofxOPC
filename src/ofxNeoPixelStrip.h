@@ -23,8 +23,7 @@ class ofxNeoPixelStrip : public ofxNeoPixelObject {
         void draw(int x, int y);
 
     private:
-    
-    
+
         // Draw Unit
         void ledStrip();
 };
