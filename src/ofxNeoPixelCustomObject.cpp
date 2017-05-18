@@ -30,13 +30,6 @@ ofxNeoPixelCustomObject::ofxNeoPixelCustomObject(int offsetx, int offsety,vector
 	actualY = offsetY+offsety;
 
 	pos = positions;
-	
-//	for (int i = 0; i < size; i++) {
-//		// Generate the position of the grabber points
-//		float rx = (offsetX+offsetx);
-//		float ry = (offsetY+offsety) + (i*spacing);
-//		pos.push_back(ofVec2f(rx,ry));
-//	}
 }
 //--------------------------------------------------------------
 void ofxNeoPixelCustomObject::setupLedObject(int offsetx, int offsety,vector<ofPoint> positions,int numberOfLeds,int spacing)
@@ -51,13 +44,6 @@ void ofxNeoPixelCustomObject::setupLedObject(int offsetx, int offsety,vector<ofP
 	actualY = offsetY+offsety;
 
 	pos = positions;
-	
-//	for (int i = 0; i < size; i++) {
-//		// Generate the position of the grabber points
-//		float rx = (offsetX+offsetx);
-//		float ry = (offsetY+offsety) + (i*spacing);
-//		pos.push_back(ofVec2f(rx,ry));
-//	}
 }
 //--------------------------------------------------------------
 void ofxNeoPixelCustomObject::drawGrabRegion(bool hideArea)
@@ -92,7 +78,6 @@ void ofxNeoPixelCustomObject::ledObject()
 	ofFill();
 	ofSetColor(100,175);
 	ofDrawRectangle(0, 0, 10, size*_spacing);
-//	ofDrawRectangle(-offsetX,actualY-(offsetY/2), 10,size*_spacing);
 	
 	for (int i = 0; i < size; i++)
 	{
