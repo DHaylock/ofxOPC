@@ -9,3 +9,4 @@
 #include "ofxNeoPixelStrip.h"
 #include "ofxNeoPixelRing.h"
 #include "ofxNeoPixelGrid.h"
+#include "ofxNeoPixelCustomObject.h"
