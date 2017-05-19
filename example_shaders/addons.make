@@ -1,0 +1,4 @@
+ofxAutoReloadedShader
+ofxJSON
+ofxNetwork
+ofxOPC
