@@ -12,7 +12,7 @@ void ofxOPC::setup(string address, int port)
     // Copy the Address and port to the variables
     _port = port;
     _address = address;
-    	
+
     // If this an example it will use this resource
     labels.load( "../../../resources/Verdana.ttf", 13);
 
