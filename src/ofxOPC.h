@@ -41,45 +41,138 @@ typedef struct OPCPacket {
 } *OPCPacket_t;
 
 //--------------------------------------------------------------
-class ofxOPC  {
-    
+class ofxOPC
+{
     public:
+	
+		//--------------------------------------------------------------
+		/// \brief Setup Fadecandy
+		/**
+			@param string address : fadecandy address
+			@param int port : fadycandy port
+		*/
+		//--------------------------------------------------------------
 		void setup(string address,int port);
+	
+		//--------------------------------------------------------------
+		/// \brief Setup without the Fadecandy
+		/** */
+		//--------------------------------------------------------------
 		void setupWithoutFadecandy();
-        void update();
+	
+		//--------------------------------------------------------------
+		/// \brief Update
+		//--------------------------------------------------------------
+		void update();
+	
+		//--------------------------------------------------------------
+		/// \brief Draw
+		//--------------------------------------------------------------
         void draw();
 
-        //! Set the FBOS Size
+		//--------------------------------------------------------------
+		/// \brief Setup the Pixel Stage
+		/** 
+			@param width : width of the stage
+			@param height : height of the stage
+		*/
+		//--------------------------------------------------------------
         void setupStage(int width, int height);
     
         // New Method of Accessing screen pixels
-        //! Open Fbo
+		//--------------------------------------------------------------
+		/// \brief Open the Pixel Stage Buffer
+		//--------------------------------------------------------------
         void beginStage();
-        //! Close Fbo
+	
+		//--------------------------------------------------------------
+		/// \brief Close the Pixel Stage Buffer
+		//--------------------------------------------------------------
         void endStage();
-        //! Draw Fbo
+	
+		//--------------------------------------------------------------
+		/// \brief Draw Stage
+		/**
+			@param bool drawGrid : whether to draw the grid or not
+			@param int gridSpace : size of the grid
+		*/
+		//--------------------------------------------------------------
         void drawStage(bool drawGrid,int gridSpace = 50);
-    
+	
+		//--------------------------------------------------------------
+		// \brief Get the Stage Width
+		//--------------------------------------------------------------
         int getStageWidth();
-        int getStageHeight();
-        int getStageCenterX();
-        int getStageCenterY();
+	
+		//--------------------------------------------------------------
+		// \brief Get the Stage Height
+		//--------------------------------------------------------------
+		int getStageHeight();
+	
+		//--------------------------------------------------------------
+		// \brief Get the Stage Center X
+		//--------------------------------------------------------------
+		int getStageCenterX();
+	
+		//--------------------------------------------------------------
+		// \brief Get the Stage Center Y
+		//--------------------------------------------------------------
+		int getStageCenterY();
+	
+		//--------------------------------------------------------------
+		// \brief Get the Stage Center
+		//--------------------------------------------------------------
         ofPoint getStageCenter();
+	
+		//--------------------------------------------------------------
+		// \brief Get a raw representation of the stage pixels
+		//--------------------------------------------------------------
         ofPixels getStagePixels();
+	
+		//--------------------------------------------------------------
+		// \brief Get the Stage pixels from specific points
+		/**
+			@param vector <ofPoint> pixels : position of pixels on the stage
+			@param vector <ofColor> colorData : color data from the specific points on the stage
+		*/
+		//--------------------------------------------------------------
         void getStagePixels(vector<ofPoint> pixels,vector <ofColor> &colorData);
 
-		//! Setup the Fadecandy server
+		//--------------------------------------------------------------
+		/// \brief Setup Fadecandy?
+		/** */
+		//--------------------------------------------------------------
 		void setFadecandyActive(bool active);
 	
-    
+		//--------------------------------------------------------------
+		/// \brief Clean Data
+		//--------------------------------------------------------------
         void cleanup();
+	
+		//--------------------------------------------------------------
+		/// \brief Close
+		//--------------------------------------------------------------
         void close();
+	
+		//--------------------------------------------------------------
+		/// \brief Are we connected to the Fadecandy
+		//--------------------------------------------------------------
         bool isConnected();
+	
+		//--------------------------------------------------------------
+		/// \brief Function that tries to reconnect
+		//--------------------------------------------------------------
         void tryConnecting();
+	
         void retryConnecting();
         void sendFirmwareConfigPacket(); // Not used
 	
-		//! For writing auto data segementation
+		//--------------------------------------------------------------
+		/// \brief Splits the color data into automatically
+		/**
+			@param vector <ofColor> pix : color data to send
+		*/
+		//--------------------------------------------------------------
 		void autoWriteData(vector <ofColor> pix);
 	
         //! For writing custom channels
