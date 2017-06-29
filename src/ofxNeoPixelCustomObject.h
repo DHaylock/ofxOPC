@@ -29,6 +29,8 @@ private:
 	
 	// Draw Unit
 	void ledObject();
+	
+	ofMesh mesh;
 };
 
 

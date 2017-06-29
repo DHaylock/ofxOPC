@@ -30,6 +30,25 @@ ofxNeoPixelCustomObject::ofxNeoPixelCustomObject(int offsetx, int offsety,vector
 	actualY = offsetY+offsety;
 
 	pos = positions;
+	
+	mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+	for (unsigned int i = 1; i < pos.size(); i++)
+	{
+		ofPoint thisPoint = pos[i-1];
+		ofPoint nextPoint = pos[i];
+		ofPoint direction = (nextPoint - thisPoint);
+		
+		float distance = direction.length();
+		ofVec3f unitDirection = direction.getNormalized();
+		ofVec3f toTheLeft = unitDirection.getRotated(-90, ofVec3f(0,0,1));
+		ofVec3f toTheRight = unitDirection.getRotated(90, ofVec3f(0,0,1));
+		
+		ofVec3f leftPoint = thisPoint+toTheLeft*5;
+		ofVec3f rightPoint = thisPoint+toTheRight*5;
+		mesh.addVertex(ofVec3f(leftPoint.x, leftPoint.y, leftPoint.z));
+		mesh.addVertex(ofVec3f(rightPoint.x, rightPoint.y, rightPoint.z));
+	}
+	
 }
 //--------------------------------------------------------------
 void ofxNeoPixelCustomObject::setupLedObject(int offsetx, int offsety,vector<ofPoint> positions,int numberOfLeds,int spacing)
@@ -60,15 +79,18 @@ void ofxNeoPixelCustomObject::drawGrabRegion(bool hideArea)
 		ofSetColor(255, 175);
 		ofNoFill();
 	}
-	else {
+	else
+	{
 		// Visualise the Grabber
 		ofSetColor(0, 175);
 		ofNoFill();
 	}
 	
-	ofDrawRectangle(actualX-offsetX,actualY-(offsetY/2),10,size*_spacing);
+	mesh.draw();
 	
-	for (int i = 0; i < pos.size(); i++) {
+	
+	for (int i = 0; i < pos.size(); i++)
+	{
 		ofDrawCircle(pos[i],2);
 	}
 }
