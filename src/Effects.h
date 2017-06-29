@@ -56,35 +56,63 @@ private:
     float x, y, size, intensity, hue,_stageHeight;
 };
 
-class Particle {
-	public:
-	
-	void spawn(ofPoint startPoint,int startSize)
-	{
-		pos = startPoint;
-		size = startSize;
-	}
-	
-	void draw()
-	{
-		size += 2;
-		ofPushStyle();
-		ofNoFill();
-		ofSetLineWidth(4);
-		ofEnableBlendMode(OF_BLENDMODE_ADD);
-		ofSetColor(255,200);
-		ofDrawCircle(pos,size);
-		ofDisableBlendMode();
-		ofPopStyle();
-	}
-	
-	ofPoint pos;
-	float size;
-};
+//class Particle {
+//	public:
+//	
+//	void spawn(ofPoint startPoint,int startSize)
+//	{
+//		pos = startPoint;
+//		size = startSize;
+//	}
+//	
+//	void draw()
+//	{
+//		size += 2;
+//		ofPushStyle();
+//		ofNoFill();
+//		ofSetLineWidth(4);
+//		ofEnableBlendMode(OF_BLENDMODE_ADD);
+//		ofSetColor(255,200);
+//		ofDrawCircle(pos,size);
+//		ofDisableBlendMode();
+//		ofPopStyle();
+//	}
+//	
+//	ofPoint pos;
+//	float size;
+//};
 
 class Effects {
     
     public:
+	
+		//----------------------------------------------------------
+		Effects()
+		{
+			modes[0] = "Mouse Follower";
+			modes[1] = "Spinning Dots";
+			modes[2] = "Block Color";
+			modes[3] = "Fade To White";
+			modes[4] = "Rotating Circles";
+			modes[5] = "Gradient Image";
+			modes[6] = "Rotating Lines";
+			modes[7] = "Noise";
+			modes[8] = "Waves";
+			modes[9] = "Horizontal Lines";
+			modes[10] = "Vertical Lines";
+			modes[11] = "Horizontal Wipe";
+			modes[12] = "Vertical Wipe";
+			modes[13] = "Color Scroll";
+			modes[14] = "Strobe";
+			modes[15] = "Gradient Lines";
+			modes[16] = "Video";
+			modes[17] = "Particles";
+			modes[18] = "Mouse Box";
+		}
+	
+		//----------------------------------------------------------
+		~Effects() {}
+	
         //----------------------------------------------------------
         void setup(int stageCenterX,int stageCenterY,int stageWidth,int stageHeight){
 
@@ -92,7 +120,7 @@ class Effects {
             _stageCenterY = stageCenterY;
             _stageWidth = stageWidth;
             _stageHeight = stageHeight;
-
+			
             moveCounter = 0;
             
             dot.load("../../../resources/dot.png");
@@ -136,8 +164,17 @@ class Effects {
             }
             colorFadeImage.update();
         }
+	
+	
+		//----------------------------------------------------------
+		map <int,string> getModes()
+		{
+			return modes;
+		}
+	
         //----------------------------------------------------------
-        void update(){
+        void update()
+		{
             videoPlayer.update();
         }
         //----------------------------------------------------------
@@ -151,7 +188,7 @@ class Effects {
                     float hue = fmodf(ofGetElapsedTimef()*10,255);
                     ofColor c = ofColor::fromHsb(hue, 255, 255);
                     ofSetColor(c);
-                    ofDrawCircle(ofGetMouseX(),ofGetMouseY(),70);
+                    ofDrawCircle(ofGetMouseX(),ofGetMouseY(),10);
                     ofPopStyle();
                 }
                     break;
@@ -262,7 +299,7 @@ class Effects {
                 }
                     break;
                     // Noise Image
-                case 8:
+                case 7:
                 {
                     for(int x = 0; x < noiseImage.getWidth(); x++) {
                         for(int y = 0; y < noiseImage.getHeight(); y++) {
@@ -279,7 +316,7 @@ class Effects {
                 }
                     break;
                     // Wavefront
-                case 9:
+                case 8:
                 {
                     float prevX = smoothX;
                     float prevY = smoothY;
@@ -296,7 +333,7 @@ class Effects {
                 }
                     break;
                     // Color changing moving lines (horizontal)
-                case 10:
+                case 9:
                 {
                     float hue = fmodf(ofGetElapsedTimef()*10,255);
                     ofColor c = ofColor::fromHsb(hue, 255, 255);
@@ -313,7 +350,7 @@ class Effects {
                 }
                     break;
                     // Color changing moving lines (vertical)
-                case 11:
+                case 10:
                 {
                     float hue = fmodf(ofGetElapsedTimef()*10,255);
                     ofColor c = ofColor::fromHsb(hue, 255, 255);
@@ -330,32 +367,32 @@ class Effects {
                 }
                     break;
                     // Horizontal Filling Box
-                case 12:
+                case 11:
                 {
-                    float hue = fmodf(ofGetElapsedTimef()*10,255);
+                    float hue = fmodf(ofGetElapsedTimef()*2,255);
                     ofColor c = ofColor::fromHsb(hue, 255, 255);
                     ofSetColor(c);
                     ofPushMatrix();
                     int x = (int)(_stageWidth/2 + _stageWidth/2 * sin(ofGetElapsedTimef()));
-                    int w = (int)(_stageWidth/2 + _stageWidth/2 * sin(ofGetElapsedTimef()*0.6));
+                    int w = (int)(_stageWidth/2 + _stageWidth/2 * sin(ofGetElapsedTimef()*0.1));
                     ofDrawRectangle(0, _stageCenterY-_stageHeight, w, _stageHeight*2);
                     ofPopMatrix();
                 }
                     break;
                     // Vertical Filling Box
-                case 13:
+                case 12:
                 {
-                    float hue = fmodf(ofGetElapsedTimef()*10,255);
+                    float hue = fmodf(ofGetElapsedTimef()*2,255);
                     ofColor c = ofColor::fromHsb(hue, 255, 255);
                     ofSetColor(c);
                     ofPushMatrix();
-                    int h = (int)(_stageHeight/2 + _stageHeight/2 * sin(ofGetElapsedTimef()*0.6));
+                    int h = (int)(_stageHeight/2 + _stageHeight/2 * sin(ofGetElapsedTimef()*0.1));
                     ofDrawRectangle(0, 0, _stageWidth, h);
                     ofPopMatrix();
                 }
                     break;
                     // Color Scroll
-                case 14:
+                case 13:
                 {
                     ofPushMatrix();
                     ofPushStyle();
@@ -376,7 +413,7 @@ class Effects {
                 }
                     break;
                     // Strobe
-                case 15:
+                case 14:
                 {
                     ofPushMatrix();
                     ofPushStyle();
@@ -393,7 +430,7 @@ class Effects {
                     ofPopMatrix();
                 }
                     break;
-                case 16:
+                case 15:
                 {
                     float hue = fmodf(ofGetElapsedTimef()*10,255);
                     ofColor c = ofColor::fromHsb(hue, 255, 255);
@@ -413,7 +450,7 @@ class Effects {
                     ofPopMatrix();
                 }
                     break;
-                case 17:
+                case 16:
                 {
                     ofPushStyle();
                     ofSetColor(ofColor::white);
@@ -422,17 +459,26 @@ class Effects {
                 }
                     break;
 					
+				case 17:
+				{
+//					int r = ofRandom(5,60);
+//					if(ofGetFrameNum() % r == 0) pts[int(ofRandom(100))].spawn(ofPoint(_stageWidth/2,_stageHeight/2),1);
+//					
+//					ofPushStyle();
+//					for(int i = 0; i < 100; i++)
+//					{
+//						pts[i].draw();
+//					}
+//					ofPopStyle();
+				}
+					break;
 				case 18:
 				{
-					int r = ofRandom(5,60);
-					if(ofGetFrameNum() % r == 0) pts[int(ofRandom(100))].spawn(ofPoint(_stageWidth/2,_stageHeight/2),1);
-					
 					ofPushStyle();
-					for(int i = 0; i < 100; i++)
-					{
-						pts[i].draw();
-					}
+					ofSetColor(255);
+					ofDrawRectangle(0, 0, _stageWidth, ofGetMouseY());
 					ofPopStyle();
+					
 				}
 					break;
 					
@@ -450,7 +496,7 @@ class Effects {
     
         ofImage dot;
         Ring rings[100];
-		Particle pts[100];
+//		Particle pts[100];
         float smoothX, smoothY;
         
         ofImage noiseImage;
@@ -459,7 +505,9 @@ class Effects {
         ofImage lineImage;
         deque<ofColor> gloriousColor;
         ofVideoPlayer videoPlayer;
-    
+	
+		map<int,string> modes;
+	
         int pos_y;
         int moveCounter;
     protected:
