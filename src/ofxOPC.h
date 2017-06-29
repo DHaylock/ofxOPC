@@ -45,6 +45,7 @@ class ofxOPC  {
     
     public:
 		void setup(string address,int port);
+		void setupWithoutFadecandy();
         void update();
         void draw();
 
@@ -67,6 +68,9 @@ class ofxOPC  {
         ofPixels getStagePixels();
         void getStagePixels(vector<ofPoint> pixels,vector <ofColor> &colorData);
 
+		//! Setup the Fadecandy server
+		void setFadecandyActive(bool active);
+	
     
         void cleanup();
         void close();
@@ -120,6 +124,8 @@ class ofxOPC  {
         int _stageWidth;
         int _stageHeight;
         unsigned char * screenPixels;
+	
+		bool bSetupWithFadecandy;
     
         // For sending our data packets out to the Server
         ofxTCPClient client;

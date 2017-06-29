@@ -8,6 +8,7 @@
 //--------------------------------------------------------------
 void ofxOPC::setup(string address, int port)
 {
+	bSetupWithFadecandy = false;
     // Copy the Address and port to the variables
     _port = port;
     _address = address;
@@ -49,6 +50,20 @@ void ofxOPC::setup(string address, int port)
 //--------------------------------------------------------------
 void ofxOPC::setupStage(int width,int height)
 {
+	// If this an example it will use this resource
+	labels.load( "../../../resources/Verdana.ttf", 13);
+	
+	// If not it will searching the data directory for the resource5
+	if (!labels.isLoaded())
+	{
+		labels.load("Verdana.ttf", 13);
+	}
+	
+	connectionAttempts = 0;
+	tryReconnecting = false;
+	startTime = ofGetElapsedTimeMillis();  // get the start time
+	endTime = 5000;// in
+	
     _stageWidth = width;
     _stageHeight = height;
     
@@ -58,6 +73,13 @@ void ofxOPC::setupStage(int width,int height)
         ofClear(0);
     screenCapture.end();
 }
+
+//--------------------------------------------------------------
+void ofxOPC::setFadecandyActive(bool active)
+{
+	bSetupWithFadecandy = active;
+}
+
 //--------------------------------------------------------------
 void ofxOPC::beginStage()
 {
@@ -150,10 +172,16 @@ void ofxOPC::drawStage(bool drawGrid,int gridSpace)
     ofFill();
     screenCapture.draw(0,0);
     ofSetColor(ofColor::white);
-    stringstream ss;
-    string st = (isConnected()) ? "Fade Candy Connected " : "Fade Candy Not Connected";
-    ss << "Input Stage" << endl;
-    ss << st << endl;
+	
+	stringstream ss;
+	ss << "Input Stage" << endl;
+	
+	if (bSetupWithFadecandy)
+	{
+		string st = (isConnected()) ? "Fade Candy Connected " : "Fade Candy Not Connected";
+		ss << st << endl;
+	}
+	
 	
 	for (int i = 0; i < error.size(); i++) ss << error[i] << endl;
 	
@@ -167,7 +195,7 @@ void ofxOPC::drawStage(bool drawGrid,int gridSpace)
 		{
             for (int x = 0; x < _stageWidth; x+=gridSpace)
 			{
-                ofSetColor(255,100);
+                ofSetColor(50);
                 ofDrawLine(x,0,x,_stageHeight);
                 ofDrawLine(0,y,_stageWidth,y);
             }
