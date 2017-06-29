@@ -86,8 +86,10 @@ void ofxNeoPixelCustomObject::drawGrabRegion(bool hideArea)
 		ofNoFill();
 	}
 	
+	ofPushStyle();
+	ofSetColor(0, 50);
 	mesh.draw();
-	
+	ofPopStyle();
 	
 	for (int i = 0; i < pos.size(); i++)
 	{
