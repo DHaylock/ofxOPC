@@ -18,6 +18,9 @@ Also drop me a line and let me know how you end up using the addon.
 - ofxNetwork - comes as part of the openFrameworks download
 - Fadecandy unit @scanlime
 - Fadecandy server <a href='https://github.com/scanlime/fadecandy'>https://github.com/scanlime/fadecandy</a> 
+- Some examples require additional addons
+- [ofxSyphon](https://github.com/astellato/ofxSyphon)
+- [ofxAutoReloadedShader](https://github.com/andreasmuller/ofxAutoReloadedShader)
 
 ## What the addon includes
 
@@ -26,6 +29,7 @@ Also drop me a line and let me know how you end up using the addon.
 - ofxNeoPixelStrip
 - ofxNeoPixelGrid
 - ofxNeoPixelJewel
+- ofxCustomNeoPixel
 
 ## Getting Started
 
@@ -113,9 +117,25 @@ else
 
 ![alt text](images/example_syphon_input.gif "syphon.gif")
 
-Coming Soon
+- Chained Neopixels
 
-- Neopixel Chained Rings
+![alt text](images/example_chaining.gif "chaining.gif")
+
+- Custom Neopixels
+
+![alt text](images/example_custom_neopixel_object.gif "Custom.gif")
+
+- Generic Neopixels
+
+![alt text](images/example_generic_neopixels.gif "Custom.gif")
+
+- Shader 
+
+![alt text](images/example_shaders.gif "Shader.gif")
+
+- x-Osc
+
+![alt text](images/example_x-osc.gif "XOSC.gif")
 
 ## Important 
 
@@ -126,6 +146,7 @@ The Fadecandy drives 8 x 64 LEDS = 512 LEDs, thats one DMX Universe. However, ea
 	opcClient.writeChannelTwo(ring60px.colorData());
 </code>
 
+##Grids
 If you would like to use the 32x32grid please alter line 24 of ofOPC.cpp from
 
 <code>uint16_t data_length = 8 * 64 * sizeof(OPCPacket_SPCData_t);</code>
@@ -138,10 +159,4 @@ To use the 32x32 grid check this guide.
 
 <a href='http://docs.pixelmatix.com/SmartMatrix/'>http://docs.pixelmatix.com/SmartMatrix/</a>
 
-Thanks to @rorypickering.
-
-## To Do
-
-- Allow users to specify the size of the elements in setup procedure
-- Create return methods with data about the elements.
-- Need to Create a Single Neopixel unit
+Thanks to @rorypickering for the link.
