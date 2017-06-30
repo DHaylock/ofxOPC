@@ -50,9 +50,10 @@ class ofxOPC
 		/**
 			@param string address : fadecandy address
 			@param int port : fadycandy port
+			@param int numberOfFadecandys : how many devices are attached to the server
 		*/
 		//--------------------------------------------------------------
-		void setup(string address,int port);
+		void setup(string address,int port,int numberOfFadecandys = 1);
 	
 		//--------------------------------------------------------------
 		/// \brief Setup without the Fadecandy
@@ -210,7 +211,7 @@ class ofxOPC
 
     private:
         ofTrueTypeFont labels;
-    
+		int numberOfFadecandys;
         void connect();
         void disconnect();
         ofFbo screenCapture;

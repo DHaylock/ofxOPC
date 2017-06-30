@@ -246,13 +246,15 @@ class Effects {
                 {
                     ofEnableBlendMode(OF_BLENDMODE_ADD);
                     float rotationAmount = ofGetElapsedTimeMillis()/10;
+					float circ1Size = 40 + 40 * abs(sin(ofGetElapsedTimef()));
+					float circ2Size = 40 + 40 * abs(cos(ofGetElapsedTimef()));
                     ofSetColor(255, 0, 0);
                     ofPushMatrix();
                     ofTranslate(_stageCenterX, _stageCenterY);
                     ofRotateZ(rotationAmount);
                     ofPushMatrix();
                     ofTranslate(-_stageCenterX, -_stageCenterY);
-                    ofDrawCircle(_stageCenterX, _stageCenterY-40, 40);
+                    ofDrawCircle(_stageCenterX, _stageCenterY-circ1Size, circ1Size);
                     ofPopMatrix();
                     ofPopMatrix();
                     ofSetColor(0, 0, 255);
@@ -261,7 +263,7 @@ class Effects {
                     ofRotateZ(-rotationAmount);
                     ofPushMatrix();
                     ofTranslate(-_stageCenterX, -_stageCenterY);
-                    ofDrawCircle(_stageCenterX, _stageCenterY+40, 40);
+                    ofDrawCircle(_stageCenterX, _stageCenterY+circ2Size, circ2Size);
                     ofPopMatrix();
                     ofPopMatrix();
                     ofDisableBlendMode();

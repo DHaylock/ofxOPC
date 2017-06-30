@@ -6,8 +6,9 @@
 //
 #include "ofxOPC.h"
 //--------------------------------------------------------------
-void ofxOPC::setup(string address, int port)
+void ofxOPC::setup(string address, int port,int numberOfFadecandys)
 {
+	this->numberOfFadecandys = numberOfFadecandys;
 	bSetupWithFadecandy = false;
     // Copy the Address and port to the variables
     _port = port;
@@ -30,7 +31,7 @@ void ofxOPC::setup(string address, int port)
     connect();
     
     // Determine the length of the data section, as a multiple of the SPCData type
-    uint16_t data_length = 8 * 64 * sizeof(OPCPacket_SPCData_t);
+    uint16_t data_length = this->numberOfFadecandys * 8 * 64 * sizeof(OPCPacket_SPCData_t);
     
     // Add the header-section's length to the data-section's to determine the total packet length; allocate the packet
     OPC_SPC_packet_length = sizeof(OPCPacket_Header_t) + data_length;
