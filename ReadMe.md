@@ -93,49 +93,21 @@ else
 - See the examples for more specific details on each of the Neopixel units.
 
 ## Examples
-- ofxNeoPixelRings
+<!--![alt text](images/example_ofxNeoPixelRings.gif "rings.gif")  -->
 
-![alt text](images/example_ofxNeoPixelRings.gif "rings.gif")
-
-- ofxNeoPixelStrips
-
-![alt text](images/example_ofxNeoPixelStrips.gif "strips.gif")
-
-- ofxNeoPixelGrids
-
-![alt text](images/example_ofxNeoPixelGrids.gif "grids.gif")
-
-- Big Grid
-
-![alt text](images/example_BigGrid.gif "biggrid.gif")
-
-- Multiple Strips
-
-![alt text](images/example_multiple_ofxNeoPixelStrips.gif "multiplestrips.gif")
-
-- Multiple Neopixel units and Syphon
-
-![alt text](images/example_syphon_input.gif "syphon.gif")
-
-- Chained Neopixels
-
-![alt text](images/example_chaining.gif "chaining.gif")
-
-- Custom Neopixels
-
-![alt text](images/example_custom_neopixel_object.gif "Custom.gif")
-
-- Generic Neopixels
-
-![alt text](images/example_generic_neopixels.gif "Custom.gif")
-
-- Shader 
-
-![alt text](images/example_shaders.gif "Shader.gif")
-
-- x-Osc
-
-![alt text](images/example_x-osc.gif "XOSC.gif")
+Example | Image 
+--- | ---
+ofxNeoPixelRings  |	<img src="images/example_ofxNeoPixelRings.gif" width="300px" />
+ofxNeoPixelStrips | <img src="images/example_ofxNeoPixelStrips.gif" width="300px" />
+ofxNeoPixelGrids | <img src="images/example_ofxNeoPixelGrids.gif" width="300px" />
+Big Grid | <img src="images/example_BigGrid.gif" width="300px" />
+Multiple Strips | <img src="images/example_multiple_ofxNeoPixelStrips.gif" width="300px" />
+Multiple Neopixel units and Syphon | <img src="images/example_syphon_input.gif" width="300px" />
+Chained Neopixels | <img src="images/example_chaining.gif" width="300px" />
+Custom Neopixels | <img src="images/example_custom_neopixel_object.gif" width="300px" />
+Generic Neopixels | <img src="images/example_generic_neopixels.gif" width="300px" />
+Shader | <img src="images/example_shaders.gif" width="300px" /> 
+x-Osc | <img src="images/example_x-osc.gif" width="300px" /> 
 
 ## Important 
 
