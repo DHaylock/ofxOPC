@@ -5,7 +5,7 @@ A openFrameworks addon for Open Pixel Control and FadeCandy Server
 
 ofxOPC is an addon for openFrameworks (v0.9.0+) that allows users to communicate to Neopixel LED units through Fadecandy and open pixel control. Draw graphics to the oF window, place the Neopixel grabber on the screen and the addon collects, encodes and sends the pixel data to the Fadecandy.
 
-![alt text](images/ofxOPC.gif "gif")
+![alt text](images/example_custom_neopixel_object.gif "gif")
 
 If you would like to contribute to the addon feel free to fork, hack and mod the code.
 Also drop me a line and let me know how you end up using the addon.
@@ -108,6 +108,7 @@ Custom Neopixels | <img src="images/example_custom_neopixel_object.gif" width="3
 Generic Neopixels | <img src="images/example_generic_neopixels.gif" width="300px" />
 Shader | <img src="images/example_shaders.gif" width="300px" /> 
 x-Osc | <img src="images/example_x-osc.gif" width="300px" /> 
+Multiple Fadecandy's | <img src="images/example_multiple_fadecandy_units.gif" width="300px" />
 
 ## Important 
 
@@ -117,6 +118,13 @@ The Fadecandy drives 8 x 64 LEDS = 512 LEDs, thats one DMX Universe. However, ea
 	opcClient.writeChannelOne(ring60px.colorData());
 	opcClient.writeChannelTwo(ring60px.colorData());
 </code>
+
+## Multiple Fadecandys
+
+There is an example that should drive 1024 leds. (I currently dont have two Fadecandys) 
+When running this example, you will need to run the ./fcserver with a unique config file. I've uploaded one inside the example bin/data folder. 
+
+For more information please read [@scanlime](https://github.com/scanlime/fadecandy/blob/master/doc/fc_server_config.md) server configuration readme.
 
 ##Grids
 If you would like to use the 32x32grid please alter line 24 of ofOPC.cpp from
