@@ -68,12 +68,36 @@ void ofApp::update()
 	defaultEffects.draw(effect);
 	
 	opcClient.endStage();
-	
+//	
+//	mergedColor.clear();
+//	
 	// Get Objects
 	for (int i = 0; i < neoPixelObjects.size(); i++)
 	{
 		opcClient.getStagePixels(neoPixelObjects.at(i)->getPixelCoordinates(), neoPixelObjects.at(i)->colors);
 	}
+//	
+//	// If the client is not connected do not try and send information
+//	if (!opcClient.isConnected())
+//	{
+//		// Will continue to try and reconnect to the Pixel Server
+//		opcClient.tryConnecting();
+//	}
+//	else
+//	{
+//		// Loop through the NeoPixel Objects and store the number of pixels in each one
+//		// Then copy the color data across from each object on to the end of the merge vector
+//		for (int i = 0; i < neoPixelObjects.size(); i++)
+//		{
+//			// I know this is resource heavy but insert was causing odd issues with the size of the Vector
+//			for(int e = 0; e < neoPixelObjects.at(i)->colorData().size(); e++)
+//			{
+//				mergedColor.push_back(neoPixelObjects.at(i)->colorData()[e]);
+//			}
+//		}
+//		
+//		opcClient.autoWriteData(mergedColor);
+//	}
 	
 	// If the client is not connected do not try and send information
 	if (!opcClient.isConnected())
@@ -86,7 +110,7 @@ void ofApp::update()
 		// Write out the first set of data
 		for (int i = 0; i < neoPixelObjects.size(); i++)
 		{
-			opcClient.writeChannel(i, neoPixelObjects[i]->colorData());
+			opcClient.writeChannel(i+1, neoPixelObjects[i]->colorData());
 		}
 	}
 }

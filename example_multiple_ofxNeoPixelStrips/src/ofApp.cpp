@@ -47,8 +47,9 @@ void ofApp::update()
     }
     else {
         // Write out the data
-        for (int i = 0; i < strips.size(); i++) {
-            opcClient.writeChannel(i, strips[i].colorData());
+        for (int i = 0; i < strips.size(); i++)
+		{
+            opcClient.writeChannel(i+1, strips[i].colorData());
         }
     }
 }

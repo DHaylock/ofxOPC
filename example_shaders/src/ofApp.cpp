@@ -76,7 +76,7 @@ void ofApp::update()
 		// Write out the first set of data
 		for (int i = 0; i < neoPixelObjects.size(); i++)
 		{
-			opcClient.writeChannel(i, neoPixelObjects[i]->colorData());
+			opcClient.writeChannel(i+1, neoPixelObjects[i]->colorData());
 		}
 	}
 }

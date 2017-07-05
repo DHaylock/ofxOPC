@@ -24,4 +24,6 @@ class ofApp : public ofBaseApp{
 		
 		int effect;
 		bool hide;
+	
+		vector <ofColor> mergedColor;
 };
