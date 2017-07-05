@@ -53,7 +53,7 @@ class ofxOPC
 			@param int numberOfFadecandys : how many devices are attached to the server
 		*/
 		//--------------------------------------------------------------
-		void setup(string address,int port,int numberOfFadecandys = 1);
+		void setup(string address,int port,int _numberOfFadecandys = 1);
 	
 		//--------------------------------------------------------------
 		/// \brief Setup without the Fadecandy
@@ -191,7 +191,7 @@ class ofxOPC
     
     
         // Function to Chain the data together
-        vector <ofColor> getChainedNeopixels(vector<vector<ofColor> > colors);
+        vector <ofColor> getChainedPixelData(vector<vector<ofColor> > colors);
     
         // Chain Three Units
         void writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor> pix2,vector <ofColor> pix3);

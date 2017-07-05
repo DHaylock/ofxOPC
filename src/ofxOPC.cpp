@@ -6,9 +6,9 @@
 //
 #include "ofxOPC.h"
 //--------------------------------------------------------------
-void ofxOPC::setup(string address, int port,int numberOfFadecandys)
+void ofxOPC::setup(string address, int port,int _numberOfFadecandys)
 {
-	this->numberOfFadecandys = numberOfFadecandys;
+	numberOfFadecandys = _numberOfFadecandys;
 	bSetupWithFadecandy = false;
     // Copy the Address and port to the variables
     _port = port;
@@ -31,7 +31,7 @@ void ofxOPC::setup(string address, int port,int numberOfFadecandys)
     connect();
     
     // Determine the length of the data section, as a multiple of the SPCData type
-    uint16_t data_length = this->numberOfFadecandys * 8 * 64 * sizeof(OPCPacket_SPCData_t);
+    uint16_t data_length = (numberOfFadecandys * 8) * 64 * sizeof(OPCPacket_SPCData_t);
     
     // Add the header-section's length to the data-section's to determine the total packet length; allocate the packet
     OPC_SPC_packet_length = sizeof(OPCPacket_Header_t) + data_length;
@@ -149,7 +149,7 @@ void ofxOPC::getStagePixels(vector<ofPoint> pixels,vector <ofColor> &colorData)
     }
 }
 //--------------------------------------------------------------
-vector<ofColor> ofxOPC::getChainedNeopixels(vector<vector<ofColor> > colors)
+vector<ofColor> ofxOPC::getChainedPixelData(vector<vector<ofColor> > colors)
 {
     vector<ofColor> returnData;
     for (int i = 0; i < colors.size(); i++)
@@ -159,7 +159,7 @@ vector<ofColor> ofxOPC::getChainedNeopixels(vector<vector<ofColor> > colors)
             returnData.push_back(colors[i][e]);
         }
     }
-    error.push_back(ofToString(returnData.size()));
+//    error.push_back(ofToString(returnData.size()));
     return returnData;
 }
 //--------------------------------------------------------------
@@ -291,14 +291,17 @@ void ofxOPC::autoWriteData(vector<ofColor>pix)
 //--------------------------------------------------------------
 void ofxOPC::writeChannel(uint8_t channel, vector<ofColor>pix)
 {
+
     // Bail early if there's no pixel data or there is too much data
     if(pix.empty())
     {
         ofLogError() << "No Data";
         return;
 
-    } else if(channel < 1 || channel > 8) {
-        // TODO: Emit error
+    }
+	else if(channel < 1 || channel > (8*numberOfFadecandys))
+	{
+		ofLogError() << "Channel Number "+ofToString(unsigned(channel))+" Exceeds Server Capacity";
         return;
     }
 
@@ -315,7 +318,8 @@ void ofxOPC::writeChannel(uint8_t channel, vector<ofColor>pix)
             OPC_SPC_packet_data[channel_offset + i].b = pix[i].b;
         }
     }
-    else {
+    else
+	{
         for (unsigned int i = 0; i < pix.size(); i++)
 		{
             OPC_SPC_packet_data[channel_offset + i].r = pix[i].r;
@@ -338,11 +342,12 @@ void ofxOPC::writeChannel(uint8_t channel, vector <ofColor> pix1,vector <ofColor
 	{
         return;
     }
-	else if(channel < 1 || channel > 8)
+	else if(channel < 1 || channel > (8*numberOfFadecandys))
 	{
-        return;
-    }
-    
+		ofLogError() << "Channel Number "+ofToString(unsigned(channel))+" Exceeds Server Capacity";
+		return;
+	}
+	
     uint16_t channel_offset = (channel - 1) * 64;
 
     // If there is more than 64 pixels per channel limit the amount to 60
